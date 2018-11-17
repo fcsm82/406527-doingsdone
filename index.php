@@ -137,13 +137,7 @@ $list_tasks = [
                 <table class="tasks">
                     <?php foreach($list_tasks as $task) : ?>
                         <?php if ($task['status'] === 'Нет') : ?>
-                            <tr class="tasks__item task
-                                <?php
-                                if ($task['status'] === 'Да') {
-                                    print('task--completed');
-                                }
-                                ?>"
-                            >
+                            <tr class="tasks__item task">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
