@@ -1,20 +1,17 @@
 <?php
+// функция подсчета количества задач для каждого проекта
+function countTasks ($list_tasks, $project) {
+    $amount_tasks = 0;
+    foreach ($list_tasks as $task) {
+        if ($task['category'] === $project) {
+            $amount_tasks ++;
+        }
+    }
+    return $amount_tasks;
+}
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
-?>
-<!DOCTYPE html>
-<html lang="ru">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Дела в порядке</title>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/flatpickr.min.css">
-</head>
-
-<?php
-
+// определение массивов проектов и задач
 $list_projects = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
 
 $list_tasks = [
@@ -55,17 +52,17 @@ $list_tasks = [
         'is_completed' => 'Нет'
     ]
 ];
-
-function countTasks ($list_tasks, $project) {
-    $amount_tasks = 0;
-    foreach ($list_tasks as $task) {
-        if ($task['category'] === $project) {
-            $amount_tasks ++;
-        }
-    }
-    return $amount_tasks;
-}
 ?>
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Дела в порядке</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/flatpickr.min.css">
+</head>
 
 <body>
 <h1 class="visually-hidden">Дела в порядке</h1>
