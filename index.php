@@ -19,40 +19,40 @@ $list_projects = ['Входящие', 'Учеба', 'Работа', 'Домаш�
 
 $list_tasks = [
     [
-        'task' => 'Собеседование в IT компании',
-        'date' => '01.12.2018',
+        'name' => 'Собеседование в IT компании',
+        'complete_date' => '01.12.2018',
         'category' => 'Работа',
-        'status' => 'Нет'
+        'is_completed' => 'Нет'
     ],
     [
-        'task' => 'Выполнить тестовое задание',
-        'date' => '25.12.2018',
+        'name' => 'Выполнить тестовое задание',
+        'complete_date' => '25.12.2018',
         'category' => 'Работа',
-        'status' => 'Нет'
+        'is_completed' => 'Нет'
     ],
     [
-        'task' => 'Сделать задание первого раздела',
-        'date' => '21.12.2018',
+        'name' => 'Сделать задание первого раздела',
+        'complete_date' => '21.12.2018',
         'category' => 'Учеба',
-        'status' => 'Да'
+        'is_completed' => 'Да'
     ],
     [
-        'task' => 'Встреча с другом', 'Купить корм для кота',
-        'date' => '22.12.2018',
+        'name' => 'Встреча с другом', 'Купить корм для кота',
+        'complete_date' => '22.12.2018',
         'category' => 'Входящие',
-        'status' => 'Нет'
+        'is_completed' => 'Нет'
     ],
     [
-        'task' => 'Купить корм для кота',
-        'date' => '22.12.2018',
+        'name' => 'Купить корм для кота',
+        'complete_date' => '22.12.2018',
         'category' => 'Домашние дела',
-        'status' => 'Нет'
+        'is_completed' => 'Нет'
     ],
     [
-        'task' => 'Заказать пиццу',
-        'date' => 'Нет',
+        'name' => 'Заказать пиццу',
+        'complete_date' => 'Нет',
         'category' => 'Домашние дела',
-        'status' => 'Нет'
+        'is_completed' => 'Нет'
     ]
 ];
 ?>
@@ -136,12 +136,12 @@ $list_tasks = [
 
                 <table class="tasks">
                     <?php foreach($list_tasks as $task) : ?>
-                        <?php if ($task['status'] === 'Нет') : ?>
+                        <?php if ($task['is_completed'] === 'Нет') : ?>
                             <tr class="tasks__item task">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                        <span class="checkbox__text"><?= $task['task']; ?></span>
+                                        <span class="checkbox__text"><?= $task['name']; ?></span>
                                     </label>
                                 </td>
 
@@ -151,15 +151,15 @@ $list_tasks = [
 
                                 <td class="task__date"></td>
                             </tr>
-                        <?php elseif ($task['status'] === 'Да' and $show_complete_tasks === 1) : ?>
+                        <?php elseif ($show_complete_tasks === 1) : ?>
                             <tr class="tasks__item task task--completed">
                                 <td class="task__select">
                                     <label class="checkbox task__checkbox">
                                         <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                        <span class="checkbox__text"><?= $task['task']; ?></span>
+                                        <span class="checkbox__text"><?= $task['name']; ?></span>
                                     </label>
                                 </td>
-                                <td class="task__date"><?= $task['date']; ?></td>
+                                <td class="task__date"><?= $task['complete_date']; ?></td>
 
                                 <td class="task__controls">
                                 </td>
