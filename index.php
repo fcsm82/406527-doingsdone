@@ -7,15 +7,19 @@ require_once ('data.php');
 $show_complete_tasks = rand(0, 1);
 
 // формируем контент страницы
-$page_content = include_template('index.php', ['task' => $list_tasks]);
+$page_content = include_template('index.php', [
+    'list_tasks' => $list_tasks,
+    'show_complete_tasks' => $show_complete_tasks
+]);
 
 // задаем заголовок страницы
 $title = 'Дела в поряке';
 
 // формируем гланую страницу
 $layout_content = include_template('layout.php', [
-    'content' => $page_content,
-    'projects' => $list_projects,
+    'page_content' => $page_content,
+    'list_projects' => $list_projects,
+    'list_tasks' => $list_tasks,
     'title' => $title
 ]);
 print($layout_content);
