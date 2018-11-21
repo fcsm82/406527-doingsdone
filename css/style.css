@@ -512,13 +512,13 @@ a:focus {
   border-bottom: 1px solid #d7dbe8;
 }
 
-.tasks__item th{
+.tasks__item th {
   text-align: left;
   padding: 20px 0;
   border-bottom: 1px solid #d7dbe8;
 }
 
-.tasks__item th:first-of-type{
+.tasks__item th:first-of-type {
   padding-left: 30px;
 }
 
@@ -537,7 +537,7 @@ a:focus {
 
 .task--completed .task__file,
 .task--completed .task__date,
-.task--completed .task__category{
+.task--completed .task__category {
   opacity: 0.2;
 }
 

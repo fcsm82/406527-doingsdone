@@ -51,9 +51,6 @@
                         </span>
                     </label>
                 </td>
-                <!--<td class="task__file">
-                    <a class="download-link" href="#">Home.psd</a>
-                </td>-->
                 <td class="task__date"><?= $task['complete_date']; ?></td>
                 <td class="task__category"><?= $task['category']; ?></td>
             </tr>
@@ -68,7 +65,6 @@
 
                 <td class="task__date"><?= $task['complete_date']; ?></td>
                 <td class="task__category"><?= $task['category']; ?></td>
-<!--                <td class="task__controls"></td>-->
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>
