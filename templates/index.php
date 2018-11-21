@@ -31,12 +31,17 @@
 <table class="tasks">
     <?php foreach($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] === 'Нет') : ?>
-            <tr class="tasks__item task">
+            <tr class="tasks__item task
+            <?php
+                if (hours_to_date($task) <= 24) {
+                    print('task--important');
+                }
+                ?>
+            ">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                         <span class="checkbox__text">
-
                             <?= $task['name']; ?>
                         </span>
                     </label>
