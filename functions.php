@@ -28,13 +28,10 @@ function countTasks ($list_tasks, $project) {
 }
 
 // функция фильтрации данных для защиты от XSS атаки
-function filter_data($list_tasks, $key) {
-    foreach ($list_tasks as &$task) {
-        $filtered_value = strip_tags($task[$key]);
-        $task[$key] = $filtered_value;
+function filter_data($list_tasks, $filterKey) {
+    foreach ($list_tasks as $key => $task) {
+        $list_tasks[$key][$filterKey] = strip_tags($task[$filterKey]);
     }
-    // разорвать ссылку на последний элемент
-    unset($task);
     return $list_tasks;
 }
 
