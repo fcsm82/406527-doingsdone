@@ -29,24 +29,30 @@
 
 
 <table class="tasks">
+    <tr class="tasks__item task">
+        <th>Задача</th>
+        <th>Дата выполнения</th>
+        <th>Категория</th>
+    </tr>
     <?php foreach($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] === 'Нет') : ?>
-            <tr class="tasks__item task">
+            <tr class="tasks__item task
+            <?php
+                if (hours_to_date($task) <= 24) {
+                    print('task--important');
+                }
+                ?>
+            ">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
                         <span class="checkbox__text">
-
                             <?= $task['name']; ?>
                         </span>
                     </label>
                 </td>
-
-                <td class="task__file">
-                    <a class="download-link" href="#">Home.psd</a>
-                </td>
-
-                <td class="task__date"></td>
+                <td class="task__date"><?= $task['complete_date']; ?></td>
+                <td class="task__category"><?= $task['category']; ?></td>
             </tr>
         <?php elseif ($show_complete_tasks === 1) : ?>
             <tr class="tasks__item task task--completed">
@@ -56,10 +62,9 @@
                         <span class="checkbox__text"><?= $task['name']; ?></span>
                     </label>
                 </td>
-                <td class="task__date"><?= $task['complete_date']; ?></td>
 
-                <td class="task__controls">
-                </td>
+                <td class="task__date"><?= $task['complete_date']; ?></td>
+                <td class="task__category"><?= $task['category']; ?></td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>
