@@ -39,7 +39,7 @@ function hours_to_date($task) {
     $secs_in_hour = 3600;
     $ts = time();
     $ts_end = strtotime($task['complete_date']);
-    $ts_diff = $ts_end -$ts;
+    $ts_diff = $ts_end - $ts;
     $hours_diff = floor($ts_diff / $secs_in_hour);
     return $hours_diff;
 }

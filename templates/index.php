@@ -29,6 +29,11 @@
 
 
 <table class="tasks">
+    <tr class="tasks__item task">
+        <th>Задача</th>
+        <th>Дата выполнения</th>
+        <th>Категория</th>
+    </tr>
     <?php foreach($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] === 'Нет') : ?>
             <tr class="tasks__item task
@@ -46,12 +51,11 @@
                         </span>
                     </label>
                 </td>
-
-                <td class="task__file">
+                <!--<td class="task__file">
                     <a class="download-link" href="#">Home.psd</a>
-                </td>
-
-                <td class="task__date"></td>
+                </td>-->
+                <td class="task__date"><?= $task['complete_date']; ?></td>
+                <td class="task__category"><?= $task['category']; ?></td>
             </tr>
         <?php elseif ($show_complete_tasks === 1) : ?>
             <tr class="tasks__item task task--completed">
@@ -61,10 +65,10 @@
                         <span class="checkbox__text"><?= $task['name']; ?></span>
                     </label>
                 </td>
-                <td class="task__date"><?= $task['complete_date']; ?></td>
 
-                <td class="task__controls">
-                </td>
+                <td class="task__date"><?= $task['complete_date']; ?></td>
+                <td class="task__category"><?= $task['category']; ?></td>
+<!--                <td class="task__controls"></td>-->
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>
