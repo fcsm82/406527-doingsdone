@@ -33,6 +33,8 @@ function filter_data($list_tasks, $key) {
         $filtered_value = strip_tags($task[$key]);
         $task[$key] = $filtered_value;
     }
+    // разорвать ссылку на последний элемент
+    unset($task);
     return $list_tasks;
 }
 
