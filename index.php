@@ -3,6 +3,7 @@
 require_once ('functions.php');
 require_once ('data.php');
 
+$list_tasks = filter_data($list_tasks, 'name');
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 

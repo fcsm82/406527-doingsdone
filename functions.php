@@ -26,4 +26,13 @@ function countTasks ($list_tasks, $project) {
     }
     return $amount_tasks;
 }
-?>
+
+// функция фильтрации данных для защиты от XSS атаки
+function filter_data($list_tasks, $key) {
+    foreach ($list_tasks as &$task) {
+        $filtered_value = strip_tags($task[$key]);
+        $task[$key] = $filtered_value;
+    }
+    return $list_tasks;
+}
+
