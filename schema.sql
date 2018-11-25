@@ -6,30 +6,33 @@ USE doingsdone;
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `email` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '' UNIQUE,
-  `name` varchar(255) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `password` char(64) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`id`)
+  `email` varchar(255) NOT NULL UNIQUE,
+  `name` varchar(255) NOT NULL,
+  `password` char(64) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY ind_email(email)
 );
 
 USE doingsdone;
 CREATE TABLE `projects` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) CHARACTER SET utf8 DEFAULT NULL UNIQUE,
+  `name` varchar(64) UNIQUE,
   `user_id` mediumint(8) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY ind_namel(name)
 );
 
 USE doingsdone;
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `date_add` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_complete` timestamp NOT NULL,
+  `date_complete` timestamp,
   `status` tinyint(1) DEFAULT '0',
-  `name` varchar(128) DEFAULT NULL,
-  `file` varchar(128) COLLATE utf8_bin DEFAULT '',
-  `term` timestamp,
+  `name` varchar(255),
+  `file` varchar(255),
   `user_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY ind_status(status),
+  KEY ind_datecomp(date_complete)
 );
