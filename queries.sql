@@ -32,10 +32,12 @@ WHERE project_id = 3;
 UPDATE tasks SET is_completed = 1
 WHERE id = 1;
 
+SET @start_day = TIMESTAMPADD(DAY, 1, CURDATE());
+SET @end_day = TIMESTAMPADD(DAY, 1, @start_day);
 SELECT t.id, t.create_time, complete_time, term_time, is_completed, t.name, file, u.name, p.name FROM tasks t
 JOIN users u ON t.user_id = u.id
 JOIN projects p ON t.project_id = p.id
-WHERE term_time = CURDATE() + INTERVAL 1 DAY;
+WHERE term_time BETWEEN @start_day AND @end_day;
 
 UPDATE tasks SET name = 'Собеседование'
 WHERE id = 1;
