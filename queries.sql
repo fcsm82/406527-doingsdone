@@ -33,7 +33,7 @@ UPDATE tasks SET is_completed = 1
 WHERE id = 1;
 
 SET @start_day = TIMESTAMPADD(DAY, 1, CURDATE());
-SET @end_day = TIMESTAMPADD(DAY, 1, @start_day);
+SET @end_day = TIMESTAMP(@start_day, '23:59:59');
 SELECT t.id, t.create_time, complete_time, term_time, is_completed, t.name, file, u.name, p.name FROM tasks t
 JOIN users u ON t.user_id = u.id
 JOIN projects p ON t.project_id = p.id
