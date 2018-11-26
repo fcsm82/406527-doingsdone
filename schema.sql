@@ -1,25 +1,26 @@
-USE doingsdone;
 CREATE DATABASE doingsdone
 DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `email` varchar(255) NOT NULL UNIQUE,
-  `name` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+USE doingsdone;
+
+CREATE TABLE users (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  name VARCHAR(255) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE INDEX name_idx ON users(name);
 CREATE INDEX create_time_idx ON users(create_time);
 
-CREATE TABLE `projects` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64),
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE projects (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  name VARCHAR(64),
+  user_id INT(11) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE INDEX name_idx ON projects(name);
@@ -31,17 +32,17 @@ ALTER TABLE projects
 ALTER TABLE projects
   ADD UNIQUE KEY user_id_name_udx (user_id, name);
 
-CREATE TABLE `tasks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `complete_time` timestamp NULL,
-  `term_time` timestamp NULL,
-  `is_completed` tinyint(1) DEFAULT 0,
-  `name` varchar(255),
-  `file` varchar(255),
-  `user_id` int(11) NOT NULL,
-  `project_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+CREATE TABLE tasks (
+  id INT(11) NOT NULL AUTO_INCREMENT,
+  create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  complete_time TIMESTAMP NULL,
+  term_time TIMESTAMP NULL,
+  is_completed TINYINT(1) DEFAULT 0,
+  name VARCHAR(255),
+  file VARCHAR(255),
+  user_id INT(11) NOT NULL,
+  project_id INT(11) NOT NULL,
+  PRIMARY KEY (id)
 );
 
 CREATE INDEX create_time_idx ON tasks(create_time);
