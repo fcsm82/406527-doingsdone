@@ -506,14 +506,14 @@ a:focus {
   border-top: 1px solid #d7dbe8;
 }
 
-.tasks__item td {
+.tasks__item td:not(:first-child) {
+  text-align: center;
   padding: 20px 0;
-
   border-bottom: 1px solid #d7dbe8;
 }
 
 .tasks__item th {
-  text-align: left;
+  text-align: center;
   padding: 20px 0;
   border-bottom: 1px solid #d7dbe8;
 }
@@ -572,7 +572,7 @@ a:focus {
 }
 
 .task__file {
-  width: 190px;
+  width: 105px;
 }
 
 .task__date {
@@ -580,7 +580,7 @@ a:focus {
 }
 
 .task__category {
-  width: 105px;
+  width: 190px;
 }
 
 .task__controls {

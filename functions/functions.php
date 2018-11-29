@@ -17,10 +17,10 @@ function include_template($name, $data) {
     return $result;
 }
 // функция подсчета количества задач для каждого проекта
-function countTasks ($list_tasks, $project) {
+function countTasks ($list_tasks, $project_name) {
     $amount_tasks = 0;
     foreach ($list_tasks as $task) {
-        if ($task['category'] === $project) {
+        if ($task['project_name'] === $project_name) {
             $amount_tasks ++;
         }
     }
@@ -28,17 +28,17 @@ function countTasks ($list_tasks, $project) {
 }
 
 // функция фильтрации данных для защиты от XSS атаки
-function filter_data($list_tasks, $filterKey) {
-    foreach ($list_tasks as $key => $task) {
-        $list_tasks[$key][$filterKey] = strip_tags($task[$filterKey]);
+function filter_data($list_values, $filterKey) {
+    foreach ($list_values as $key => $value) {
+        $list_values[$key][$filterKey] = strip_tags($value[$filterKey]);
     }
-    return $list_tasks;
+    return $list_values;
 }
 // функция подсчета остатка времени до даты выполнения задачи
 function hours_to_date($task) {
     $secs_in_hour = 3600;
     $ts = time();
-    $ts_end = strtotime($task['complete_date']);
+    $ts_end = strtotime($task['complete_time']);
     $ts_diff = $ts_end - $ts;
     $hours_diff = floor($ts_diff / $secs_in_hour);
     return $hours_diff;

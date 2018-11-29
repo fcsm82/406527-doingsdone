@@ -1,25 +1,36 @@
 <?php
 // подключаем файл с функциями и данными
-require_once ('functions.php');
-//require_once ('data.php');
+$root = realpath($_SERVER['DOCUMENT_ROOT']);
+require_once "$root/functions/database.php";
+require_once "$root/functions/functions.php";
 
 //подключение к БД
-$con = mysqli_connect(localhost, root, test,doingsdone);
-if ($con == false) {
-    print("Ошибка подключения: " . mysqli_connect_error());
-}
-else {
-    print("Соединение установлено");
-}
-mysqli_set_charset($con, "utf8");
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$database = 'doingsdone';
+$link = db_connect($host, $user, $password, $database);
 
-$sql = "SELECT p.id, p.name, user_id, u.name FROM projects p
-        JOIN users u ON p.user_id = u.id";
+$user_id = 1;
+$sql = "SELECT p.project_name FROM projects p ".
+    "JOIN users u ON p.user_id = u.id ".
+    "WHERE p.user_id = ".$user_id;
+$data = [$user_id];
+$stmt = db_get_prepare_stmt($link, $sql, $data = []);
+$list_projects = db_fetch_data($link, $sql, $data);
+$list_projects = filter_data($list_projects, 'project_name');
 
-$result = mysqli_query($con, $sql);
-$list_tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-$list_tasks = filter_data($list_tasks, 'name');
+$sql =  "SELECT t.task_name, t.complete_time, t.is_completed, t.file, p.project_name FROM tasks t ".
+    "JOIN users u ON t.user_id = u.id ".
+    "JOIN projects p ON t.project_id = p.id ".
+    "WHERE t.user_id = ".$user_id;
+
+#$stmt = db_get_prepare_stmt($link, $sql, $data = []);
+$list_tasks = db_fetch_data($link, $sql, $data);
+$list_tasks = filter_data($list_tasks, 'task_name');
+
+
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
