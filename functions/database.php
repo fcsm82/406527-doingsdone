@@ -3,12 +3,11 @@
 // функция подключения к БД
 function db_connect($host, $user, $password, $database) {
     $con = mysqli_connect($host, $user, $password, $database);
-    if ($con == false) {
+    if (!$con) {
         print("Ошибка подключения: " . mysqli_connect_error());
     }
     else {
         mysqli_set_charset($con, "utf8");
-        print("Соединение установлено");
     };
     return $con;
 }

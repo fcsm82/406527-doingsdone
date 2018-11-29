@@ -17,10 +17,10 @@ function include_template($name, $data) {
     return $result;
 }
 // функция подсчета количества задач для каждого проекта
-function countTasks ($list_tasks, $project_name) {
+function countTasks ($list_tasks, $project) {
     $amount_tasks = 0;
     foreach ($list_tasks as $task) {
-        if ($task['project_name'] === $project_name) {
+        if ($task['project_name'] === $project) {
             $amount_tasks ++;
         }
     }

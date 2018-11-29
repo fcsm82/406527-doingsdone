@@ -1,8 +1,8 @@
 <?php
 // подключаем файл с функциями и данными
-$root = realpath($_SERVER['DOCUMENT_ROOT']);
-require_once "$root/functions/database.php";
-require_once "$root/functions/functions.php";
+const APP_DIR = __DIR__;
+require_once APP_DIR . '/functions/database.php';
+require_once APP_DIR . '/functions/functions.php';
 
 //подключение к БД
 $host = 'localhost';
@@ -12,23 +12,23 @@ $database = 'doingsdone';
 $link = db_connect($host, $user, $password, $database);
 
 $user_id = 1;
-$sql = "SELECT p.project_name FROM projects p ".
+$sql = "SELECT p.name  FROM projects p ".
     "JOIN users u ON p.user_id = u.id ".
     "WHERE p.user_id = ".$user_id;
 $data = [$user_id];
 $stmt = db_get_prepare_stmt($link, $sql, $data = []);
 $list_projects = db_fetch_data($link, $sql, $data);
-$list_projects = filter_data($list_projects, 'project_name');
+$list_projects = filter_data($list_projects, 'name');
 
 
-$sql =  "SELECT t.task_name, t.complete_time, t.is_completed, t.file, p.project_name FROM tasks t ".
+$sql =  "SELECT t.name, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t ".
     "JOIN users u ON t.user_id = u.id ".
     "JOIN projects p ON t.project_id = p.id ".
     "WHERE t.user_id = ".$user_id;
 
 #$stmt = db_get_prepare_stmt($link, $sql, $data = []);
 $list_tasks = db_fetch_data($link, $sql, $data);
-$list_tasks = filter_data($list_tasks, 'task_name');
+$list_tasks = filter_data($list_tasks, 'name');
 
 
 // показывать или нет выполненные задачи
