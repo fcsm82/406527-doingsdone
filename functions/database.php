@@ -1,10 +1,10 @@
 <?php
 
 // функция подключения к БД
-function db_connect($host, $user, $password, $database) {
-    $con = mysqli_connect($host, $user, $password, $database);
+function dbConnect($config) {
+    $con = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
     if (!$con) {
-        print("Ошибка подключения: " . mysqli_connect_error());
+        die("Ошибка подключения: " . mysqli_connect_error());
     }
     else {
         mysqli_set_charset($con, "utf8");
@@ -21,7 +21,7 @@ function db_connect($host, $user, $password, $database) {
  *
  * @return mysqli_stmt Подготовленное выражение
  */
-function db_get_prepare_stmt($link, $sql, $data = []) {
+function dbGetPrepareStmt($link, $sql, $data = []) {
     $stmt = mysqli_prepare($link, $sql);
 
     if ($data) {
@@ -57,9 +57,9 @@ function db_get_prepare_stmt($link, $sql, $data = []) {
 }
 
 // получение записей из БД
-function db_fetch_data($link, $sql, $data = []) {
+function dbFetchData($link, $sql, $data = []) {
     $result = [];
-    $stmt = db_get_prepare_stmt($link, $sql, $data);
+    $stmt = dbGetPrepareStmt($link, $sql, $data);
     mysqli_stmt_execute($stmt);
     $res = mysqli_stmt_get_result($stmt);
     if ($res) {
@@ -71,8 +71,8 @@ function db_fetch_data($link, $sql, $data = []) {
 }
 
 // добавление записей в БД
-function db_insert_data($link, $sql, $data = []) {
-    $stmt = db_get_prepare_stmt($link, $sql, $data);
+function dbInsertData($link, $sql, $data = []) {
+    $stmt = dbGetPrepareStmt($link, $sql, $data);
     $result = mysqli_stmt_execute($stmt);
     if ($result) {
         $result = mysqli_insert_id($link);

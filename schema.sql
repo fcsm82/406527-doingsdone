@@ -36,6 +36,7 @@ CREATE TABLE tasks (
   id INT(11) NOT NULL AUTO_INCREMENT,
   create_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   complete_time TIMESTAMP NULL,
+  term_time TIMESTAMP NULL,
   is_completed TINYINT(1) DEFAULT 0,
   name VARCHAR(255),
   file VARCHAR(255),
@@ -46,6 +47,7 @@ CREATE TABLE tasks (
 
 CREATE INDEX create_time_idx ON tasks(create_time);
 CREATE INDEX complete_time_idx ON tasks(complete_time);
+CREATE INDEX term_time_idx ON tasks(term_time);
 CREATE INDEX is_completed_idx ON tasks(is_completed);
 
 ALTER TABLE tasks

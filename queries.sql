@@ -11,13 +11,13 @@ INSERT INTO projects (name, user_id) VALUES
 ('Домашние дела', '1'),
 ('Авто', '1');
 
-INSERT INTO tasks (name, complete_time, is_completed, project_id, user_id) VALUES
-('Собеседование в IT компании', STR_TO_DATE('01.12.2018', '%d.%m.%Y'), 0, 3, 1),
-('Выполнить тестовое задание', STR_TO_DATE('25.12.2018', '%d.%m.%Y'), 0, 3, 1),
-('Сделать задание первого раздела', STR_TO_DATE('21.12.2018', '%d.%m.%Y'), 1, 2, 2),
-('Встреча с другом', STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 1, 1),
-('Купить корм для кота', STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 4,1),
-('Заказать пиццу', NULL, 0, 4, 1);
+INSERT INTO tasks (name, complete_time, term_time, is_completed, project_id, user_id) VALUES
+('Собеседование в IT компании', STR_TO_DATE('01.12.2018', '%d.%m.%Y'), NULL, 0, 3, 1),
+('Выполнить тестовое задание', NULL, STR_TO_DATE('25.12.2018', '%d.%m.%Y'), 0, 3, 1),
+('Сделать задание первого раздела', NULL, STR_TO_DATE('21.12.2018', '%d.%m.%Y'), 1, 2, 2),
+('Встреча с другом', NULL, STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 1, 1),
+('Купить корм для кота', NULL, STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 4,1),
+('Заказать пиццу', NULL, NULL, 0, 4, 1);
 
 
 SELECT p.id, p.name, user_id, u.name FROM projects p
