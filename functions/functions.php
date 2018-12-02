@@ -54,34 +54,38 @@ function filterData($list_values, $filterKey) {
 }
 
 // функция подсчета остатка времени до даты выполнения задачи
-function hoursToDate($task) {
-    if (is_null($task['term_time'])) {
+function hoursToDate($term_time) {
+    if (!$term_time) {
         return null;
     }
     $secs_in_hour = 3600;
     $ts = time();
-    $ts_end = strtotime($task['term_time']);
+    $ts_end = strtotime($term_time);
     $ts_diff = $ts_end - $ts;
     $hours_diff = floor($ts_diff / $secs_in_hour);
     return $hours_diff;
 }
 /**
- * функция определения срочночти задачи
+ * функция определения срочноcти задачи
  * @param array $task
  * @return string
  */
-function isImportant($task) {
-    if (is_null($task['term_time'])) {
-        return (print(''));
+function isImportant($term_time) {
+    if (!$term_time) {
+        return false;
     }
-    $hours_diff = hoursToDate($task);
+    $hours_diff = hoursToDate($term_time);
     if ($hours_diff <= 24) {
-        return (print('task--important'));
+        return true;
     }
-    return (print(''));
+    return false;
 }
 
-//
+/** функция форматирования времени
+ * @param timestamp $time
+ * @return string|null
+ * @throws Exception
+ */
 function formatTime($time) {
     if (!$time) {
         return null;

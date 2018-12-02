@@ -7,7 +7,8 @@
  */
 function getProjectsByUser($user_id, $connection)
 {
-    $sql = "SELECT p.name  FROM projects p ".
+    $sql =
+        "SELECT p.id, p.name  FROM projects p ".
         "JOIN users u ON p.user_id = u.id ".
         "WHERE p.user_id = ?";
     $values = [$user_id];
@@ -19,7 +20,8 @@ function getProjectsByUser($user_id, $connection)
 
 function getTasksByUser($user_id, $connection)
 {
-    $sql =  "SELECT t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t ".
+    $sql =
+        "SELECT t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t ".
         "JOIN users u ON t.user_id = u.id ".
         "JOIN projects p ON t.project_id = p.id ".
         "WHERE t.user_id = ?";

@@ -29,7 +29,7 @@
 
 
 <table class="tasks">
-    <tr class='tasks__item'>
+    <tr class="tasks__item">
         <th>Задача</th>
         <th>Файл</th>
         <th>Дата создания</th>
@@ -40,9 +40,7 @@
     <?php foreach($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] === 0) : ?>
             <tr class="tasks__item task
-            <?php
-                isImportant($task);
-                ?>
+            <?= isImportant($task['term_time']) ? 'task--important' : '' ?>
             ">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
