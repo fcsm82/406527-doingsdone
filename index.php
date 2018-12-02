@@ -5,7 +5,7 @@ require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
 require_once APP_DIR . '/functions/data.php';
 
-$config = require 'config.php';
+$config = require APP_DIR . '/config.php';
 $connection = dbConnect($config['db']);
 
 $user_id = 1;

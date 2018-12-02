@@ -32,6 +32,7 @@
     <tr class='tasks__item'>
         <th>Задача</th>
         <th>Файл</th>
+        <th>Дата создания</th>
         <th>Срок выполнения</th>
         <th>Дата выполнения</th>
         <th>Категория</th>
@@ -54,6 +55,7 @@
                 <td class="task__file">
                      <a class="download-link" href="#"><?= $task['file']; ?></a>
                 </td>
+                <td class="task__date"><?= formatTime($task['create_time']); ?></td>
                 <td class="task__date"><?= formatTime($task['term_time']); ?></td>
                 <td class="task__date"><?= formatTime($task['complete_time']); ?></td>
                 <td class="task__category"><?= $task['project_name']; ?></td>
@@ -66,8 +68,8 @@
                         <span class="checkbox__text"><?= $task['name']; ?></span>
                     </label>
                 </td>
-
                 <td class="task__file"><?= $task['file']; ?></td>
+                <td class="task__date"><?= formatTime($task['create_time']); ?></td>
                 <td class="task__date"><?= formatTime($task['term_time']); ?></td>
                 <td class="task__date"><?= formatTime($task['complete_time']); ?></td>
                 <td class="task__category"><?= $task['project_name']; ?></td>
