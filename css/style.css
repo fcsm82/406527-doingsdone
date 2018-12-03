@@ -335,6 +335,7 @@ a:focus {
 .content__main {
   flex-grow: 1;
   padding: 0 30px 0 27px;
+  margin-left: 27px;
 }
 
 .content__main-heading {
@@ -506,20 +507,16 @@ a:focus {
   border-top: 1px solid #d7dbe8;
 }
 
-.tasks__item td {
-  padding: 20px 0;
-
+.tasks__item td:not(:first-child) {
+  text-align: left;
+  padding: 20px 0 20px 20px;
   border-bottom: 1px solid #d7dbe8;
 }
 
 .tasks__item th {
+  padding: 20px 0 20px 20px;
   text-align: left;
-  padding: 20px 0;
   border-bottom: 1px solid #d7dbe8;
-}
-
-.tasks__item th:first-of-type {
-  padding-left: 30px;
 }
 
 .task__checkbox .checkbox__input + .checkbox__text {
@@ -572,7 +569,7 @@ a:focus {
 }
 
 .task__file {
-  width: 190px;
+  width: 105px;
 }
 
 .task__date {
@@ -580,7 +577,7 @@ a:focus {
 }
 
 .task__category {
-  width: 105px;
+  width: 190px;
 }
 
 .task__controls {

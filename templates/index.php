@@ -29,19 +29,18 @@
 
 
 <table class="tasks">
-    <tr class="tasks__item task">
+    <tr class="tasks__item">
         <th>Задача</th>
+        <th>Файл</th>
+        <th>Дата создания</th>
+        <th>Срок выполнения</th>
         <th>Дата выполнения</th>
         <th>Категория</th>
     </tr>
     <?php foreach($list_tasks as $task) : ?>
-        <?php if ($task['is_completed'] === 'Нет') : ?>
+        <?php if ($task['is_completed'] === 0) : ?>
             <tr class="tasks__item task
-            <?php
-                if (hours_to_date($task) <= 24) {
-                    print('task--important');
-                }
-                ?>
+            <?= isImportant($task['term_time']) ? 'task--important' : '' ?>
             ">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
@@ -51,8 +50,13 @@
                         </span>
                     </label>
                 </td>
-                <td class="task__date"><?= $task['complete_date']; ?></td>
-                <td class="task__category"><?= $task['category']; ?></td>
+                <td class="task__file">
+                     <a class="download-link" href="#"><?= $task['file']; ?></a>
+                </td>
+                <td class="task__date"><?= formatTime($task['create_time']); ?></td>
+                <td class="task__date"><?= formatTime($task['term_time']); ?></td>
+                <td class="task__date"><?= formatTime($task['complete_time']); ?></td>
+                <td class="task__category"><?= $task['project_name']; ?></td>
             </tr>
         <?php elseif ($show_complete_tasks === 1) : ?>
             <tr class="tasks__item task task--completed">
@@ -62,9 +66,11 @@
                         <span class="checkbox__text"><?= $task['name']; ?></span>
                     </label>
                 </td>
-
-                <td class="task__date"><?= $task['complete_date']; ?></td>
-                <td class="task__category"><?= $task['category']; ?></td>
+                <td class="task__file"><?= $task['file']; ?></td>
+                <td class="task__date"><?= formatTime($task['create_time']); ?></td>
+                <td class="task__date"><?= formatTime($task['term_time']); ?></td>
+                <td class="task__date"><?= formatTime($task['complete_time']); ?></td>
+                <td class="task__category"><?= $task['project_name']; ?></td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>
