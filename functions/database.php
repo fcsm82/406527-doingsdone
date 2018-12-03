@@ -1,6 +1,10 @@
 <?php
 
-// функция подключения к БД
+/**
+ * Функция подключения к БД
+ * @param array $config с параметрами подключения
+ * @return mysqli
+ */
 function dbConnect($config) {
     $con = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
     if (!$con) {
@@ -56,7 +60,13 @@ function dbGetPrepareStmt($link, $sql, $data = []) {
     return $stmt;
 }
 
-// получение записей из БД
+/**
+ * Функция получения записей из БД
+ * @param $link mysqli Ресурс соединения
+ * @param $sql string SQL запрос с плейсхолдерами вместо значений
+ * @param array $data Данные для вставки на место плейсхолдеров
+ * @return array|null
+ */
 function dbFetchData($link, $sql, $data = []) {
     $result = [];
     $stmt = dbGetPrepareStmt($link, $sql, $data);
@@ -70,7 +80,13 @@ function dbFetchData($link, $sql, $data = []) {
 
 }
 
-// добавление записей в БД
+/**
+ * Функция вставки записей из БД
+ * @param $link mysqli Ресурс соединения
+ * @param $sql
+ * @param array $data
+ * @return bool|int|string
+ */
 function dbInsertData($link, $sql, $data = []) {
     $stmt = dbGetPrepareStmt($link, $sql, $data);
     $result = mysqli_stmt_execute($stmt);

@@ -1,11 +1,10 @@
 <?php
 /**
- * функция-шаблонизатор
+ * Функция-шаблонизатор
  * @param $name
  * @param $data
- * @return
+ * @return false|string
  */
-
 function includeTemplate($name, $data) {
     $name = 'templates/' . $name;
     $result = '';
@@ -25,11 +24,10 @@ function includeTemplate($name, $data) {
 
 /**
  * функция подсчета количества задач для каждого проекта
- * @param array $list_tasks
- * @param $project
- * @return int
+ * @param array $list_tasks Список задач
+ * @param $project Название проекта
+ * @return int $amount_tasks Количество задач
  */
-// функция подсчета количества задач для каждого проекта
 function countTasks ($list_tasks, $project) {
     $amount_tasks = 0;
     foreach ($list_tasks as $task) {
@@ -53,7 +51,11 @@ function filterData($list_values, $filterKey) {
     return $list_values;
 }
 
-// функция подсчета остатка времени до даты выполнения задачи
+/**
+ * Функция подсчета остатка времени до даты выполнения задачи
+ * @param $term_time
+ * @return float|null
+ */
 function hoursToDate($term_time) {
     if (!$term_time) {
         return null;
