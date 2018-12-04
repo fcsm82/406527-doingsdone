@@ -29,17 +29,17 @@
 
 
 <table class="tasks">
-    <tr class="tasks__item">
-        <th>Задача</th>
-        <th>Файл</th>
-        <th>Дата создания</th>
-        <th>Срок выполнения</th>
-        <th>Дата выполнения</th>
-        <th>Категория</th>
+    <tr class="th__tasks">
+        <th class="th__task">Задача</th>
+        <th class="th__file">Файл</th>
+        <th class="th__date">Дата создания</th>
+        <th class="th__date">Срок выполнения</th>
+        <th class="th__date">Дата выполнения</th>
+        <th class="th__category">Категория</th>
     </tr>
     <?php foreach($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] === 0) : ?>
-            <tr class="tasks__item task
+            <tr class="tasks__item tasks
             <?= isImportant($task['term_time']) ? 'task--important' : '' ?>
             ">
                 <td class="task__select">

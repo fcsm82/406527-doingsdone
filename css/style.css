@@ -502,6 +502,13 @@ a:focus {
 
   border-collapse: collapse;
 }
+.th__tasks {
+  border-bottom: 1px solid #d7dbe8;
+}
+
+.th__tasks th {
+  padding-bottom: 20px;
+}
 
 .tasks__item:first-child td {
   border-top: 1px solid #d7dbe8;
@@ -509,13 +516,7 @@ a:focus {
 
 .tasks__item td:not(:first-child) {
   text-align: left;
-  padding: 20px 0 20px 20px;
-  border-bottom: 1px solid #d7dbe8;
-}
-
-.tasks__item th {
-  padding: 20px 0 20px 20px;
-  text-align: left;
+  padding: 20px 0;
   border-bottom: 1px solid #d7dbe8;
 }
 
@@ -562,29 +563,30 @@ a:focus {
   padding-left: 50px;
 }
 
+.th__task {
+  min-width: 454px;
+}
+
+.th__file {
+  min-width: 95px;
+}
+
+.th__date {
+  min-width: 103px;
+}
+
+.th__category {
+  min-width: 100px;
+}
+
 .task__select {
   position: relative;
-
-  width: 476px;
-}
-
-.task__file {
-  width: 105px;
-}
-
-.task__date {
-  width: 80px;
-}
-
-.task__category {
-  width: 190px;
 }
 
 .task__controls {
   position: relative;
 
   width: 75px;
-
   text-align: right;
 }
 
