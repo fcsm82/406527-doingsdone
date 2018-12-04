@@ -70,11 +70,9 @@ function getTasksByProject($project_id, $connection)
  */
 function getUrlByProject($project_id)
 {
-    $data = array(
-        'project_id' => $project_id
-    );
+    $data = ['project_id' => $project_id];
 
-    $scriptname = pathinfo(APP_RUN, PATHINFO_BASENAME);
+    $scriptname = 'index.php';
     $query = http_build_query($data);
     $url = "/" . $scriptname . "?" . $query;
 
@@ -95,5 +93,5 @@ function getProjectById($project_id, $connection)
     $values = [$project_id];
 
     $project = dbFetchData($connection, $sql, $values);
-    return $project;
+    return $project ? $project[0] : null;
 }

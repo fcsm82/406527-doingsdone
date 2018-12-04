@@ -1,7 +1,6 @@
 <?php
 // подключаем файл с функциями и данными
 const APP_DIR = __DIR__;
-const APP_RUN = __FILE__;
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
 require_once APP_DIR . '/functions/data.php';
