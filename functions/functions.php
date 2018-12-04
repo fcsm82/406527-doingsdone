@@ -23,22 +23,6 @@ function includeTemplate($name, $data) {
 }
 
 /**
- * функция подсчета количества задач для каждого проекта
- * @param array $list_tasks Список задач
- * @param $project Название проекта
- * @return int $amount_tasks Количество задач
- */
-function countTasks ($list_tasks, $project) {
-    $amount_tasks = 0;
-    foreach ($list_tasks as $task) {
-        if ($task['project_name'] === $project) {
-            $amount_tasks ++;
-        }
-    }
-    return $amount_tasks;
-}
-
-/**
  * функция фильтрации данных для защиты от XSS атаки
  * @param array $list_values
  * @param string $filterKey

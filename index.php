@@ -9,21 +9,21 @@ $config = require APP_DIR . '/config.php';
 $connection = dbConnect($config['db']);
 
 $user_id = 1;
-
 $list_projects = getProjectsByUser($user_id, $connection);
-$list_all_tasks = getTasksByUser($user_id, $connection);
 
 if (isset($_GET['project_id'])) {
     $project_id = $_GET['project_id'];
-    $list_tasks = getTasksByProject($project_id, $connection);
     $project = getProjectById($project_id, $connection);
 
     if (!$project) {
         die(http_response_code(404));
     }
+    else {
+        $list_tasks = getTasksByProject($project_id, $connection);
+    }
 }
 else {
-    $list_tasks = $list_all_tasks;
+    $list_tasks = getTasksByUser($user_id, $connection);
 }
 
 // показывать или нет выполненные задачи
@@ -42,7 +42,7 @@ $title = 'Дела в поряке';
 $layout_content = includeTemplate('layout.php', [
     'page_content' => $page_content,
     'list_projects' => $list_projects,
-    'list_all_tasks' => $list_all_tasks,
+    'list_tasks' => $list_tasks,
     'title' => $title
 ]);
 print($layout_content);

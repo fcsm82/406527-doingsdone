@@ -9,9 +9,11 @@
 function getProjectsByUser($user_id, $connection)
 {
     $sql =
-        "SELECT p.id, p.name  FROM projects p ".
+        "SELECT p.id, p.name, COUNT(t.id) AS task_count FROM projects p ".
         "JOIN users u ON p.user_id = u.id ".
-        "WHERE p.user_id = ?";
+        "LEFT JOIN tasks t ON p.id = t.project_id ".
+        "WHERE p.user_id = ? GROUP BY p.id ".
+        "ORDER BY p.name";
     $values = [$user_id];
 
     $list_projects = dbFetchData($connection, $sql, $values);
