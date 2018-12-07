@@ -42,7 +42,6 @@ $title = 'Дела в поряке';
 $layout_content = includeTemplate('layout.php', [
     'page_content' => $page_content,
     'list_projects' => $list_projects,
-    'list_tasks' => $list_tasks,
     'title' => $title
 ]);
 print($layout_content);

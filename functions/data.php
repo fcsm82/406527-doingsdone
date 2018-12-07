@@ -119,19 +119,17 @@ function getProjectIdByName($project_name, $connection)
 function addTask ($user_id, $connection)
 {
     $sql =
-        "INSERT INTO tasks (create_time, term_time, is_completed, name, user_id, project_id) VALUES ".
-        "(?, ?, STR_TO_DATE(?, '%d.%m.%Y'), ?, ?, ?)";
+        "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".
+        "(?, ?, ?, ?, ?)";
 
     $values =
         [
-            $create_time = time(),
-            $term_time = $_POST['date'],
-            $is_completed = 0,
-            $name = $_POST['name'],
+            (new DateTime($_POST['date']))->format('Y-m-d H:i:s'),
+            $_POST['name'],
             $user_id,
-            $project_id = $_POST['project']
+            $_POST['project'],
+            '/' . $_FILES['preview']['name']
         ];
 
-    $result = dbInsertData($connection, $sql, $values);
-    return $result;
+    dbInsertData($connection, $sql, $values);
 }
