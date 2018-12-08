@@ -116,7 +116,7 @@ function getProjectIdByName($project_name, $connection)
 /**
  *
  */
-function addTask ($user_id, $connection)
+function addTask ($user_id, $connection, $task)
 {
     $sql =
         "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".

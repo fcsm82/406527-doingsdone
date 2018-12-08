@@ -14,21 +14,9 @@ $user_id = 1;
 $list_projects = getProjectsByUser($user_id, $connection);
 $list_tasks = getTasksByUser($user_id, $connection);
 
-$classname = null;
-$error = null;
-$input_error = [
-    'name' => null,
-    'date' => null,
-    'project' => null,
-    'preview' => null
-];
-
 // формируем контент страницы
 $page_content = includeTemplate('add.php', [
-    'list_projects' => $list_projects,
-    'classname' => $classname,
-    'input_error' => $input_error,
-    'error' => $error
+    'list_projects' => $list_projects
 ]);
 
 // задаем заголовок страницы
@@ -44,29 +32,27 @@ $layout_content = includeTemplate('layout.php', [
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
+    $task = $_POST;
+    $errors = [];
     // Список полей формы
     $fields = ['name', 'project', 'date' , 'preview'];
-
-    if (!isFormValidated($fields)) {
-        $classname = 'form__input--error';
-        $error = '<p class="form__message">Пожалуйста, исправьте ошибки в форме</p>';
+    if (!isFormValid($fields)) {
         $page_content = includeTemplate('add.php', [
             'list_projects' => $list_projects,
-            'classname' => $classname,
-            'input_error' => $input_error,
-            'error' => $error
+            'task' => $task,
+            'errors' => $errors
+
         ]);
         $layout_content = includeTemplate('layout.php', [
             'page_content' => $page_content,
             'list_projects' => $list_projects,
-            'list_tasks' => $list_tasks,
             'title' => $title
         ]);
 
         print($layout_content);
     }
     else {
-        addTask ($user_id, $connection);
+        addTask ($user_id, $connection, $task);
         header("Location: /index.php");
     }
 }

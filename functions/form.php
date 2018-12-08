@@ -4,10 +4,10 @@
  * @param array $fields Список полей формы
  * @return bool Возвращает True или False
  */
-function isFormValidated($fields)
+function isFormValid($fields)
 {
     foreach ($fields as $field) {
-        if (!isFieldValidated($field)) {
+        if (!isFieldValid($field)) {
             return false;
         }
     }
@@ -19,24 +19,33 @@ function isFormValidated($fields)
  * @param string $field Имя поля в форме
  * @return bool Возвращает True или False
  */
-function isFieldValidated ($field) {
+function isFieldValid ($field)
+{
     switch ($field) {
         case $field = 'name' :
             if (!isFieldFilled($field)) {
                 return false;
             }
-            elseif (isFieldLong($field, 255)) {
+
+            if (isFieldLong($field, 255)) {
                 return false;
             }
 
-        #case $field = 'project' :
-        /*case $field = 'date' :
-            if (!isDateFormated()) {
+        /*case $field = 'project' :
+            if (!isProjectExist($field)) {
                 return false;
             }*/
-        case $field = 'file' :
-            if (!isFileGood($field)) {
+
+        /*case $field = 'date' :
+            if (!isDatevalid($field)) {
                 return false;
+            }*/
+
+        case $field = 'preview' :
+            if (isFileUploaded($field)) {
+                $tmp_name = $_FILES[$field]['tmp_name'];
+                $target = "/" . basename($_FILES[$field]["name"]);
+                move_uploaded_file($tmp_name, $target);
             }
     }
     return true;
@@ -69,38 +78,46 @@ function isFieldLong($field, $len) {
     return false;
 }
 
-/**
- * Функция проверки файла
- * @param string $field Имя поля в форме
- * @return bool Возвращает True или False
- */
-function isFileGood($field) {
-    if (isset($_FILES['preview']['name'])) {
-        $tmp_name = $_FILES['preview']['tmp_name'];
-        $path = $_FILES['preview']['name'];
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $file_type = finfo_file($finfo, $tmp_name);
-
-        if ($file_type !== "image/png") {
-            errorCollector($field, 'Изображение должно быть в формате PNG');
-            return false;
-        }
-        else {
-            move_uploaded_file($tmp_name, APP__DIR . $path);
+function isProjectExist ($field) {
+    global $list_projects;
+    foreach ($list_projects as $project) {
+        if ($_POST[$field] === $project['id']) {
+            return true;
         }
     }
+    errorCollector($field, 'Проект сданным ID не существует');
+    return false;
+}
+
+function isDateValid($field) {
+    $format = 'd.m.Y';
+    $d = date_create_from_format($format, $_POST[$field]);
+    if (date_format($d, $format) !== $_POST[$field]) {
+        errorCollector($field, 'Дата должна быть в формате "дд.мм.гггг" ');
+        return false;
+    }
     return true;
+}
+
+function isFileUploaded($field) {
+    return isset($_FILES[$field]['name']) ? true : false;
+}
+
+function isFileTypeValid ($tmp_name, $type) {
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $file_type = finfo_file($finfo, $tmp_name);
+
+    return ($file_type !== $type) ? false : true;
 }
 
 /**
  * Функция - сборщик ошибок при заполнении полей формы
  * @param string $field Имя поля в форме
- * @param string $error Сообщение об ошибке при заполнении поля формы
- * @return array/null $input_error Возвращает массив с ошибками или null
+ * @param string $text_error Сообщение об ошибке при заполнении поля формы
+ * @return array/null $errors Возвращает массив с ошибками или null
  */
-function errorCollector ($field, $error)
-{
-    global $input_error;
-    $input_error[$field] = $error;
-    return $input_error;
+function errorCollector ($field, $text_error) {
+    global $errors;
+    $errors[$field] = $text_error;
+    return $errors;
 }
