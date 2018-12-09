@@ -114,21 +114,26 @@ function getProjectIdByName($project_name, $connection)
 }
 
 /**
- *
+ * Функция добавлениязадачи в БД
+ * @param int $user_id
+ * @param mysqli object $connection Объект подключения к БД
+ * @param $task
+ * @throws Exception
  */
-function addTask ($user_id, $connection, $task)
+function addTask ($user_id, $connection, $task_data)
 {
+
     $sql =
         "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".
         "(?, ?, ?, ?, ?)";
 
     $values =
         [
-            (new DateTime($_POST['date']))->format('Y-m-d H:i:s'),
-            $_POST['name'],
+            (new DateTime($task_data['date']))->format('Y-m-d H:i:s'),
+            $task_data['name'],
             $user_id,
-            $_POST['project'],
-            '/' . $_FILES['preview']['name']
+            $task_data['project'],
+            $task_data['file_name']
         ];
 
     dbInsertData($connection, $sql, $values);
