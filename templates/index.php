@@ -47,7 +47,7 @@
                     </label>
                 </td>
                 <td class="task__file">
-                     <a class="download-link" href="<?= '/'.$task['file']; ?>"><?= $task['file']; ?></a>
+                     <a class="download-link" href="<?= $task['file']; ?>"><?= $task['file']; ?></a>
                 </td>
                 <td class="task__date"><?= formatTime($task['create_time']); ?></td>
                 <td class="task__date"><?= formatTime($task['term_time']); ?></td>

@@ -22,7 +22,7 @@ function isFormValid($fields)
 function isFieldValid ($field)
 {
     switch ($field) {
-        case $field = 'name' :
+        case'name' :
             if (!isFieldFilled($field)) {
                 return false;
             }
@@ -31,21 +31,27 @@ function isFieldValid ($field)
                 return false;
             }
 
-        /*case $field = 'project' :
+        /*case 'project' :
             if (!isProjectExist($field)) {
                 return false;
             }*/
 
-        /*case $field = 'date' :
+        /*case 'date' :
             if (!isDatevalid($field)) {
                 return false;
             }*/
 
-        case $field = 'preview' :
+        case 'preview' :
+
+//            $res = isFileUploaded($field);
+//            var_dump($res);
+//            die();
+
             if (isFileUploaded($field)) {
                 $tmp_name = $_FILES[$field]['tmp_name'];
-                $target = "/" . basename($_FILES[$field]["name"]);
+                $target = APP_DIR .'/'. basename($_FILES[$field]["name"]);
                 move_uploaded_file($tmp_name, $target);
+
             }
     }
     return true;
@@ -100,6 +106,7 @@ function isDateValid($field) {
 }
 
 function isFileUploaded($field) {
+
     return isset($_FILES[$field]['name']) ? true : false;
 }
 
