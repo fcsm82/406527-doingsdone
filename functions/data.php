@@ -120,8 +120,12 @@ function getIdByEmail ($email, $connection) {
         "WHERE email = ?";
     $values = [$email];
 
-    $id = dbFetchData($connection, $sql, $values);
-    return $id;
+    $result = dbFetchData($connection, $sql, $values);
+    if (!$result) {
+        return false;
+    }
+
+    return $result[0]['id'];
 }
 
 /**
