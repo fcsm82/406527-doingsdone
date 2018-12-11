@@ -10,7 +10,7 @@ $config = require APP_DIR . '/config.php';
 $connection = dbConnect($config['db']);
 
 // задаем заголовок страницы
-$title = 'Добавление задачи';
+$title = 'Регистрация аккаунта';
 
 $user_id = 1;
 
@@ -18,31 +18,28 @@ $user_id = 1;
 $errors = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $task_data = $_POST;
+    $reg_data = $_POST;
 
-    $task_data['file_name'] = $_FILES['preview']['name'];
-    $task_data['file_tmp_name'] = $_FILES['preview']['tmp_name'];
-
-    $result = validateTaskForm($task_data, $connection);
+    $result = validateRegForm($reg_data, $connection);
 
     if ($result === true) {
-        addTask ($user_id, $connection, $task_data);
+        addUser ($connection, $reg_data);
         header("Location: /index.php");
     }
     else {
-        $list_projects = getProjectsByUser($user_id, $connection);
-
         $errors = $result;
 
-        $page_content = includeTemplate('add.php', [
-            'list_projects' => $list_projects,
-            'task_data' => $task_data,
+        $page_content = includeTemplate('register.php', [
+            'reg_data' => $reg_data,
             'errors' => $errors
+
+        ]);
+        $side_content = includeTemplate('register_side_content.php', [
 
         ]);
         $layout_content = includeTemplate('layout.php', [
             'page_content' => $page_content,
-            'list_projects' => $list_projects,
+            'side_content' => $side_content,
             'title' => $title
         ]);
 
@@ -50,17 +47,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$list_projects = getProjectsByUser($user_id, $connection);
-$list_tasks = getTasksByUser($user_id, $connection);
-
 // формируем контент страницы
-$page_content = includeTemplate('add.php', [
-    'list_projects' => $list_projects
-]);
-$side_content = includeTemplate('side_content.php', [
-    'list_projects' => $list_projects
+$page_content = includeTemplate('register.php', [
+
 ]);
 
+$side_content = includeTemplate('register_side_content.php', [
+
+]);
 
 // формируем страницу с добавлением задачи
 $layout_content = includeTemplate('layout.php', [
@@ -70,4 +64,3 @@ $layout_content = includeTemplate('layout.php', [
 ]);
 
 print($layout_content);
-

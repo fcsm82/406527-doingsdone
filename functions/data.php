@@ -60,6 +60,7 @@ function getTasksByProject($project_id, $connection)
     $values = [$project_id];
 
     $list_tasks = dbFetchData($connection, $sql, $values);
+
     $list_tasks = filterData($list_tasks, 'name');
 
     return $list_tasks;
@@ -113,6 +114,16 @@ function getProjectIdByName($project_name, $connection)
     return $project;
 }
 
+function getIdByEmail ($email, $connection) {
+    $sql =
+        "SELECT id FROM users ".
+        "WHERE email = ?";
+    $values = [$email];
+
+    $id = dbFetchData($connection, $sql, $values);
+    return $id;
+}
+
 /**
  * Функция добавлениязадачи в БД
  * @param int $user_id
@@ -134,6 +145,23 @@ function addTask ($user_id, $connection, $task_data)
             $user_id,
             $task_data['project'],
             $task_data['file_name']
+        ];
+
+    dbInsertData($connection, $sql, $values);
+}
+
+function addUser ($connection, $reg_data)
+{
+
+    $sql =
+        "INSERT INTO users (email, password, name) VALUES ".
+        "(?, ?, ?)";
+
+    $values =
+        [
+            $reg_data['email'],
+            $password = password_hash($reg_data['password'], PASSWORD_DEFAULT),
+            $reg_data['name']
         ];
 
     dbInsertData($connection, $sql, $values);
