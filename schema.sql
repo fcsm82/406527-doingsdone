@@ -41,7 +41,7 @@ CREATE TABLE tasks (
   name VARCHAR(255),
   file VARCHAR(255),
   user_id INT(11) NOT NULL,
-  project_id INT(11) NOT NULL,
+  project_id INT(11) NULL,
   PRIMARY KEY (id)
 );
 

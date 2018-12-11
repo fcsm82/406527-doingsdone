@@ -97,3 +97,44 @@ function getProjectById($project_id, $connection)
     $project = dbFetchData($connection, $sql, $values);
     return $project ? $project[0] : null;
 }
+/** Функция получения ID проекта по его названию
+ * @param string $project_name Название проекта
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
+function getProjectIdByName($project_name, $connection)
+{
+    $sql =
+        "SELECT name AS project_name, id  FROM projects ".
+        "WHERE $project_name = ?";
+    $values = [$project_name];
+
+    $project = dbFetchData($connection, $sql, $values);
+    return $project;
+}
+
+/**
+ * Функция добавлениязадачи в БД
+ * @param int $user_id
+ * @param mysqli object $connection Объект подключения к БД
+ * @param $task
+ * @throws Exception
+ */
+function addTask ($user_id, $connection, $task_data)
+{
+
+    $sql =
+        "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".
+        "(?, ?, ?, ?, ?)";
+
+    $values =
+        [
+            (new DateTime($task_data['date']))->format('Y-m-d H:i:s'),
+            $task_data['name'],
+            $user_id,
+            $task_data['project'],
+            $task_data['file_name']
+        ];
+
+    dbInsertData($connection, $sql, $values);
+}

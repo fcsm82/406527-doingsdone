@@ -17,11 +17,7 @@
     <label class="checkbox">
         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
         <input class="checkbox__input visually-hidden show_completed" type="checkbox"
-            <?php
-            if ($show_complete_tasks === 1) {
-                print('checked');
-            }
-            ?>
+            <?php ($show_complete_tasks === 1) ? 'checked' : ''; ?>
         >
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
@@ -51,7 +47,7 @@
                     </label>
                 </td>
                 <td class="task__file">
-                     <a class="download-link" href="#"><?= $task['file']; ?></a>
+                     <a class="download-link" href="<?= $task['file']; ?>"><?= $task['file']; ?></a>
                 </td>
                 <td class="task__date"><?= formatTime($task['create_time']); ?></td>
                 <td class="task__date"><?= formatTime($task['term_time']); ?></td>
