@@ -34,6 +34,9 @@ $page_content = includeTemplate('index.php', [
     'list_tasks' => $list_tasks,
     'show_complete_tasks' => $show_complete_tasks
 ]);
+$side_content = includeTemplate('side_content.php', [
+    'list_projects' => $list_projects
+]);
 
 // задаем заголовок страницы
 $title = 'Дела в поряке';
@@ -41,7 +44,7 @@ $title = 'Дела в поряке';
 // формируем гланую страницу
 $layout_content = includeTemplate('layout.php', [
     'page_content' => $page_content,
-    'list_projects' => $list_projects,
+    'side_content' => $side_content,
     'title' => $title
 ]);
 print($layout_content);
