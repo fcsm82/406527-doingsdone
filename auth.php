@@ -13,30 +13,28 @@ $config = require APP_DIR . '/config.php';
 // Подключаемся к БД
 $connection = dbConnect($config['db']);
 
-// задаем заголовок страницы
-$title = 'Регистрация аккаунта';
+$title = 'Вход на сайт';
 
 // массив с ошибками валиции формы
 $errors = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $reg_data = $_POST;
+    $auth_data = $_POST;
 
-    $result = validateRegForm($reg_data, $connection);
+    $result = validateAuthForm($auth_data, $connection);
 
     if ($result === true) {
-        addUser ($connection, $reg_data);
-        $user = getUserbyEmail($reg_data['email'], $connection);
-
+        $user = getUserbyEmail($auth_data['email'], $connection);
         session_start();
         $_SESSION['user'] = $user;
         header("Location: /index.php");
     }
+
     else {
         $errors = $result;
 
-        $page_content = includeTemplate('register.php', [
-            'reg_data' => $reg_data,
+        $page_content = includeTemplate('auth.php', [
+            'auth_data' => $auth_data,
             'errors' => $errors
 
         ]);
@@ -51,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // формируем контент страницы
-$page_content = includeTemplate('register.php', [
+$page_content = includeTemplate('auth.php', [
 
 ]);
 
@@ -62,3 +60,7 @@ $layout_content = includeTemplate('layout.php', [
 ]);
 
 print($layout_content);
+
+
+
+

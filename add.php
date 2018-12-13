@@ -1,18 +1,23 @@
 <?php
-// подключаем файл с функциями и данными
+// Задаем текущую директорию
 const APP_DIR = __DIR__;
+
+// Подключаем файлы с функциями
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
 require_once APP_DIR . '/functions/data.php';
 require_once APP_DIR . '/functions/validators.php';
 
+// Подключаем файл с настройками
 $config = require APP_DIR . '/config.php';
+// Подключаемся к БД
 $connection = dbConnect($config['db']);
 
-// задаем заголовок страницы
 $title = 'Добавление задачи';
 
-$user_id = 1;
+session_start();
+$user = $_SESSION['user'];
+$user_id = $_SESSION['user']['id'];
 
 // массив с ошибками валиции формы
 $errors = null;
@@ -41,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         ]);
         $layout_content = includeTemplate('layout.php', [
+            'user' => $user,
             'page_content' => $page_content,
             'list_projects' => $list_projects,
             'title' => $title
@@ -61,9 +67,9 @@ $side_content = includeTemplate('side_content.php', [
     'list_projects' => $list_projects
 ]);
 
-
 // формируем страницу с добавлением задачи
 $layout_content = includeTemplate('layout.php', [
+    'user' => $user,
     'page_content' => $page_content,
     'side_content' => $side_content,
     'title' => $title
