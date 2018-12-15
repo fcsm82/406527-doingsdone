@@ -29,6 +29,12 @@ $form_message = null;
 // данные авторизации
 $auth_data = null;
 
+$user = getAuthUser($connection);
+if ($user) {
+    header("Location: /index.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $auth_data = $_POST;
     $result = validateAuthForm($auth_data, $connection);
@@ -43,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             header("Location: /index.php");
             exit();
-        } else {
-            $errors = $result;
-            $form_message = ERROR_VERIFY_USER;
         }
+
+        $errors = $result;
+        $form_message = ERROR_VERIFY_USER;
     } else {
         $errors = $result;
         $form_message = ERROR_VALID_FORM;

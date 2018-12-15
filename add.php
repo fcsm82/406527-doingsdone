@@ -17,16 +17,13 @@ $connection = dbConnect($config['db']);
 
 $title = 'Добавление задачи';
 
-
-if (!checkAuth($connection)) {
+$user = getAuthUser($connection);
+if (!$user) {
     header("Location: /index.php");
     exit();
 }
 
-$user = checkAuth($connection);
-if ($user) {
-    $user_id = $_SESSION['user']['id'];
-
+    $user_id = $user['id'];
 
     // массив с ошибками валиции формы
     $errors = null;
@@ -69,4 +66,3 @@ if ($user) {
     ]);
 
     print($layout_content);
-}

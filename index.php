@@ -22,7 +22,9 @@ $title = 'Дела в поряке';
 $show_complete_tasks = rand(0, 1);
 
 // проверяем авторизацию пользователя
-if (!checkAuth($connection)) {
+$user = getAuthUser($connection);
+
+if (!$user) {
     // формируем страницу для неавторизованного пользователя
     $layout_content = includeTemplate('guest.php', [
         'title' => $title
@@ -30,10 +32,7 @@ if (!checkAuth($connection)) {
     print($layout_content);
 }
 
-$user = checkAuth($connection);
-
-if ($user) {
-    $user_id = $_SESSION['user']['id'];
+    $user_id = $user['id'];
     $list_projects = getProjectsByUser($user_id, $connection);
 
     if (isset($_GET['project_id'])) {
@@ -63,4 +62,3 @@ if ($user) {
         'title' => $title
     ]);
     print($layout_content);
-}

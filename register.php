@@ -20,6 +20,17 @@ $title = 'Регистрация аккаунта';
 $errors = null;
 $reg_data = null;
 
+// проверяем авторизацию пользователя
+$user = getAuthUser($connection);
+
+if ($user) {
+    // формируем страницу для авторизованного пользователя
+    $layout_content = includeTemplate('index.php', [
+        'title' => $title
+    ]);
+    print($layout_content);
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $reg_data = $_POST;
 

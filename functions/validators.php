@@ -264,7 +264,7 @@ function getErrors($results)
  * @param mysqli object $connection Объект подключения к БД
  * @return array|bool|false Возвращает массив с данными пользователя | false
  */
-function checkAuth($connection)
+function getAuthUser($connection)
 {
     if (!isset($_SESSION['user'])) {
         return false;
