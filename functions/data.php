@@ -114,11 +114,12 @@ function getProjectIdByName($project_name, $connection)
 }
 
 /**
- * @param ыекштп $email Email пользователя
+ * @param string $email Email пользователя
  * @param mysqli object $connection Объект подключения к БД
  * @return bool|string Возвращает false или id пользователя
  */
-function getIdByEmail ($email, $connection) {
+function getIdByEmail($email, $connection)
+{
     $sql =
         "SELECT id FROM users ".
         "WHERE email = ?";
@@ -139,9 +140,8 @@ function getIdByEmail ($email, $connection) {
  * @param array $task_data Данные из формы добавления задачи
  * @throws Exception
  */
-function addTask ($user_id, $connection, $task_data)
+function addTask($user_id, $connection, $task_data)
 {
-
     $sql =
         "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".
         "(?, ?, ?, ?, ?)";
@@ -163,9 +163,8 @@ function addTask ($user_id, $connection, $task_data)
  * @param mysqli object $connection Объект подключения к БД
  * @param array $reg_data Данные из формы регистрации пользователя
  */
-function addUser ($connection, $reg_data)
+function addUser($connection, $reg_data)
 {
-
     $sql =
         "INSERT INTO users (email, password, name) VALUES ".
         "(?, ?, ?)";
@@ -184,9 +183,10 @@ function addUser ($connection, $reg_data)
  * Функция получения данных пользователя по его email
  * @param string $email Email пользователя
  * @param mysqli object $connection Объект подключения к БД
- * @return array|null Возвращает данные пользователя | null в случае отсутствия пользователя в БД,
+ * @return array|false Возвращает данные пользователя | false в случае отсутствия пользователя в БД
  */
-function getUserbyEmail ($email, $connection) {
+function getUserByEmail($email, $connection)
+{
     $sql =
         "SELECT * FROM users ".
         "WHERE email = ?";

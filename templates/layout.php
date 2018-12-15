@@ -19,7 +19,7 @@
                 <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
 
-            <?php if(isset($user)) : ?>
+            <?php if (isset($user)) : ?>
             <div class="main-header__side">
                 <a class="main-header__side-item button button--plus open-modal" href="add.php">Добавить задачу</a>
 
@@ -45,19 +45,19 @@
 
         <div class="content">
             <section class="content__side">
-                <?php if(isset($user)) : ?>
+                <?php if (isset($user)) : ?>
                 <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php if(isset($list_projects)) : ?>
+
                         <?php foreach ($list_projects as $project): ?>
                             <li class="main-navigation__list-item">
                                 <a class="main-navigation__list-item-link" href="<?=getUrlByProject($project['id']) ?>"><?= $project['name']; ?></a>
                                 <span class="main-navigation__list-item-count"><?= $project['task_count']; ?></span>
                             </li>
                         <?php endforeach; ?>
-                        <?php endif; ?>
+
                     </ul>
                 </nav>
 
@@ -85,7 +85,7 @@
             <p>Веб-приложение для удобного ведения списка дел.</p>
         </div>
 
-        <?php if(isset($user)) : ?>
+        <?php if (isset($user)) : ?>
         <a class="main-footer__button button button--plus" href="add.php">Добавить задачу</a>
         <?php endif; ?>
 

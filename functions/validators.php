@@ -8,6 +8,7 @@ const ERROR_EMPTY_LOGIN = 'Введите имя пользователя';
 const ERROR_EMPTY_PASSWORD = 'Введите пароль';
 const ERROR_WRONG_USER = 'Пользователя не существует';
 const ERROR_WRONG_PASSWORD = 'Неверный пароль';
+const ERROR_WRONG_EMAIL = 'Введите корректный адрес электронной почты';
 
 /**
  * Функция валидации формы
@@ -26,7 +27,6 @@ function validateTaskForm($task_data, $connection)
     if (isset($file_tmp_name)) {
         $results['preview'] = validateAttachment($task_data['file_name'], $task_data['file_tmp_name']);
     }
-
 
     $errors = getErrors($results);
 
@@ -56,7 +56,8 @@ function validateName($name)
  * @param mysqli object $connection Объект подключения к БД
  * @return bool|string Возращает true или текст ошибки
  */
-function validateProject($project_id, $connection) {
+function validateProject($project_id, $connection)
+{
     $project = getProjectById($project_id, $connection);
     if ($project == null) {
         return ERROR_PROJECT_ID;
@@ -69,7 +70,8 @@ function validateProject($project_id, $connection) {
  * @param $input_date дата
  * @return bool|string Возращает true или текст ошибки
  */
-function validateCompletionDate($input_date) {
+function validateCompletionDate($input_date)
+{
     if (!empty($input_date)) {
         $format = 'd.m.Y';
         $date_obj = DateTime::createFromFormat($format, $input_date);
@@ -88,7 +90,8 @@ function validateCompletionDate($input_date) {
  * @param int $max Максимальное количество символов в строке
  * @return bool|string Возращает true или текст ошибки
  */
-function checkLength($string, $min, $max) {
+function checkLength($string, $min, $max)
+{
     $length = mb_strlen($string);
     if ($length < $min || $length > $max) {
         return ERROR_LENGTH_FIELD . 'от ' . $min . ' до ' . $max . ' символов';
@@ -102,7 +105,8 @@ function checkLength($string, $min, $max) {
  * @param $file_tmp_name временное имя файла из массива $_FILES
  * @return bool Возращает true
  */
-function validateAttachment($file_name, $file_tmp_name) {
+function validateAttachment($file_name, $file_tmp_name)
+{
     $target = APP_DIR .'/'. basename($file_name);
     move_uploaded_file($file_tmp_name, $target);
     return true;
@@ -138,6 +142,11 @@ function validateEmail($email, $connection)
     if (empty($email)) {
         return ERROR_EMPTY_FIELD;
     }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return ERROR_WRONG_EMAIL;
+    }
+
     $id = getIdByEmail($email, $connection);
 
     if (!empty($id)) {
@@ -178,8 +187,8 @@ function validateAuthForm($auth_data, $connection)
 {
     $results = [];
 
-    $results['email'] = verifyLogin($auth_data['email'], $connection);
-    $results['password'] = verifyPassword($auth_data['email'], $auth_data['password'], $connection);
+    $results['email'] = validateLogin($auth_data['email']);
+    $results['password'] = validateInputPassword($auth_data['password']);
 
     $errors = getErrors($results);
 
@@ -187,40 +196,49 @@ function validateAuthForm($auth_data, $connection)
 }
 
 /**
- * Функция проверки логина/имени пользователя
- * @param string $login Email введеный пользователем для аутентификации
- * @param mysqli object $connection Объект подключения к БД
- * @return bool|string Возращает true | текст ошибки
+ * Функция валидации логина пользователя
+ * @param string $login логин/email пользователя
+ * @return bool|string Возвращает true | текст ошибки
  */
-function verifyLogin($login, $connection)
+function validateLogin($login)
 {
     if (empty($login)) {
         return ERROR_EMPTY_LOGIN;
     }
-    $user = getUserbyEmail($login, $connection);
-    if (!$user) {
-        return ERROR_WRONG_USER;
+
+    if (!filter_var($login, FILTER_VALIDATE_EMAIL)) {
+        return ERROR_WRONG_EMAIL;
     }
     return true;
 }
 
 /**
- * Функция проверки пароля пользователя
- * @param string $login Email введеный пользователем для аутентификации
- * @param string $password Пароль введенный пользователем для аутентификации
- * @param mysqli object $connection Объект подключения к БД
- * @return bool|string Возращает true | текст ошибки
+ * Функция валидации пароля, введенного пользователем
+ * @param string $password пароль пользователя
+ * @return bool|string Возвращает true | текст ошибки
  */
-function verifyPassword($login, $password, $connection)
+function validateInputPassword($password)
 {
     if (empty($password)) {
         return ERROR_EMPTY_PASSWORD;
     }
-    $user = getUserbyEmail($login, $connection);
-    if (!password_verify($password, $user['password'])) {
-        return ERROR_WRONG_PASSWORD;
-    }
     return true;
+}
+
+/**
+ * Функция проверки подлинности пользователя
+ * @param array $auth_data Массив $_POST
+ * @param mysqli object $connection Объект подключения к БД
+ * @return bool
+ */
+function verifyUser($auth_data, $connection)
+{
+    $user = getUserByEmail($auth_data['email'], $connection);
+
+    if (isset($user)) {
+        return password_verify($auth_data['password'], $user['password']) ? true : false;
+    }
+    return false;
 }
 
 
@@ -234,10 +252,24 @@ function getErrors($results)
     $errors = [];
 
     foreach ($results as $key => $result) {
-
         if ($result !== true) {
             $errors[$key] = $result;
         }
     }
     return $errors;
+}
+
+/**
+ * Функция проверки авторизации пользователя
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|bool|false Возвращает массив с данными пользователя | false
+ */
+function checkAuth($connection)
+{
+    if (!isset($_SESSION['user'])) {
+        return false;
+    } else {
+        $user = getUserByEmail($_SESSION['user']['email'], $connection);
+    }
+    return $user;
 }

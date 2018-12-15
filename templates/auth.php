@@ -25,6 +25,10 @@
         <?php endif; ?>
     </div>
 
+    <?php if (isset($errors)) : ?>
+        <p class="form__message"><?= $form_message; ?></p>
+    <?php endif; ?>
+
     <div class="form__row form__row--controls">
         <input class="button" type="submit" name="" value="Войти">
     </div>

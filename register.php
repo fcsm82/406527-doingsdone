@@ -18,6 +18,7 @@ $title = 'Регистрация аккаунта';
 
 // массив с ошибками валиции формы
 $errors = null;
+$reg_data = null;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $reg_data = $_POST;
@@ -25,34 +26,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = validateRegForm($reg_data, $connection);
 
     if ($result === true) {
-        addUser ($connection, $reg_data);
-        $user = getUserbyEmail($reg_data['email'], $connection);
+        addUser($connection, $reg_data);
 
         session_start();
+        $user = getUserByEmail($reg_data['email'], $connection);
+
         $_SESSION['user'] = $user;
         header("Location: /index.php");
-    }
-    else {
+        exit();
+    } else {
         $errors = $result;
-
-        $page_content = includeTemplate('register.php', [
-            'reg_data' => $reg_data,
-            'errors' => $errors
-
-        ]);
-
-        $layout_content = includeTemplate('layout.php', [
-            'page_content' => $page_content,
-            'title' => $title
-        ]);
-
-        print($layout_content);
     }
 }
 
 // формируем контент страницы
 $page_content = includeTemplate('register.php', [
-
+    'reg_data' => $reg_data,
+    'errors' => $errors
 ]);
 
 // формируем страницу с добавлением задачи

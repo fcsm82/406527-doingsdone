@@ -8,6 +8,8 @@ require_once APP_DIR . '/functions/functions.php';
 require_once APP_DIR . '/functions/data.php';
 require_once APP_DIR . '/functions/validators.php';
 
+session_start();
+
 // Подключаем файл с настройками
 $config = require APP_DIR . '/config.php';
 // Подключаемся к БД
@@ -19,11 +21,18 @@ $title = 'Дела в поряке';
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 
-session_start();
+// проверяем авторизацию пользователя
+if (!checkAuth($connection)) {
+    // формируем страницу для неавторизованного пользователя
+    $layout_content = includeTemplate('guest.php', [
+        'title' => $title
+    ]);
+    print($layout_content);
+}
 
-if (isset($_SESSION['user'])) {
+$user = checkAuth($connection);
 
-    $user = $_SESSION['user'];
+if ($user) {
     $user_id = $_SESSION['user']['id'];
     $list_projects = getProjectsByUser($user_id, $connection);
 
@@ -33,19 +42,12 @@ if (isset($_SESSION['user'])) {
 
         if (!$project) {
             die(http_response_code(404));
-        }
-        else {
+        } else {
             $list_tasks = getTasksByProject($project_id, $connection);
         }
-    }
-    else {
+    } else {
         $list_tasks = getTasksByUser($user_id, $connection);
     }
-
-    $page_content = includeTemplate('index.php', [
-        'list_tasks' => $list_tasks,
-        'show_complete_tasks' => $show_complete_tasks
-    ]);
 
     // формируем контент страницы
     $page_content = includeTemplate('index.php', [
@@ -56,21 +58,9 @@ if (isset($_SESSION['user'])) {
     // формируем гланую страницу
     $layout_content = includeTemplate('layout.php', [
         'user' => $user,
+        'list_projects' => $list_projects,
         'page_content' => $page_content,
         'title' => $title
     ]);
     print($layout_content);
 }
-
-else {
-    // формируем страницу с добавлением задачи
-    $layout_content = includeTemplate('guest.php', [
-        'title' => $title
-    ]);
-    print($layout_content);
-}
-
-
-
-
-

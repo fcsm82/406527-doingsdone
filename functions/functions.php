@@ -5,7 +5,8 @@
  * @param $data
  * @return false|string
  */
-function includeTemplate($name, $data) {
+function includeTemplate($name, $data)
+{
     $name = 'templates/' . $name;
     $result = '';
 
@@ -28,7 +29,8 @@ function includeTemplate($name, $data) {
  * @param string $filterKey
  * @return array
  */
-function filterData($list_values, $filterKey) {
+function filterData($list_values, $filterKey)
+{
     foreach ($list_values as $key => $value) {
         $list_values[$key][$filterKey] = strip_tags($value[$filterKey]);
     }
@@ -40,7 +42,8 @@ function filterData($list_values, $filterKey) {
  * @param $term_time
  * @return float|null
  */
-function hoursToDate($term_time) {
+function hoursToDate($term_time)
+{
     if (!$term_time) {
         return null;
     }
@@ -56,7 +59,8 @@ function hoursToDate($term_time) {
  * @param array $task
  * @return string
  */
-function isImportant($term_time) {
+function isImportant($term_time)
+{
     if (!$term_time) {
         return false;
     }
@@ -72,7 +76,8 @@ function isImportant($term_time) {
  * @return string|null
  * @throws Exception
  */
-function formatTime($time) {
+function formatTime($time)
+{
     if (!$time) {
         return null;
     }
