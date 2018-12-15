@@ -20,15 +20,13 @@ $title = 'Регистрация аккаунта';
 $errors = null;
 $reg_data = null;
 
+session_start();
+
 // проверяем авторизацию пользователя
 $user = getAuthUser($connection);
-
 if ($user) {
-    // формируем страницу для авторизованного пользователя
-    $layout_content = includeTemplate('index.php', [
-        'title' => $title
-    ]);
-    print($layout_content);
+    header("Location: /index.php");
+    exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
