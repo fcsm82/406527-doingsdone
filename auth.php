@@ -8,21 +8,27 @@ require_once APP_DIR . '/functions/functions.php';
 require_once APP_DIR . '/functions/data.php';
 require_once APP_DIR . '/functions/validators.php';
 
+const ERROR_VALID_FORM = 'Пожалуйста, исправьте ошибки в форме';
+const ERROR_VERIFY_USER = 'Вы ввели неверный email/пароль';
+
+session_start();
+
 // Подключаем файл с настройками
 $config = require APP_DIR . '/config.php';
 // Подключаемся к БД
 $connection = dbConnect($config['db']);
 
-// задаем заголовок страницы
-$title = 'Регистрация аккаунта';
+$title = 'Вход на сайт';
 
 // массив с ошибками валиции формы
 $errors = null;
-$reg_data = null;
 
-session_start();
+// сообщение об ошибках в форме
+$form_message = null;
 
-// проверяем авторизацию пользователя
+// данные авторизации
+$auth_data = null;
+
 $user = getAuthUser($connection);
 if ($user) {
     header("Location: /index.php");
@@ -30,27 +36,33 @@ if ($user) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $reg_data = $_POST;
-
-    $result = validateRegForm($reg_data, $connection);
+    $auth_data = $_POST;
+    $result = validateAuthForm($auth_data, $connection);
 
     if ($result === true) {
-        addUser($connection, $reg_data);
+        $result = verifyUser($auth_data, $connection);
 
-        session_start();
-        $user = getUserByEmail($reg_data['email'], $connection);
 
-        $_SESSION['user'] = $user;
-        header("Location: /index.php");
-        exit();
+        if ($result === true) {
+            $user = getUserByEmail($auth_data['email'], $connection);
+            $_SESSION['user'] = $user;
+
+            header("Location: /index.php");
+            exit();
+        }
+
+        $errors = $result;
+        $form_message = ERROR_VERIFY_USER;
     } else {
         $errors = $result;
+        $form_message = ERROR_VALID_FORM;
     }
 }
 
 // формируем контент страницы
-$page_content = includeTemplate('register.php', [
-    'reg_data' => $reg_data,
+$page_content = includeTemplate('auth.php', [
+    'auth_data' => $auth_data,
+    'form_message' => $form_message,
     'errors' => $errors
 ]);
 

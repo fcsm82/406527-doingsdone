@@ -33,7 +33,7 @@
         <th class="th__date">Дата выполнения</th>
         <th class="th__category">Категория</th>
     </tr>
-    <?php foreach($list_tasks as $task) : ?>
+    <?php foreach ($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] === 0) : ?>
             <tr class="tasks__item tasks
             <?= isImportant($task['term_time']) ? 'task--important' : '' ?>

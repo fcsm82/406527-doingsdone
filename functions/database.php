@@ -5,12 +5,12 @@
  * @param array $config с параметрами подключения
  * @return mysqli
  */
-function dbConnect($config) {
+function dbConnect($config)
+{
     $con = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
     if (!$con) {
         die("Ошибка подключения: " . mysqli_connect_error());
-    }
-    else {
+    } else {
         mysqli_set_charset($con, "utf8");
     };
     return $con;
@@ -18,14 +18,13 @@ function dbConnect($config) {
 
 /**
  * Создает подготовленное выражение на основе готового SQL запроса и переданных данных
- *
  * @param $link mysqli Ресурс соединения
  * @param $sql string SQL запрос с плейсхолдерами вместо значений
  * @param array $data Данные для вставки на место плейсхолдеров
- *
  * @return mysqli_stmt Подготовленное выражение
  */
-function dbGetPrepareStmt($link, $sql, $data = []) {
+function dbGetPrepareStmt($link, $sql, $data = [])
+{
     $stmt = mysqli_prepare($link, $sql);
 
     if ($data) {
@@ -37,11 +36,9 @@ function dbGetPrepareStmt($link, $sql, $data = []) {
 
             if (is_int($value)) {
                 $type = 'i';
-            }
-            else if (is_string($value)) {
+            } elseif (is_string($value)) {
                 $type = 's';
-            }
-            else if (is_double($value)) {
+            } elseif (is_double($value)) {
                 $type = 'd';
             }
 
@@ -67,7 +64,8 @@ function dbGetPrepareStmt($link, $sql, $data = []) {
  * @param array $data Данные для вставки на место плейсхолдеров
  * @return array|null
  */
-function dbFetchData($link, $sql, $data = []) {
+function dbFetchData($link, $sql, $data = [])
+{
     $result = [];
     $stmt = dbGetPrepareStmt($link, $sql, $data);
     mysqli_stmt_execute($stmt);
@@ -77,7 +75,6 @@ function dbFetchData($link, $sql, $data = []) {
     }
     mysqli_stmt_close($stmt);
     return $result;
-
 }
 
 /**
@@ -87,7 +84,8 @@ function dbFetchData($link, $sql, $data = []) {
  * @param array $data
  * @return bool|int|string
  */
-function dbInsertData($link, $sql, $data = []) {
+function dbInsertData($link, $sql, $data = [])
+{
     $stmt = dbGetPrepareStmt($link, $sql, $data);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
