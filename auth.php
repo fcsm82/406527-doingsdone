@@ -19,6 +19,9 @@ const ERROR_VERIFY_USER = 'Вы ввели неверный email/пароль';
 
 session_start();
 
+if (!file_exists(APP_DIR . '/config.php')) {
+    die('На основе config.sample.php создайте файл, указав в нём настройки для подключениия к БД');
+}
 // Подключаем файл с настройками
 $config = require APP_DIR . '/config.php';
 // Подключаемся к БД
