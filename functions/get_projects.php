@@ -41,12 +41,16 @@ function getProjectById($project_id, $connection)
  * @param mysqli object $connection Объект подключения к БД
  * @return array|null
  */
-function getProjectIdByName($project_name, $connection)
+function getProjectIdByNameAndUser($project_name, $user_id, $connection)
 {
     $sql =
         "SELECT id, name  FROM projects ".
-        "WHERE name = ?";
-    $values = [$project_name];
+        "WHERE name = ? AND user_id = ?";
+    $values =
+        [
+            $project_name,
+            $user_id
+        ];
 
     $id = dbFetchData($connection, $sql, $values);
 

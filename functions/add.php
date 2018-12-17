@@ -51,18 +51,34 @@ function addUser($connection, $reg_data)
  */
 function addTask($user_id, $connection, $task_data)
 {
-    $sql =
-        "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".
-        "(?, ?, ?, ?, ?)";
+    if (!empty($task_data['date'])) {
+        $sql =
+            "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".
+            "(?, ?, ?, ?, ?)";
 
-    $values =
-        [
-            (new DateTime($task_data['date']))->format('Y-m-d H:i:s'),
-            $task_data['name'],
-            $user_id,
-            $task_data['project'],
-            $task_data['file_name']
-        ];
+        $values =
+            [
+                (new DateTime($task_data['date']))->format('Y-m-d H:i:s'),
+                $task_data['name'],
+                $user_id,
+                $task_data['project'],
+                $task_data['file_name']
+            ];
+    }
+    else {
+        $sql =
+            "INSERT INTO tasks (name, user_id, project_id, file) VALUES ".
+            "(?, ?, ?, ?)";
+
+        $values =
+            [
+                $task_data['name'],
+                $user_id,
+                $task_data['project'],
+                $task_data['file_name']
+            ];
+    }
+
 
     dbInsertData($connection, $sql, $values);
 }

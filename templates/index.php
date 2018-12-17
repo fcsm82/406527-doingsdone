@@ -29,14 +29,6 @@
 
 
 <table class="tasks">
-    <tr class="th__tasks">
-        <th class="th__task">Задача</th>
-        <th class="th__file">Файл</th>
-        <th class="th__date">Дата создания</th>
-        <th class="th__date">Срок выполнения</th>
-        <th class="th__date">Дата выполнения</th>
-        <th class="th__category">Категория</th>
-    </tr>
     <?php foreach ($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] == 0 || $show_complete_tasks == 1) : ?>
             <tr class="tasks__item task
@@ -51,11 +43,12 @@
                         </a>
                     </label>
                 </td>
-                <td class="task__file"><?= $task['file']; ?></td>
-                <td class="task__date"><?= formatTime($task['create_time']); ?></td>
+
+                    <td class="task__file">
+                        <a href="<?= $task['file']; ?>"><?= $task['file']; ?></a>
+                    </td>
+
                 <td class="task__date"><?= formatTime($task['term_time']); ?></td>
-                <td class="task__date"><?= formatTime($task['complete_time']); ?></td>
-                <td class="task__category"><?= $task['project_name']; ?></td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>

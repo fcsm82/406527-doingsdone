@@ -38,6 +38,7 @@ if (!$user) {
     print($layout_content);
 }
 
+else {
     $user_id = $user['id'];
     $filter = null;
     $list_projects = getProjectsByUser($user_id, $connection);
@@ -75,3 +76,7 @@ if (!$user) {
         'title' => $title
     ]);
     print($layout_content);
+
+}
+
+

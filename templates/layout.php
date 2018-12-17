@@ -21,7 +21,7 @@
 
             <?php if (isset($user)) : ?>
             <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="add_user.php">Добавить задачу</a>
+                <a class="main-header__side-item button button--plus open-modal" href="add_task.php">Добавить задачу</a>
 
                 <div class="main-header__side-item user-menu">
                     <div class="user-menu__image">
@@ -86,7 +86,7 @@
         </div>
 
         <?php if (isset($user)) : ?>
-        <a class="main-footer__button button button--plus" href="add_user.php">Добавить задачу</a>
+        <a class="main-footer__button button button--plus" href="add_task.php">Добавить задачу</a>
         <?php endif; ?>
 
         <div class="main-footer__social social">

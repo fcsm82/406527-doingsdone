@@ -292,7 +292,7 @@ function validateProjectForm($project_data, $connection)
     return $errors ? $errors : true;
 }
 
-function validateNameProject($name, $connection)
+function validateNameProject($name, $user_id, $connection)
 {
     $name = trim($name);
     if (empty($name)) {
@@ -303,7 +303,7 @@ function validateNameProject($name, $connection)
         return $check_length;
     }
 
-    $id = getProjectIdByName($name, $connection);
+    $id = getProjectIdByNameAndUser($name, $user_id, $connection);
 
     if (!empty($id)) {
         return ERROR_PROJECT_EXIST;
