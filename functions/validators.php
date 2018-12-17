@@ -4,6 +4,7 @@ const ERROR_LENGTH_FIELD = 'Количество символов в поле д
 const ERROR_PROJECT_ID = 'Необходимо выбрать проект';
 const ERROR_DATE_FIELD = 'Введите дату в формате ДД.ММ.ГГГГ';
 const ERROR_EMAIL_EXIST = 'Пользователь с указанным адресом эл. почты уже зарегистрирован';
+const ERROR_PROJECT_EXIST = 'Прооект с указанным именем уже существует';
 const ERROR_EMPTY_LOGIN = 'Введите имя пользователя';
 const ERROR_EMPTY_PASSWORD = 'Введите пароль';
 const ERROR_WRONG_USER = 'Пользователя не существует';
@@ -24,7 +25,7 @@ function validateTaskForm($task_data, $connection)
     $results['project'] = validateProject($task_data['project'], $connection);
     $results['date'] = validateCompletionDate($task_data['date']);
 
-    if (isset($file_tmp_name)) {
+    if (isset($_FILES['file_tmp_name'])) {
         $results['preview'] = validateAttachment($task_data['file_name'], $task_data['file_tmp_name']);
     }
 
@@ -40,6 +41,7 @@ function validateTaskForm($task_data, $connection)
  */
 function validateName($name)
 {
+    $name = trim($name);
     if (empty($name)) {
         return ERROR_EMPTY_FIELD;
     }
@@ -272,4 +274,40 @@ function getAuthUser($connection)
         $user = getUserByEmail($_SESSION['user']['email'], $connection);
     }
     return $user;
+}
+
+/**
+ * Функция валидации формы
+ * @param array $project_data Массив $_POST
+ * @return array|bool Возращает true или массив с ошибками
+ */
+function validateProjectForm($project_data, $connection)
+{
+    $results = [];
+    $results['name'] = validateNameProject($project_data['name'], $connection);
+
+
+    $errors = getErrors($results);
+
+    return $errors ? $errors : true;
+}
+
+function validateNameProject($name, $connection)
+{
+    $name = trim($name);
+    if (empty($name)) {
+        return ERROR_EMPTY_FIELD;
+    }
+    $check_length = checkLength($name, 1, 255);
+    if ($check_length !== true) {
+        return $check_length;
+    }
+
+    $id = getProjectIdByName($name, $connection);
+
+    if (!empty($id)) {
+        return ERROR_PROJECT_EXIST;
+    }
+
+    return true;
 }

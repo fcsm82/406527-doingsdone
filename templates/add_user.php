@@ -1,7 +1,7 @@
 <main class="content__main">
     <h2 class="content__main-heading">Добавление задачи</h2>
 
-    <form class="form" action="add.php" method="post" enctype="multipart/form-data">
+    <form class="form" action="add_user.php" method="post" enctype="multipart/form-data">
         <div class="form__row">
             <?php $classname = isset($errors['name']) ? "form__input--error" : "";
             $value = isset($task_data['name']) ? $task_data['name'] : ""; ?>

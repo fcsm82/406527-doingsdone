@@ -5,7 +5,14 @@ const APP_DIR = __DIR__;
 // Подключаем файлы с функциями
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
-require_once APP_DIR . '/functions/data.php';
+
+require_once APP_DIR . '/functions/get_tasks.php';
+require_once APP_DIR . '/functions/get_projects.php';
+require_once APP_DIR . '/functions/get_user.php';
+
+require_once APP_DIR . '/functions/change.php';
+require_once APP_DIR . '/functions/time.php';
+require_once APP_DIR . '/functions/url.php';
 require_once APP_DIR . '/functions/validators.php';
 
 session_start();
@@ -18,8 +25,7 @@ $connection = dbConnect($config['db']);
 // задаем заголовок страницы
 $title = 'Дела в поряке';
 
-// показывать или нет выполненные задачи
-$show_complete_tasks = rand(0, 1);
+
 
 // проверяем авторизацию пользователя
 $user = getAuthUser($connection);
@@ -33,6 +39,7 @@ if (!$user) {
 }
 
     $user_id = $user['id'];
+    $filter = null;
     $list_projects = getProjectsByUser($user_id, $connection);
 
     if (isset($_GET['project_id'])) {
@@ -42,15 +49,21 @@ if (!$user) {
         if (!$project) {
             die(http_response_code(404));
         } else {
-            $list_tasks = getTasksByProject($project_id, $connection);
+            $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+            $list_tasks = (isset($filter)) ? getTasksByProjectByFilter($project_id, $connection, $filter) : getTasksByProject($project_id, $connection);
         }
     } else {
-        $list_tasks = getTasksByUser($user_id, $connection);
+        $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
+        $list_tasks = (isset($filter)) ? getTasksByUserByFilter($user_id, $connection, $filter) : getTasksByUser($user_id, $connection);
     }
 
-    // формируем контент страницы
+    $show_complete_tasks = (isset($_GET['show_completed'])) ? changeShowTasks($_GET['show_completed']) : 0;
+
+
+// формируем контент страницы
     $page_content = includeTemplate('index.php', [
         'list_tasks' => $list_tasks,
+        'filter' => $filter,
         'show_complete_tasks' => $show_complete_tasks
     ]);
 

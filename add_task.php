@@ -5,7 +5,15 @@ const APP_DIR = __DIR__;
 // Подключаем файлы с функциями
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
-require_once APP_DIR . '/functions/data.php';
+
+require_once APP_DIR . '/functions/get_tasks.php';
+require_once APP_DIR . '/functions/get_projects.php';
+require_once APP_DIR . '/functions/get_id.php';
+require_once APP_DIR . '/functions/get_user.php';
+require_once APP_DIR . '/functions/add.php';
+require_once APP_DIR . '/functions/change.php';
+require_once APP_DIR . '/functions/time.php';
+require_once APP_DIR . '/functions/url.php';
 require_once APP_DIR . '/functions/validators.php';
 
 session_start();
@@ -51,7 +59,7 @@ if (!$user) {
     $list_tasks = getTasksByUser($user_id, $connection);
 
     // формируем контент страницы
-    $page_content = includeTemplate('add.php', [
+    $page_content = includeTemplate('add_task.php', [
         'list_projects' => $list_projects,
         'task_data' => $task_data,
         'errors' => $errors

@@ -70,6 +70,11 @@ a:focus {
   text-decoration: underline;
 }
 
+.checkbox a {
+  color: #31313a;
+  text-decoration: none;
+}
+
 .body-background {
   background: #ffffff url("../img/background.jpg") no-repeat 0 0;
   background-size: cover;

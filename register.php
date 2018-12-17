@@ -5,7 +5,9 @@ const APP_DIR = __DIR__;
 // Подключаем файлы с функциями
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
-require_once APP_DIR . '/functions/data.php';
+require_once APP_DIR . '/functions/get_id.php';
+require_once APP_DIR . '/functions/get_user.php';
+require_once APP_DIR . '/functions/add.php';
 require_once APP_DIR . '/functions/validators.php';
 
 // Подключаем файл с настройками
