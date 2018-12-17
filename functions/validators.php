@@ -25,7 +25,7 @@ function validateTaskForm($task_data, $connection)
     $results['project'] = validateProject($task_data['project'], $connection);
     $results['date'] = validateCompletionDate($task_data['date']);
 
-    if (isset($task_data['file_tmp_name'])) {
+    if (isset($task_data['file_tmp_name']) && count($results) === 0) {
         $results['preview'] = validateAttachment($task_data['file_name'], $task_data['file_tmp_name']);
     }
 
@@ -281,10 +281,10 @@ function getAuthUser($connection)
  * @param array $project_data Массив $_POST
  * @return array|bool Возращает true или массив с ошибками
  */
-function validateProjectForm($project_data, $connection)
+function validateProjectForm($project_data, $user_id, $connection)
 {
     $results = [];
-    $results['name'] = validateNameProject($project_data['name'], $connection);
+    $results['name'] = validateNameProject($project_data['name'], $user_id, $connection);
 
 
     $errors = getErrors($results);

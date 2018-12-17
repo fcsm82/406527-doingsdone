@@ -43,7 +43,7 @@ if ($user) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $project_data = $_POST;
 
-        $result = validateProjectForm($project_data, $connection);
+        $result = validateProjectForm($project_data, $user_id, $connection);
 
 
         if ($result === true) {
