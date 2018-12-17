@@ -5,7 +5,13 @@ const APP_DIR = __DIR__;
 // Подключаем файлы с функциями
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
-require_once APP_DIR . '/functions/data.php';
+
+require_once APP_DIR . '/functions/get_id.php';
+require_once APP_DIR . '/functions/get_user.php';
+
+
+require_once APP_DIR . '/functions/time.php';
+require_once APP_DIR . '/functions/url.php';
 require_once APP_DIR . '/functions/validators.php';
 
 const ERROR_VALID_FORM = 'Пожалуйста, исправьте ошибки в форме';
@@ -13,6 +19,9 @@ const ERROR_VERIFY_USER = 'Вы ввели неверный email/пароль';
 
 session_start();
 
+if (!file_exists(APP_DIR . '/config.php')) {
+    die('На основе config.sample.php создайте файл, указав в нём настройки для подключениия к БД');
+}
 // Подключаем файл с настройками
 $config = require APP_DIR . '/config.php';
 // Подключаемся к БД

@@ -5,40 +5,51 @@ const APP_DIR = __DIR__;
 // Подключаем файлы с функциями
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
-require_once APP_DIR . '/functions/data.php';
+require_once APP_DIR . '/functions/get_tasks.php';
+require_once APP_DIR . '/functions/get_projects.php';
+require_once APP_DIR . '/functions/get_id.php';
+require_once APP_DIR . '/functions/get_user.php';
+require_once APP_DIR . '/functions/add.php';
+require_once APP_DIR . '/functions/change.php';
+require_once APP_DIR . '/functions/time.php';
+require_once APP_DIR . '/functions/url.php';
 require_once APP_DIR . '/functions/validators.php';
 
 session_start();
-
+if (!file_exists(APP_DIR . '/config.php')) {
+    die('На основе config.sample.php создайте файл, указав в нём настройки для подключениия к БД');
+}
 // Подключаем файл с настройками
 $config = require APP_DIR . '/config.php';
 // Подключаемся к БД
 $connection = dbConnect($config['db']);
 
-$title = 'Добавление задачи';
+$title = 'Добавление проекта';
 
-$user = getAuthUser($connection);
-if (!$user) {
+
+if (!getAuthUser($connection)) {
     header("Location: /index.php");
     exit();
 }
 
-    $user_id = $user['id'];
+$user = getAuthUser($connection);
+
+if ($user) {
+    $user_id = $_SESSION['user']['id'];
+
 
     // массив с ошибками валиции формы
     $errors = null;
-    $task_data = null;
+    $project_data = null;
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $task_data = $_POST;
+        $project_data = $_POST;
 
-        $task_data['file_name'] = $_FILES['preview']['name'];
-        $task_data['file_tmp_name'] = $_FILES['preview']['tmp_name'];
+        $result = validateProjectForm($project_data, $user_id, $connection);
 
-        $result = validateTaskForm($task_data, $connection);
 
         if ($result === true) {
-            addTask($user_id, $connection, $task_data);
+            addProject($user_id, $connection, $project_data);
             header("Location: /index.php");
             exit();
         } else {
@@ -46,14 +57,12 @@ if (!$user) {
             $list_projects = getProjectsByUser($user_id, $connection);
         }
     }
-
     $list_projects = getProjectsByUser($user_id, $connection);
-    $list_tasks = getTasksByUser($user_id, $connection);
 
     // формируем контент страницы
-    $page_content = includeTemplate('add.php', [
+    $page_content = includeTemplate('add_project.php', [
         'list_projects' => $list_projects,
-        'task_data' => $task_data,
+        'project_data' => $project_data,
         'errors' => $errors
     ]);
 
@@ -66,3 +75,4 @@ if (!$user) {
     ]);
 
     print($layout_content);
+}
