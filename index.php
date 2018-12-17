@@ -36,9 +36,7 @@ if (!$user) {
         'title' => $title
     ]);
     print($layout_content);
-}
-
-else {
+} else {
     $user_id = $user['id'];
     $filter = null;
     $list_projects = getProjectsByUser($user_id, $connection);
@@ -61,7 +59,7 @@ else {
     $show_complete_tasks = (isset($_GET['show_completed'])) ? changeShowTasks($_GET['show_completed']) : 0;
 
 
-// формируем контент страницы
+    // формируем контент страницы
     $page_content = includeTemplate('index.php', [
         'list_tasks' => $list_tasks,
         'filter' => $filter,
@@ -76,7 +74,4 @@ else {
         'title' => $title
     ]);
     print($layout_content);
-
 }
-
-

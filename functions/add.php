@@ -64,8 +64,7 @@ function addTask($user_id, $connection, $task_data)
                 $task_data['project'],
                 $task_data['file_name']
             ];
-    }
-    else {
+    } else {
         $sql =
             "INSERT INTO tasks (name, user_id, project_id, file) VALUES ".
             "(?, ?, ?, ?)";

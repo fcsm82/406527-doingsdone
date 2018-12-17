@@ -25,7 +25,7 @@ function validateTaskForm($task_data, $connection)
     $results['project'] = validateProject($task_data['project'], $connection);
     $results['date'] = validateCompletionDate($task_data['date']);
 
-    if (isset($_FILES['file_tmp_name'])) {
+    if (isset($task_data['file_tmp_name'])) {
         $results['preview'] = validateAttachment($task_data['file_name'], $task_data['file_tmp_name']);
     }
 
