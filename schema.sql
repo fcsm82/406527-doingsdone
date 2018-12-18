@@ -57,3 +57,5 @@ ALTER TABLE tasks
 ALTER TABLE tasks
   ADD FOREIGN KEY (project_id)
     REFERENCES projects(id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+CREATE FULLTEXT INDEX task_name_search ON tasks(name);

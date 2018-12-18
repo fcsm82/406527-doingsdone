@@ -1,4 +1,7 @@
 <?php
+
+require_once APP_DIR . '/functions/file.php';
+
 const ERROR_EMPTY_FIELD = 'Обязательное к заполнению поле';
 const ERROR_LENGTH_FIELD = 'Количество символов в поле должно быть ';
 const ERROR_PROJECT_ID = 'Необходимо выбрать проект';
@@ -25,13 +28,13 @@ function validateTaskForm($task_data, $connection)
     $results['project'] = validateProject($task_data['project'], $connection);
     $results['date'] = validateCompletionDate($task_data['date']);
 
-    if (isset($task_data['file_tmp_name']) && count($results) === 0) {
-        $results['preview'] = validateAttachment($task_data['file_name'], $task_data['file_tmp_name']);
+
+
+    if (isset($task_data['file_tmp_name']) && count($results) == 0) {
+        $results['preview'] = uploadFile($task_data['file_name'], $task_data['file_tmp_name']);
     }
-
     $errors = getErrors($results);
-
-    return $errors ? $errors : true;
+    return $errors ?: true;
 }
 
 /**
@@ -61,7 +64,7 @@ function validateName($name)
 function validateProject($project_id, $connection)
 {
     $project = getProjectById($project_id, $connection);
-    if ($project == null) {
+    if ($project === null) {
         return ERROR_PROJECT_ID;
     }
     return true;
@@ -77,7 +80,7 @@ function validateCompletionDate($input_date)
     if (!empty($input_date)) {
         $format = 'd.m.Y';
         $date_obj = DateTime::createFromFormat($format, $input_date);
-        if ($date_obj && $date_obj->format($format) == $input_date) {
+        if ($date_obj && $date_obj->format($format) === $input_date) {
             return true;
         }
         return ERROR_DATE_FIELD;
@@ -102,19 +105,6 @@ function checkLength($string, $min, $max)
 }
 
 /**
- * Фнукция валидации поля "Файл"
- * @param string $file_name имя файла из массива $_FILES
- * @param $file_tmp_name временное имя файла из массива $_FILES
- * @return bool Возращает true
- */
-function validateAttachment($file_name, $file_tmp_name)
-{
-    $target = APP_DIR .'/'. basename($file_name);
-    move_uploaded_file($file_tmp_name, $target);
-    return true;
-}
-
-/**
  * Функция валидации формы
  * @param array $reg_data Массив $_POST
  * @param mysqli object $connection Объект подключения к БД
@@ -130,7 +120,7 @@ function validateRegForm($reg_data, $connection)
 
     $errors = getErrors($results);
 
-    return $errors ? $errors : true;
+    return $errors ?: true;
 }
 
 /**
@@ -185,7 +175,7 @@ function validatePassword($password)
  * @param mysqli object $connection Объект подключения к БД
  * @return array|bool Возращает true или массив с ошибками
  */
-function validateAuthForm($auth_data, $connection)
+function validateAuthForm($auth_data)
 {
     $results = [];
 
@@ -194,7 +184,7 @@ function validateAuthForm($auth_data, $connection)
 
     $errors = getErrors($results);
 
-    return $errors ? $errors : true;
+    return $errors ?: true;
 }
 
 /**
@@ -261,24 +251,12 @@ function getErrors($results)
     return $errors;
 }
 
-/**
- * Функция проверки авторизации пользователя
- * @param mysqli object $connection Объект подключения к БД
- * @return array|bool|false Возвращает массив с данными пользователя | false
- */
-function getAuthUser($connection)
-{
-    if (!isset($_SESSION['user'])) {
-        return false;
-    } else {
-        $user = getUserByEmail($_SESSION['user']['email'], $connection);
-    }
-    return $user;
-}
 
 /**
  * Функция валидации формы
  * @param array $project_data Массив $_POST
+ * @param $user_id
+ * @param $connection
  * @return array|bool Возращает true или массив с ошибками
  */
 function validateProjectForm($project_data, $user_id, $connection)
@@ -289,8 +267,9 @@ function validateProjectForm($project_data, $user_id, $connection)
 
     $errors = getErrors($results);
 
-    return $errors ? $errors : true;
+    return $errors ?: true;
 }
+
 
 function validateNameProject($name, $user_id, $connection)
 {

@@ -9,8 +9,8 @@
 function addProject($user_id, $connection, $project_data)
 {
     $sql =
-        "INSERT INTO projects (name, user_id) VALUES ".
-        "(?, ?)";
+        'INSERT INTO projects (name, user_id) VALUES ' .
+        '(?, ?)';
 
     $values =
         [
@@ -29,8 +29,8 @@ function addProject($user_id, $connection, $project_data)
 function addUser($connection, $reg_data)
 {
     $sql =
-        "INSERT INTO users (email, password, name) VALUES ".
-        "(?, ?, ?)";
+        'INSERT INTO users (email, password, name) VALUES ' .
+        '(?, ?, ?)';
 
     $values =
         [
@@ -53,8 +53,8 @@ function addTask($user_id, $connection, $task_data)
 {
     if (!empty($task_data['date'])) {
         $sql =
-            "INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ".
-            "(?, ?, ?, ?, ?)";
+            'INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ' .
+            '(?, ?, ?, ?, ?)';
 
         $values =
             [
@@ -66,8 +66,8 @@ function addTask($user_id, $connection, $task_data)
             ];
     } else {
         $sql =
-            "INSERT INTO tasks (name, user_id, project_id, file) VALUES ".
-            "(?, ?, ?, ?)";
+            'INSERT INTO tasks (name, user_id, project_id, file) VALUES ' .
+            '(?, ?, ?, ?)';
 
         $values =
             [

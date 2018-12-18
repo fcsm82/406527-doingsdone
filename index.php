@@ -28,7 +28,6 @@ $connection = dbConnect($config['db']);
 $title = 'Дела в поряке';
 
 
-
 // проверяем авторизацию пользователя
 $user = getAuthUser($connection);
 
@@ -40,40 +39,49 @@ if (!$user) {
     print($layout_content);
     exit();
 }
-    $user_id = $user['id'];
-    $filter = null;
-    $list_projects = getProjectsByUser($user_id, $connection);
 
-    if (isset($_GET['project_id'])) {
-        $project_id = $_GET['project_id'];
-        $project = getProjectById($project_id, $connection);
+$user_id = $user['id'];
+$list_projects = getProjectsByUser($user_id, $connection);
+$filter = $_GET['filter'] ?? null;
+$list_tasks = isset($filter) ? getTasksByUserByFilter($user_id, $connection, $filter) : getTasksByUser($user_id, $connection);
+$show_complete_tasks = isset($_GET['show_completed']) ? changeShowTasks($_GET['show_completed']) : 0;
+$template = 'index.php';
 
-        if (!$project) {
-            die(http_response_code(404));
-        } else {
-            $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
-            $list_tasks = (isset($filter)) ? getTasksByProjectByFilter($project_id, $connection, $filter) : getTasksByProject($project_id, $connection);
-        }
-    } else {
-        $filter = isset($_GET['filter']) ? $_GET['filter'] : null;
-        $list_tasks = (isset($filter)) ? getTasksByUserByFilter($user_id, $connection, $filter) : getTasksByUser($user_id, $connection);
+
+if (isset($_GET['search'])) {
+    $search_data = trim($_GET['search']) ?? null;
+
+    $list_tasks = getTasksBySearchByUser($search_data, $user_id, $connection);
+
+    if (empty($list_tasks)) {
+        $template = 'search.php';
+        #'Ничего не найдено по вашему запросу';
     }
+}
 
-    $show_complete_tasks = (isset($_GET['show_completed'])) ? changeShowTasks($_GET['show_completed']) : 0;
 
+if (isset($_GET['project_id'])) {
+    $project_id = $_GET['project_id'];
+    $project = getProjectById($project_id, $connection);
 
-    // формируем контент страницы
-    $page_content = includeTemplate('index.php', [
-        'list_tasks' => $list_tasks,
-        'filter' => $filter,
-        'show_complete_tasks' => $show_complete_tasks
-    ]);
+    if (!$project) {
+        die(http_response_code(404));
+    }
+    $list_tasks = isset($filter) ? getTasksByProjectByFilter($project_id, $connection, $filter) : getTasksByProject($project_id, $connection);
+}
 
-    // формируем гланую страницу
-    $layout_content = includeTemplate('layout.php', [
-        'user' => $user,
-        'list_projects' => $list_projects,
-        'page_content' => $page_content,
-        'title' => $title
-    ]);
-    print($layout_content);
+// формируем контент страницы
+$page_content = includeTemplate($template, [
+    'list_tasks' => $list_tasks,
+    'filter' => $filter,
+    'show_complete_tasks' => $show_complete_tasks
+]);
+
+// формируем гланую страницу
+$layout_content = includeTemplate('layout.php', [
+    'user' => $user,
+    'list_projects' => $list_projects,
+    'page_content' => $page_content,
+    'title' => $title
+]);
+print($layout_content);

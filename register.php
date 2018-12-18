@@ -30,7 +30,7 @@ session_start();
 // проверяем авторизацию пользователя
 $user = getAuthUser($connection);
 if ($user) {
-    header("Location: /index.php");
+    header('Location: /index.php');
     exit();
 }
 
@@ -46,11 +46,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = getUserByEmail($reg_data['email'], $connection);
 
         $_SESSION['user'] = $user;
-        header("Location: /index.php");
+        header('Location: /index.php');
         exit();
-    } else {
-        $errors = $result;
     }
+    $errors = $result;
 }
 
 // формируем контент страницы

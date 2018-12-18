@@ -8,8 +8,8 @@
 function getIdByEmail($email, $connection)
 {
     $sql =
-        "SELECT id FROM users ".
-        "WHERE email = ?";
+        'SELECT id FROM users ' .
+        'WHERE email = ?';
     $values = [$email];
 
     $result = dbFetchData($connection, $sql, $values);

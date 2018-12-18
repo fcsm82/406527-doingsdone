@@ -30,7 +30,7 @@ $title = 'Добавление задачи';
 
 $user = getAuthUser($connection);
 if (!$user) {
-    header("Location: /index.php");
+    header('Location: /index.php');
     exit();
 }
 
@@ -50,12 +50,11 @@ if (!$user) {
 
         if ($result === true) {
             addTask($user_id, $connection, $task_data);
-            header("Location: /index.php");
+            header('Location: /index.php');
             exit();
-        } else {
-            $errors = $result;
-            $list_projects = getProjectsByUser($user_id, $connection);
         }
+
+        $errors = $result;
     }
 
     $list_projects = getProjectsByUser($user_id, $connection);

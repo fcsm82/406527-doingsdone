@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection PhpInconsistentReturnPointsInspection */
 
 /**
  * Функция подключения к БД
@@ -9,10 +9,10 @@ function dbConnect($config)
 {
     $con = mysqli_connect($config['host'], $config['user'], $config['password'], $config['database']);
     if (!$con) {
-        die("Ошибка подключения: " . mysqli_connect_error());
-    } else {
-        mysqli_set_charset($con, "utf8");
-    };
+        die('Ошибка подключения: ' . mysqli_connect_error());
+    }
+
+    mysqli_set_charset($con, 'utf8');
     return $con;
 }
 
@@ -38,7 +38,7 @@ function dbGetPrepareStmt($link, $sql, $data = [])
                 $type = 'i';
             } elseif (is_string($value)) {
                 $type = 's';
-            } elseif (is_double($value)) {
+            } elseif (is_float($value)) {
                 $type = 'd';
             }
 

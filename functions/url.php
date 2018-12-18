@@ -18,9 +18,7 @@ function getUrlByProject($project_id)
 
     $scriptname = 'index.php';
     $query = http_build_query($data);
-    $url = "/" . $scriptname . "?" . $query;
-
-    return $url;
+    return '/' . $scriptname . '?' . $query;
 }
 
 function buildUrlForFilter($filter = null)
@@ -41,9 +39,7 @@ function buildUrlForFilter($filter = null)
 
     $scriptname = 'index.php';
     $query = http_build_query($data);
-    $url = "/" . $scriptname . "?" . $query;
-
-    return $url;
+    return '/' . $scriptname . '?' . $query;
 }
 
 function buildUrlForComplete($show_complete_tasks)
@@ -62,9 +58,7 @@ function buildUrlForComplete($show_complete_tasks)
 
     $scriptname = 'index.php';
     $query = http_build_query($data);
-    $url = "/" . $scriptname . "?" . $query;
-
-    return $url;
+    return '/' . $scriptname . '?' . $query;
 }
 
 function buildUrlForTasks($task_id, $is_completed, $scriptname)
@@ -86,7 +80,5 @@ function buildUrlForTasks($task_id, $is_completed, $scriptname)
     $data ['set_status'] = $is_completed;
 
     $query = http_build_query($data);
-    $url = "/" . $scriptname . "?" . $query;
-
-    return $url;
+    return '/' . $scriptname . '?' . $query;
 }

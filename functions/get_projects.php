@@ -8,11 +8,11 @@
 function getProjectsByUser($user_id, $connection)
 {
     $sql =
-        "SELECT p.id, p.name, COUNT(t.id) AS task_count FROM projects p ".
-        "JOIN users u ON p.user_id = u.id ".
-        "LEFT JOIN tasks t ON p.id = t.project_id ".
-        "WHERE p.user_id = ? GROUP BY p.id ".
-        "ORDER BY p.name";
+        'SELECT p.id, p.name, COUNT(t.id) AS task_count FROM projects p ' .
+        'JOIN users u ON p.user_id = u.id ' .
+        'LEFT JOIN tasks t ON p.id = t.project_id ' .
+        'WHERE p.user_id = ? GROUP BY p.id ' .
+        'ORDER BY p.name';
     $values = [$user_id];
 
     $list_projects = dbFetchData($connection, $sql, $values);
@@ -29,30 +29,31 @@ function getProjectsByUser($user_id, $connection)
 function getProjectById($project_id, $connection)
 {
     $sql =
-        "SELECT id AS project_id, name  FROM projects ".
-        "WHERE id = ?";
+        'SELECT id AS project_id, name  FROM projects ' .
+        'WHERE id = ?';
     $values = [$project_id];
 
     $project = dbFetchData($connection, $sql, $values);
     return $project ? $project[0] : null;
 }
-/** Функция получения ID проекта по его названию
+
+/**
+ * Функция получения ID проекта по его названию
  * @param string $project_name Название проекта
- * @param mysqli object $connection Объект подключения к БД
+ * @param int $user_id Идентификатор пользователя
+ * @param $connection
  * @return array|null
  */
 function getProjectIdByNameAndUser($project_name, $user_id, $connection)
 {
     $sql =
-        "SELECT id, name  FROM projects ".
-        "WHERE name = ? AND user_id = ?";
+        'SELECT id, name  FROM projects ' .
+        'WHERE name = ? AND user_id = ?';
     $values =
         [
             $project_name,
             $user_id
         ];
 
-    $id = dbFetchData($connection, $sql, $values);
-
-    return $id;
+    return dbFetchData($connection, $sql, $values);
 }

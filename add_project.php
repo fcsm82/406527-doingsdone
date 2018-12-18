@@ -28,7 +28,7 @@ $title = 'Добавление проекта';
 
 
 if (!getAuthUser($connection)) {
-    header("Location: /index.php");
+    header('Location: /index.php');
     exit();
 }
 
@@ -50,12 +50,10 @@ if ($user) {
 
         if ($result === true) {
             addProject($user_id, $connection, $project_data);
-            header("Location: /index.php");
+            header('Location: /index.php');
             exit();
-        } else {
-            $errors = $result;
-            $list_projects = getProjectsByUser($user_id, $connection);
         }
+        $errors = $result;
     }
     $list_projects = getProjectsByUser($user_id, $connection);
 
