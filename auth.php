@@ -40,13 +40,13 @@ $auth_data = null;
 
 $user = getAuthUser($connection);
 if ($user) {
-    header("Location: /index.php");
+    header('Location: /index.php');
     exit();
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $auth_data = $_POST;
-    $result = validateAuthForm($auth_data, $connection);
+    $result = validateAuthForm($auth_data);
 
     if ($result === true) {
         $result = verifyUser($auth_data, $connection);
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = getUserByEmail($auth_data['email'], $connection);
             $_SESSION['user'] = $user;
 
-            header("Location: /index.php");
+            header('Location: /index.php');
             exit();
         }
 

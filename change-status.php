@@ -36,6 +36,6 @@ if (isset($_GET['task_id'])) {
 
 
     $url = buildUrlForTasks($task['id'], $task['is_completed'], 'index.php');
-    $loc = "Location: ". $url;
+    $loc = 'Location: ' . $url;
     header($loc);
 }

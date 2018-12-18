@@ -13,12 +13,11 @@ function hoursToDate($term_time)
     $ts = time();
     $ts_end = strtotime($term_time);
     $ts_diff = $ts_end - $ts;
-    $hours_diff = floor($ts_diff / $secs_in_hour);
-    return $hours_diff;
+    return floor($ts_diff / $secs_in_hour);
 }
 
 /** функция форматирования времени
- * @param timestamp $time
+ * @param string $time
  * @return string|null
  * @throws Exception
  */

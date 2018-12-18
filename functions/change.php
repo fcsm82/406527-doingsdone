@@ -3,17 +3,17 @@
 function changeTaskStatus($task, $status, $connection)
 {
     $sql =
-        "UPDATE tasks SET is_completed = ?, complete_time = ? ".
-        "WHERE id = ?";
+        'UPDATE tasks SET is_completed = ?, complete_time = ? ' .
+        'WHERE id = ?';
 
-    if ($status == 0) {
+    if ($status === 0) {
         $status = 1;
         $complete_time = (new DateTime())->format('Y-m-d H:i:s');
     } else {
         $status = 0;
 
         // Необходимо записать в БД null! Не работает!
-        $complete_time = (new DateTime('12.12.2012'))->format('Y-m-d H:i:s');
+        $complete_time = (new DateTime())->format('Y-m-d H:i:s');
     }
 
     $values =

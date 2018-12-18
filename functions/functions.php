@@ -15,7 +15,7 @@ function includeTemplate($name, $data)
     }
 
     ob_start();
-    extract($data);
+    extract($data, EXTR_OVERWRITE);
     require $name;
 
     $result = ob_get_clean();
@@ -37,11 +37,10 @@ function filterData($list_values, $filterKey)
     return $list_values;
 }
 
-
 /**
- * функция определения срочноcти задачи
- * @param array $task
- * @return string
+ * Функция определения срочноcти задачи
+ * @param $term_time
+ * @return bool
  */
 function isImportant($term_time)
 {
@@ -49,8 +48,5 @@ function isImportant($term_time)
         return false;
     }
     $hours_diff = hoursToDate($term_time);
-    if ($hours_diff <= 24) {
-        return true;
-    }
-    return false;
+    return $hours_diff <= 24;
 }
