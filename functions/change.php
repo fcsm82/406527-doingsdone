@@ -9,21 +9,27 @@ function changeTaskStatus($task, $status, $connection)
     if ($status === 0) {
         $status = 1;
         $complete_time = (new DateTime())->format('Y-m-d H:i:s');
+
+        $values =
+            [
+                $status,
+                $complete_time,
+                $task['id']
+            ];
     } else {
+        $sql =
+            'UPDATE tasks SET is_completed = ?, complete_time = NULL ' .
+            'WHERE id = ?';
+
         $status = 0;
 
-        // Необходимо записать в БД null! Не работает!
-        $complete_time = (new DateTime())->format('Y-m-d H:i:s');
+        $values =
+            [
+                $status,
+                $task['id']
+            ];
     }
-
-    $values =
-        [
-            $status,
-            $complete_time,
-            $task['id']
-        ];
-
-
+    
     dbInsertData($connection, $sql, $values);
 }
 

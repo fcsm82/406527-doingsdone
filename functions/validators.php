@@ -28,12 +28,12 @@ function validateTaskForm($task_data, $connection)
     $results['project'] = validateProject($task_data['project'], $connection);
     $results['date'] = validateCompletionDate($task_data['date']);
 
+    $errors = getErrors($results);
 
-
-    if (isset($task_data['file_tmp_name']) && count($results) == 0) {
+    if (isset($task_data['file_tmp_name']) && !$errors) {
         $results['preview'] = uploadFile($task_data['file_name'], $task_data['file_tmp_name']);
     }
-    $errors = getErrors($results);
+
     return $errors ?: true;
 }
 
