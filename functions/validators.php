@@ -71,9 +71,12 @@ function validateProject($project_id, $connection)
  */
 function validateCompletionDate($input_date)
 {
-    if ($input_date !== null) {
+    if (!empty($input_date)) {
+
+
         $format = 'd.m.Y';
         $date_obj = DateTime::createFromFormat($format, $input_date);
+
         if ($date_obj && $date_obj->format($format) === $input_date) {
             return true;
         }

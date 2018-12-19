@@ -24,9 +24,9 @@ function uploadFile($file_name, $file_tmp_name)
 {
     $target = APP_DIR .'/'. $file_name;
     $result = move_uploaded_file($file_tmp_name, $target);
-    if (!$result) {
+    /*if (!$result) {
         die('Ошибка загрузки файла');
-    }
+    }*/
 }
 
 function getFile()

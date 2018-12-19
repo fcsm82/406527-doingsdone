@@ -34,7 +34,7 @@
             <?php $classname = isset($errors['date']) ? 'form__input--error' : '';
             $value = $task_data['date'] ?? ''; ?>
 
-            <input class="form__input form__input--date <?= $classname; ?>" type="date" name="date" id="date" value="<?= $value; ?>"
+            <input class="form__input form__input--date <?= $classname; ?>" type="text" name="date" id="date" value="<?= $value; ?>"
                    placeholder="Введите дату в формате ДД.ММ.ГГГГ">
             <?php if (isset($errors['date'])) : ?>
                 <p class="form__message"><?= $errors['date']; ?></p>

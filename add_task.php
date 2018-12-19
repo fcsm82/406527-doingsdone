@@ -47,7 +47,9 @@ if (!$user) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $task_data = $_POST;
 
+
         $result = validateTaskForm($task_data, $connection);
+
 
         if ($result === true) {
             $task_data['file_name'] = getFile();

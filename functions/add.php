@@ -53,6 +53,7 @@ function addUser($connection, $reg_data)
 function addTask($user_id, $connection, $task_data)
 {
     // todo вставить код учитывающий существование задачи без проекта
+
     if (!empty($task_data['date'])) {
         $sql =
             'INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ' .
