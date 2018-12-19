@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // Задаем текущую директорию
 const APP_DIR = __DIR__;
 
@@ -55,7 +57,6 @@ if (isset($_GET['search'])) {
 
     if (empty($list_tasks)) {
         $template = 'search.php';
-        #'Ничего не найдено по вашему запросу';
     }
 }
 

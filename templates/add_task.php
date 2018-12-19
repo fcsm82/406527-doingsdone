@@ -21,7 +21,7 @@
             <select class="form__input form__input--select <?= $classname; ?>" name="project" id="project">
                 <option value=""></option>
                 <?php foreach ($list_projects as $project): ?>
-                    <option value="<?= $project['id']; ?>"><?= $project['name']; ?></option>
+                    <option value="<?= $project['id']; ?>" <?= (isset($task_data['project']) and $task_data['project'] === $project['id']) ? 'selected' : '' ; ?> ><?= $project['name']; ?></option>
                 <?php endforeach; ?>
             </select>
             <?php if (isset($errors['project'])) : ?>
@@ -34,7 +34,7 @@
             <?php $classname = isset($errors['date']) ? 'form__input--error' : '';
             $value = $task_data['date'] ?? ''; ?>
 
-            <input class="form__input form__input--date <?= $classname; ?>" type="text" name="date" id="date" value="<?= $value; ?>"
+            <input class="form__input form__input--date <?= $classname; ?>" type="date" name="date" id="date" value="<?= $value; ?>"
                    placeholder="Введите дату в формате ДД.ММ.ГГГГ">
             <?php if (isset($errors['date'])) : ?>
                 <p class="form__message"><?= $errors['date']; ?></p>

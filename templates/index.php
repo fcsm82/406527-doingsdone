@@ -28,11 +28,6 @@
 
 
 <table class="tasks">
-    <tr class="th__tasks">
-        <th class="th__task">Задача</th>
-        <th class="th__file">Файл</th>
-        <th class="th__date">Дата выполнения</th>
-    </tr>
         <?php foreach ($list_tasks as $task) : ?>
             <?php if ($task['is_completed'] === 0 || $show_complete_tasks === '1') : ?>
             <tr class="tasks__item task

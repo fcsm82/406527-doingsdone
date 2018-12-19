@@ -1,7 +1,4 @@
 <?php
-
-require_once APP_DIR . '/functions/file.php';
-
 const ERROR_EMPTY_FIELD = 'Обязательное к заполнению поле';
 const ERROR_LENGTH_FIELD = 'Количество символов в поле должно быть ';
 const ERROR_PROJECT_ID = 'Необходимо выбрать проект';
@@ -24,15 +21,11 @@ function validateTaskForm($task_data, $connection)
 {
     $results = [];
 
-    $results['name'] = validateName($task_data['name']);
-    $results['project'] = validateProject($task_data['project'], $connection);
-    $results['date'] = validateCompletionDate($task_data['date']);
+    $results['name'] = validateName(getValueByKey($task_data, 'name'));
+    $results['project'] = validateProject(getValueByKey($task_data, 'project'), $connection);
+    $results['date'] = validateCompletionDate(getValueByKey($task_data, 'date'));
 
     $errors = getErrors($results);
-
-    if (isset($task_data['file_tmp_name']) && !$errors) {
-        $results['preview'] = uploadFile($task_data['file_name'], $task_data['file_tmp_name']);
-    }
 
     return $errors ?: true;
 }
@@ -64,7 +57,8 @@ function validateName($name)
 function validateProject($project_id, $connection)
 {
     $project = getProjectById($project_id, $connection);
-    if ($project === null) {
+
+    if ($project === null && !empty($task_data[$project_id])) {
         return ERROR_PROJECT_ID;
     }
     return true;
@@ -77,7 +71,7 @@ function validateProject($project_id, $connection)
  */
 function validateCompletionDate($input_date)
 {
-    if (!empty($input_date)) {
+    if ($input_date !== null) {
         $format = 'd.m.Y';
         $date_obj = DateTime::createFromFormat($format, $input_date);
         if ($date_obj && $date_obj->format($format) === $input_date) {
@@ -114,9 +108,9 @@ function validateRegForm($reg_data, $connection)
 {
     $results = [];
 
-    $results['email'] = validateEmail($reg_data['email'], $connection);
-    $results['password'] = validatePassword($reg_data['password']);
-    $results['name'] = validateName($reg_data['name']);
+    $results['email'] = validateEmail(getValueByKey($reg_data, 'email'), $connection);
+    $results['password'] = validatePassword(getValueByKey($reg_data, 'password'));
+    $results['name'] = validateName(getValueByKey($reg_data, 'name'));
 
     $errors = getErrors($results);
 
@@ -179,8 +173,8 @@ function validateAuthForm($auth_data)
 {
     $results = [];
 
-    $results['email'] = validateLogin($auth_data['email']);
-    $results['password'] = validateInputPassword($auth_data['password']);
+    $results['email'] = validateLogin(getValueByKey($auth_data, 'email'));
+    $results['password'] = validateInputPassword(getValueByKey($auth_data, 'password'));
 
     $errors = getErrors($results);
 
@@ -262,8 +256,7 @@ function getErrors($results)
 function validateProjectForm($project_data, $user_id, $connection)
 {
     $results = [];
-    $results['name'] = validateNameProject($project_data['name'], $user_id, $connection);
-
+    $results['name'] = validateNameProject(getValueByKey($project_data, 'name'), $user_id, $connection);
 
     $errors = getErrors($results);
 
@@ -289,4 +282,9 @@ function validateNameProject($name, $user_id, $connection)
     }
 
     return true;
+}
+
+function getValueByKey($array, $key)
+{
+    return $array[$key] ?? null;
 }

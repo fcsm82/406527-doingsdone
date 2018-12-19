@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Задаем текущую директорию
 const APP_DIR = __DIR__;
 
@@ -15,6 +18,7 @@ require_once APP_DIR . '/functions/change.php';
 require_once APP_DIR . '/functions/time.php';
 require_once APP_DIR . '/functions/url.php';
 require_once APP_DIR . '/functions/validators.php';
+require_once APP_DIR . '/functions/file.php';
 
 session_start();
 
@@ -43,12 +47,10 @@ if (!$user) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $task_data = $_POST;
 
-        $task_data['file_name'] = $_FILES['preview']['name'];
-        $task_data['file_tmp_name'] = $_FILES['preview']['tmp_name'];
-
         $result = validateTaskForm($task_data, $connection);
 
         if ($result === true) {
+            $task_data['file_name'] = getFile();
             addTask($user_id, $connection, $task_data);
             header('Location: /index.php');
             exit();

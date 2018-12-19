@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Задаем текущую директорию
 const APP_DIR = __DIR__;
 
@@ -46,7 +49,6 @@ if ($user) {
         $project_data = $_POST;
 
         $result = validateProjectForm($project_data, $user_id, $connection);
-
 
         if ($result === true) {
             addProject($user_id, $connection, $project_data);
