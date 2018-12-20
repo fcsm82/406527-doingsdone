@@ -19,7 +19,7 @@
 
             <label class="form__label" for="project">Проект <sup>*</sup></label>
             <select class="form__input form__input--select <?= $classname; ?>" name="project" id="project">
-                <option value=""></option>
+                <option></option>
                 <?php foreach ($list_projects as $project): ?>
                     <option value="<?= $project['id']; ?>" <?= (isset($task_data['project']) and $task_data['project'] === $project['id']) ? 'selected' : '' ; ?> ><?= $project['name']; ?></option>
                 <?php endforeach; ?>

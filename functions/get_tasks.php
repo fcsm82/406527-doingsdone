@@ -8,9 +8,8 @@
 function getTasksByUser($user_id, $connection)
 {
     $sql =
-        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t '.
+        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file FROM tasks t '.
         'JOIN users u ON t.user_id = u.id '.
-        'JOIN projects p ON t.project_id = p.id '.
         'WHERE t.user_id = ?';
 
     $values = [$user_id];
@@ -44,9 +43,8 @@ function getTasksByUserByFilter($user_id, $connection, $filter)
 function getTasksByUserToday($user_id, $connection)
 {
     $sql =
-        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t '.
+        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file FROM tasks t '.
         'JOIN users u ON t.user_id = u.id '.
-        'JOIN projects p ON t.project_id = p.id '.
         'WHERE t.user_id = ? AND DATE(t.term_time) = CURDATE() AND DATE(t.term_time) < DATE_ADD(CURDATE(), INTERVAL 1 day)';
 
     $values = [$user_id];
@@ -60,9 +58,8 @@ function getTasksByUserToday($user_id, $connection)
 function getTasksByUserTomorrow($user_id, $connection)
 {
     $sql =
-        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t '.
+        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file FROM tasks t '.
         'JOIN users u ON t.user_id = u.id '.
-        'JOIN projects p ON t.project_id = p.id '.
         'WHERE t.user_id = ? AND DATE(t.term_time) > CURDATE() AND DATE(t.term_time) < DATE_ADD(CURDATE(), INTERVAL 2 day)';
 
     $values = [$user_id];
@@ -76,10 +73,9 @@ function getTasksByUserTomorrow($user_id, $connection)
 function getTasksByUserOverdue($user_id, $connection)
 {
     $sql =
-        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t '.
+        'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file FROM tasks t '.
         'JOIN users u ON t.user_id = u.id '.
-        'JOIN projects p ON t.project_id = p.id '.
-        'WHERE t.user_id = ? AND DATE(t.term_time) < NOW() ORDER BY t.term_time DESC';
+        'WHERE t.user_id = ? AND DATE(t.term_time) < CURDATE() ORDER BY t.term_time DESC';
 
     $values = [$user_id];
 

@@ -90,3 +90,29 @@ function dbInsertData($link, $sql, $data = [])
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 }
+
+/**
+ * Формирует prepare sql запрос к таблице $table из полей fields, значение по которым в массиве $data не NULL
+ * @param string $table
+ * @param array $fields
+ * @param array $data
+ * @return string
+ */
+function buildPrepareSqlWithoutNullFields($table, $fields, $data)
+{
+    $columns = [];
+    $valuesTemplate = [];
+
+    foreach ($fields as $field) {
+        if ($data[$field] !== null) {
+            $columns[] = $field;
+            $valuesTemplate[] = '?';
+        }
+    }
+
+    $sql = 'INSERT INTO '
+        . $table
+        . ' ('. implode(', ', $columns) .') VALUES ('. implode(', ', $valuesTemplate) .')';
+
+    return $sql;
+}
