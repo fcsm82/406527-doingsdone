@@ -73,7 +73,7 @@ function validateCompletionDate($input_date)
 {
     if (!empty($input_date)) {
 
-        $format = 'd.m.Y';
+        $format = 'Y-m-d';
         $date_obj = DateTime::createFromFormat($format, $input_date);
 
         if ($date_obj && $date_obj->format($format) === $input_date) {

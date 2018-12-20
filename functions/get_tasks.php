@@ -251,7 +251,7 @@ function getTasksBySearchByUser($search_data, $user_id, $connection)
         'SELECT t.id, t.name, t.create_time, t.term_time, t.complete_time, t.is_completed, t.file, p.name AS project_name FROM tasks t ' .
         'JOIN users u ON t.user_id = u.id ' .
         'JOIN projects p ON t.project_id = p.id ' .
-        'WHERE t.user_id = ? AND MATCH(t.name) AGAINST(?)';
+        'WHERE t.user_id = ? AND MATCH(t.name) AGAINST(? BOOLEAN MODE)';
 
     $values = [
         $user_id,

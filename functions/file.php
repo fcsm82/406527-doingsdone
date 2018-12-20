@@ -40,7 +40,7 @@ function uploadFile($file_name, $file_tmp_name)
  */
 function getFileName()
 {
-    if (!isset($_FILES['preview']['name']) && !isset($_FILES['preview']['tmp_name'])) {
+    if ((!isset($_FILES['preview']['name']) && !isset($_FILES['preview']['tmp_name'])) || !$_FILES['preview']['name']) {
         return '';
     }
 
