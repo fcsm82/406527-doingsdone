@@ -33,7 +33,7 @@
     <?php foreach ($list_tasks as $task) : ?>
         <?php if ($task['is_completed'] === 0 || $show_complete_tasks === '1') : ?>
             <tr class="tasks__item task
-                <?= isImportant($task['term_time']) ? 'task--important' : '' ?>
+                <?= isImportant($task['term_time']) && $task['is_completed'] === 0 ? 'task--important' : '' ?>
                 <?= $task['is_completed'] === 1 ? 'task--completed' : ''; ?>
             ">
                 <td class="task__select">
