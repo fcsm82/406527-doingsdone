@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Задаем текущую директорию
 const APP_DIR = __DIR__;
 
@@ -15,6 +18,7 @@ require_once APP_DIR . '/functions/change.php';
 require_once APP_DIR . '/functions/time.php';
 require_once APP_DIR . '/functions/url.php';
 require_once APP_DIR . '/functions/validators.php';
+require_once APP_DIR . '/functions/file.php';
 
 session_start();
 
@@ -34,45 +38,45 @@ if (!$user) {
     exit();
 }
 
-    $user_id = $user['id'];
+$user_id = $user['id'];
 
-    // массив с ошибками валиции формы
-    $errors = null;
-    $task_data = null;
+// массив с ошибками валиции формы
+$errors = null;
+$task_data = null;
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $task_data = $_POST;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $task_data = $_POST;
 
-        $task_data['file_name'] = $_FILES['preview']['name'];
-        $task_data['file_tmp_name'] = $_FILES['preview']['tmp_name'];
 
-        $result = validateTaskForm($task_data, $connection);
+    $result = validateTaskForm($task_data, $connection);
 
-        if ($result === true) {
-            addTask($user_id, $connection, $task_data);
-            header('Location: /index.php');
-            exit();
-        }
 
-        $errors = $result;
+    if ($result === true) {
+        $task_data['file_name'] = getFileName();
+        addTask($user_id, $connection, $task_data);
+        header('Location: /index.php');
+        exit();
     }
 
-    $list_projects = getProjectsByUser($user_id, $connection);
-    $list_tasks = getTasksByUser($user_id, $connection);
+    $errors = $result;
+}
 
-    // формируем контент страницы
-    $page_content = includeTemplate('add_task.php', [
-        'list_projects' => $list_projects,
-        'task_data' => $task_data,
-        'errors' => $errors
-    ]);
+$list_projects = getProjectsByUser($user_id, $connection);
+$list_tasks = getTasksByUser($user_id, $connection);
 
-    // формируем страницу с добавлением задачи
-    $layout_content = includeTemplate('layout.php', [
-        'user' => $user,
-        'page_content' => $page_content,
-        'list_projects' => $list_projects,
-        'title' => $title
-    ]);
+// формируем контент страницы
+$page_content = includeTemplate('add_task.php', [
+    'list_projects' => $list_projects,
+    'task_data' => $task_data,
+    'errors' => $errors
+]);
 
-    print($layout_content);
+// формируем страницу с добавлением задачи
+$layout_content = includeTemplate('layout.php', [
+    'user' => $user,
+    'page_content' => $page_content,
+    'list_projects' => $list_projects,
+    'title' => $title
+]);
+
+print($layout_content);

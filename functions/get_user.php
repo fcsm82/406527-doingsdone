@@ -27,6 +27,7 @@ function getUserByEmail($email, $connection)
     $values = [mysqli_real_escape_string($connection, $email)];
 
     $user = dbFetchData($connection, $sql, $values);
+    $user = filterData($user, 'name');
 
     return $user ? $user[0] : false;
 }

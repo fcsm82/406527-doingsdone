@@ -8,7 +8,7 @@
 function getProjectsByUser($user_id, $connection)
 {
     $sql =
-        'SELECT p.id, p.name, COUNT(t.id) AS task_count FROM projects p ' .
+        'SELECT p.id, p.name, (SELECT count(*) FROM tasks WHERE project_id=p.id AND is_completed=0) AS task_count FROM projects p ' .
         'JOIN users u ON p.user_id = u.id ' .
         'LEFT JOIN tasks t ON p.id = t.project_id ' .
         'WHERE p.user_id = ? GROUP BY p.id ' .

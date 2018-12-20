@@ -1,4 +1,7 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 // Задаем текущую директорию
 const APP_DIR = __DIR__;
 
@@ -25,7 +28,6 @@ if (isset($_GET['task_id'])) {
 
 
     $task = getTaskById($task_id, $connection);
-
 
 
     if (!$task) {

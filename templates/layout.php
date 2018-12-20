@@ -20,21 +20,22 @@
             </a>
 
             <?php if (isset($user)) : ?>
-            <div class="main-header__side">
-                <a class="main-header__side-item button button--plus open-modal" href="add_task.php">Добавить задачу</a>
+                <div class="main-header__side">
+                    <a class="main-header__side-item button button--plus open-modal" href="add_task.php">Добавить
+                        задачу</a>
 
-                <div class="main-header__side-item user-menu">
-                    <div class="user-menu__image">
-                        <img src="img/user-pic.jpg" width="40" height="40" alt="Пользователь">
-                    </div>
+                    <div class="main-header__side-item user-menu">
+                        <div class="user-menu__image">
+                            <img src="img/user-pic.jpg" width="40" height="40" alt="Пользователь">
+                        </div>
 
-                    <div class="user-menu__data">
-                        <p><?= $user['name']; ?></p>
+                        <div class="user-menu__data">
+                            <p><?= $user['name']; ?></p>
 
-                        <a href="logout.php">Выйти</a>
+                            <a href="logout.php">Выйти</a>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php else : ?>
                 <div class="main-header__side">
                     <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
@@ -46,23 +47,24 @@
         <div class="content">
             <section class="content__side">
                 <?php if (isset($user)) : ?>
-                <h2 class="content__side-heading">Проекты</h2>
+                    <h2 class="content__side-heading">Проекты</h2>
 
-                <nav class="main-navigation">
-                    <ul class="main-navigation__list">
+                    <nav class="main-navigation">
+                        <ul class="main-navigation__list">
 
-                        <?php foreach ($list_projects as $project): ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="<?=getUrlByProject($project['id']) ?>"><?= $project['name']; ?></a>
-                                <span class="main-navigation__list-item-count"><?= $project['task_count']; ?></span>
-                            </li>
-                        <?php endforeach; ?>
+                            <?php foreach ($list_projects as $project): ?>
+                                <li class="main-navigation__list-item">
+                                    <a class="main-navigation__list-item-link"
+                                       href="<?= getUrlByProject($project['id']) ?>"><?= $project['name']; ?></a>
+                                    <span class="main-navigation__list-item-count"><?= $project['task_count']; ?></span>
+                                </li>
+                            <?php endforeach; ?>
 
-                    </ul>
-                </nav>
+                        </ul>
+                    </nav>
 
-                <a class="button button--transparent button--plus content__side-button"
-                   href="add_project.php" target="project_add">Добавить проект</a>
+                    <a class="button button--transparent button--plus content__side-button"
+                       href="add_project.php" target="project_add">Добавить проект</a>
                 <?php else : ?>
                     <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
 
@@ -71,7 +73,7 @@
             </section>
 
             <main class="content__main">
-                <?=$page_content;?>
+                <?= $page_content; ?>
             </main>
         </div>
     </div>
@@ -86,7 +88,7 @@
         </div>
 
         <?php if (isset($user)) : ?>
-        <a class="main-footer__button button button--plus" href="add_task.php">Добавить задачу</a>
+            <a class="main-footer__button button button--plus" href="add_task.php">Добавить задачу</a>
         <?php endif; ?>
 
         <div class="main-footer__social social">

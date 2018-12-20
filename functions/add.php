@@ -49,35 +49,29 @@ function addUser($connection, $reg_data)
  * @param array $task_data Данные из формы добавления задачи
  * @throws Exception
  */
+
 function addTask($user_id, $connection, $task_data)
 {
-    if (!empty($task_data['date'])) {
-        $sql =
-            'INSERT INTO tasks (term_time, name, user_id, project_id, file) VALUES ' .
-            '(?, ?, ?, ?, ?)';
+    $data = [
+        'term_time' => !empty($task_data['date']) ? (new DateTime($task_data['date']))->format('Y-m-d H:i:s') : null,
+        'name' => $task_data['name'],
+        'user_id' => $user_id,
+        'project_id' => !empty($task_data['project']) ? (int)$task_data['project'] : null,
+        'file' => !empty($task_data['file_name']) ? $task_data['file_name'] : null
+    ];
 
-        $values =
-            [
-                (new DateTime($task_data['date']))->format('Y-m-d H:i:s'),
-                $task_data['name'],
-                $user_id,
-                $task_data['project'],
-                $task_data['file_name']
-            ];
-    } else {
-        $sql =
-            'INSERT INTO tasks (name, user_id, project_id, file) VALUES ' .
-            '(?, ?, ?, ?)';
+    $sql = buildPrepareSqlWithoutNullFields(
+        'tasks',
+        ['term_time', 'name', 'user_id', 'project_id', 'file'],
+        $data
+    );
 
-        $values =
-            [
-                $task_data['name'],
-                $user_id,
-                $task_data['project'],
-                $task_data['file_name']
-            ];
+    $values = [];
+    foreach ($data as $item) {
+        if ($item !== null) {
+            $values[] = $item;
+        }
     }
-
 
     dbInsertData($connection, $sql, $values);
 }

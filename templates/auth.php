@@ -6,7 +6,8 @@
         $value = $auth_data['email'] ?? ''; ?>
 
         <label class="form__label" for="email">E-mail <sup>*</sup></label>
-        <input class="form__input <?= $classname; ?>" type="text" name="email" id="email" value="<?= $value; ?>" placeholder="Введите e-mail">
+        <input class="form__input <?= $classname; ?>" type="text" name="email" id="email" value="<?= $value; ?>"
+               placeholder="Введите e-mail">
 
         <?php if (isset($errors['email'])) : ?>
             <p class="form__message"><?= $errors['email']; ?></p>
@@ -18,7 +19,8 @@
         $value = $auth_data['password'] ?? ''; ?>
 
         <label class="form__label" for="password">Пароль <sup>*</sup></label>
-        <input class="form__input <?= $classname; ?>" type="password" name="password" id="password" value="<?= $value; ?>" placeholder="Введите пароль">
+        <input class="form__input <?= $classname; ?>" type="password" name="password" id="password"
+               value="<?= $value; ?>" placeholder="Введите пароль">
 
         <?php if (isset($errors['password'])) : ?>
             <p class="form__message"><?= $errors['password']; ?></p>
