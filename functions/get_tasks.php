@@ -1,7 +1,7 @@
 <?php
 /**
  * Функция получения списка задач для заданного пользователя
- * @param int $user_id Идентификатор пользователя
+ * @param integer $user_id Идентификатор пользователя
  * @param mysqli object $connection Объект подключения к БД
  * @return array|null
  */
@@ -20,6 +20,13 @@ function getTasksByUser($user_id, $connection)
     return $list_tasks;
 }
 
+/**
+ * Функция получения списка задач с фильтром
+ * @param integer $user_id Идентификатор пользователя
+ * @param mysqli object $connection Объект подключения к БД
+ * @param string $filter
+ * @return array|null
+ */
 function getTasksByUserByFilter($user_id, $connection, $filter)
 {
     switch ($filter) {
@@ -40,6 +47,12 @@ function getTasksByUserByFilter($user_id, $connection, $filter)
     }
 }
 
+/**
+ * Функция получения списка задач с датой выполнения 'сегодня'
+ * @param integer $user_id Идентификатор пользователя
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
 function getTasksByUserToday($user_id, $connection)
 {
     $sql =
@@ -55,6 +68,12 @@ function getTasksByUserToday($user_id, $connection)
     return $list_tasks;
 }
 
+/**
+ * Функция получения списка задач с датой выполнения 'завтра'
+ * @param integer $user_id Идентификатор пользователя
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
 function getTasksByUserTomorrow($user_id, $connection)
 {
     $sql =
@@ -70,6 +89,12 @@ function getTasksByUserTomorrow($user_id, $connection)
     return $list_tasks;
 }
 
+/**
+ * Функция получения списка задач с просроченной датой выполнения
+ * @param integer $user_id Идентификатор пользователя
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
 function getTasksByUserOverdue($user_id, $connection)
 {
     $sql =
@@ -87,7 +112,7 @@ function getTasksByUserOverdue($user_id, $connection)
 
 /**
  * Функция получения списка задач по заданному проекту
- * @param int $project_id Идентификатор проекта
+ * @param integer $project_id Идентификатор проекта
  * @param mysqli object $connection Объект подключения к БД
  * @return array|null
  */
@@ -107,6 +132,13 @@ function getTasksByProject($project_id, $connection)
     return $list_tasks;
 }
 
+/**
+ * Функция получения списка задач по проекту c фильтром
+ * @param integer $project_id Идентификатор проекта
+ * @param mysqli object $connection Объект подключения к БД
+ * @param string $filter
+ * @return array|null
+ */
 function getTasksByProjectByFilter($project_id, $connection, $filter)
 {
     switch ($filter) {
@@ -123,6 +155,12 @@ function getTasksByProjectByFilter($project_id, $connection, $filter)
         }
 }
 
+/**
+ * Функция получения списка задач по проекту c датой выполнения 'сегодня'
+ * @param integer $project_id Идентификатор проекта
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
 function getTasksByProjectToday($project_id, $connection)
 {
     $sql =
@@ -139,6 +177,12 @@ function getTasksByProjectToday($project_id, $connection)
     return $list_tasks;
 }
 
+/**
+ * Функция получения списка задач по проекту c датой выполнения 'завтра'
+ * @param integer $project_id Идентификатор проекта
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
 function getTasksByProjectTomorrow($project_id, $connection)
 {
     $sql =
@@ -155,6 +199,12 @@ function getTasksByProjectTomorrow($project_id, $connection)
     return $list_tasks;
 }
 
+/**
+ * Функция получения списка задач по проекту c просроченной датой выполнения
+ * @param @param integer $project_id Идентификатор проекта
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
 function getTasksByProjectOverdue($project_id, $connection)
 {
     $sql =
@@ -171,6 +221,12 @@ function getTasksByProjectOverdue($project_id, $connection)
     return $list_tasks;
 }
 
+/**
+ * Функция плучения задачи по ее идентификатору
+ * @param $task_id
+ * @param mysqli object $connection Объект подключения к БД
+ * @return string|null
+ */
 function getTaskById($task_id, $connection)
 {
     $sql =
@@ -182,6 +238,13 @@ function getTaskById($task_id, $connection)
     return $task ? $task[0] : null;
 }
 
+/**
+ * Функция поиска задачи
+ * @param string $search_data поисковый запрос
+ * @param string $user_id
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array|null
+ */
 function getTasksBySearchByUser($search_data, $user_id, $connection)
 {
     $sql =

@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Функция изменения статуса задачи
+ * @param string $task
+ * @param integer $status
+ * @param mysqli object $connection Объект подключения к БД
+ * @throws Exception
+ */
 function changeTaskStatus($task, $status, $connection)
 {
     $sql =
@@ -33,6 +40,11 @@ function changeTaskStatus($task, $status, $connection)
     dbInsertData($connection, $sql, $values);
 }
 
+/**
+ * Функция отображения выполненных задач
+ * @param string $show_complete_tasks
+ * @return string
+ */
 function changeShowTasks($show_complete_tasks)
 {
     if ($show_complete_tasks === '0') {

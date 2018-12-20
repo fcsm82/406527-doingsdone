@@ -53,11 +53,11 @@ function addUser($connection, $reg_data)
 function addTask($user_id, $connection, $task_data)
 {
     $data = [
-        'term_time' => (!empty($task_data['date']) ? (new DateTime($task_data['date']))->format('Y-m-d H:i:s') : null),
+        'term_time' => !empty($task_data['date']) ? (new DateTime($task_data['date']))->format('Y-m-d H:i:s') : null,
         'name' => $task_data['name'],
         'user_id' => $user_id,
-        'project_id' => (!empty($task_data['project']) ? (int)$task_data['project'] : null),
-        'file' => (!empty($task_data['file_name']) ? $task_data['file_name'] : null)
+        'project_id' => !empty($task_data['project']) ? (int)$task_data['project'] : null,
+        'file' => !empty($task_data['file_name']) ? $task_data['file_name'] : null
     ];
 
     $sql = buildPrepareSqlWithoutNullFields(
@@ -73,7 +73,5 @@ function addTask($user_id, $connection, $task_data)
         }
     }
 
-    /*var_dump($data, $sql, $values);
-    die();*/
     dbInsertData($connection, $sql, $values);
 }

@@ -250,8 +250,8 @@ function getErrors($results)
 /**
  * Функция валидации формы
  * @param array $project_data Массив $_POST
- * @param $user_id
- * @param $connection
+ * @param integer $user_id
+ * @param mysqli object $connection Объект подключения к БД
  * @return array|bool Возращает true или массив с ошибками
  */
 function validateProjectForm($project_data, $user_id, $connection)
@@ -265,6 +265,13 @@ function validateProjectForm($project_data, $user_id, $connection)
 }
 
 
+/**
+ * Функция валидации поля с именем проекта
+ * @param string $name
+ * @param integer $user_id
+ * @param mysqli object $connection Объект подключения к БД
+ * @return bool|string
+ */
 function validateNameProject($name, $user_id, $connection)
 {
     $name = trim($name);
@@ -285,6 +292,12 @@ function validateNameProject($name, $user_id, $connection)
     return true;
 }
 
+/**
+ * Функция получения значения по его ключу в массиве
+ * @param $array
+ * @param $key
+ * @return null
+ */
 function getValueByKey($array, $key)
 {
     return $array[$key] ?? null;

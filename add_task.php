@@ -52,7 +52,7 @@ if (!$user) {
 
 
         if ($result === true) {
-            $task_data['file_name'] = getFile();
+            $task_data['file_name'] = getFileName();
             addTask($user_id, $connection, $task_data);
             header('Location: /index.php');
             exit();
