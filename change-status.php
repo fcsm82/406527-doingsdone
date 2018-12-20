@@ -30,7 +30,6 @@ if (isset($_GET['task_id'])) {
     $task = getTaskById($task_id, $connection);
 
 
-
     if (!$task) {
         die(http_response_code(404));
     }

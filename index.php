@@ -45,7 +45,8 @@ if (!$user) {
 $user_id = $user['id'];
 $list_projects = getProjectsByUser($user_id, $connection);
 $filter = $_GET['filter'] ?? null;
-$list_tasks = isset($filter) ? getTasksByUserByFilter($user_id, $connection, $filter) : getTasksByUser($user_id, $connection);
+$list_tasks = isset($filter) ? getTasksByUserByFilter($user_id, $connection, $filter) : getTasksByUser($user_id,
+    $connection);
 $show_complete_tasks = isset($_GET['show_completed']) ? changeShowTasks($_GET['show_completed']) : 0;
 $template = 'index.php';
 
@@ -68,7 +69,8 @@ if (isset($_GET['project_id'])) {
     if (!$project) {
         die(http_response_code(404));
     }
-    $list_tasks = isset($filter) ? getTasksByProjectByFilter($project_id, $connection, $filter) : getTasksByProject($project_id, $connection);
+    $list_tasks = isset($filter) ? getTasksByProjectByFilter($project_id, $connection,
+        $filter) : getTasksByProject($project_id, $connection);
 }
 
 // формируем контент страницы

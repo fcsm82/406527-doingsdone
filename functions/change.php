@@ -9,6 +9,7 @@
  */
 function changeTaskStatus($task, $status, $connection)
 {
+
     $sql =
         'UPDATE tasks SET is_completed = ?, complete_time = ? ' .
         'WHERE id = ?';
@@ -36,7 +37,7 @@ function changeTaskStatus($task, $status, $connection)
                 $task['id']
             ];
     }
-    
+
     dbInsertData($connection, $sql, $values);
 }
 

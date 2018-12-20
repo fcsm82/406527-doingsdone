@@ -8,7 +8,8 @@
 <div class="tasks-controls">
     <nav class="tasks-switch">
         <a href="<?= buildUrlForFilter(); ?>"
-           class="tasks-switch__item <?= !isset($filter) || $filter === 'all' ? 'tasks-switch__item--active' : '' ?>">Все задачи</a>
+           class="tasks-switch__item <?= !isset($filter) || $filter === 'all' ? 'tasks-switch__item--active' : '' ?>">Все
+            задачи</a>
         <a href="<?= buildUrlForFilter('today'); ?>"
            class="tasks-switch__item <?= $filter === 'today' ? 'tasks-switch__item--active' : '' ?>">Повестка дня</a>
         <a href="<?= buildUrlForFilter('tomorrow'); ?>"
@@ -20,7 +21,8 @@
     <label class="checkbox">
         <a href="<?= buildUrlForComplete($show_complete_tasks); ?>">
             <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-            <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?= ($show_complete_tasks ===  '1') ? 'checked' : ''; ?>>
+            <input class="checkbox__input visually-hidden show_completed"
+                   type="checkbox" <?= ($show_complete_tasks === '1') ? 'checked' : ''; ?>>
             <span class="checkbox__text">Показывать выполненные</span>
         </a>
     </label>

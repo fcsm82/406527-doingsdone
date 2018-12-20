@@ -112,7 +112,7 @@ function buildPrepareSqlWithoutNullFields($table, $fields, $data)
 
     $sql = 'INSERT INTO '
         . $table
-        . ' ('. implode(', ', $columns) .') VALUES ('. implode(', ', $valuesTemplate) .')';
+        . ' (' . implode(', ', $columns) . ') VALUES (' . implode(', ', $valuesTemplate) . ')';
 
     return $sql;
 }

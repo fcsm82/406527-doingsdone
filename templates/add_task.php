@@ -7,7 +7,8 @@
             $value = $task_data['name'] ?? ''; ?>
 
             <label class="form__label" for="name">Название <sup>*</sup></label>
-            <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>" placeholder="Введите название">
+            <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>"
+                   placeholder="Введите название">
             <?php if (isset($errors['name'])) : ?>
                 <p class="form__message"><?= $errors['name']; ?></p>
             <?php endif; ?>
@@ -21,7 +22,8 @@
             <select class="form__input form__input--select <?= $classname; ?>" name="project" id="project">
                 <option></option>
                 <?php foreach ($list_projects as $project): ?>
-                    <option value="<?= $project['id']; ?>" <?= (isset($task_data['project']) and $task_data['project'] === $project['id']) ? 'selected' : '' ; ?> ><?= $project['name']; ?></option>
+                    <option
+                        value="<?= $project['id']; ?>" <?= (isset($task_data['project']) and $task_data['project'] === $project['id']) ? 'selected' : ''; ?> ><?= $project['name']; ?></option>
                 <?php endforeach; ?>
             </select>
             <?php if (isset($errors['project'])) : ?>
@@ -34,7 +36,8 @@
             <?php $classname = isset($errors['date']) ? 'form__input--error' : '';
             $value = $task_data['date'] ?? ''; ?>
 
-            <input class="form__input form__input--date <?= $classname; ?>" type="text" name="date" id="date" value="<?= $value; ?>"
+            <input class="form__input form__input--date <?= $classname; ?>" type="date" name="date" id="date"
+                   value="<?= $value; ?>"
                    placeholder="Введите дату в формате ДД.ММ.ГГГГ">
             <?php if (isset($errors['date'])) : ?>
                 <p class="form__message"><?= $errors['date']; ?></p>
@@ -48,7 +51,8 @@
             $value = $task_data['preview'] ?? ''; ?>
 
             <div class="form__input-file">
-                <input class="visually-hidden <?= $classname;?>" type="file" name="preview" id="preview" value="<?= $value ?>">
+                <input class="visually-hidden <?= $classname; ?>" type="file" name="preview" id="preview"
+                       value="<?= $value ?>">
                 <label class="button button--transparent" for="preview">
                     <span>Выберите файл</span>
                 </label>
