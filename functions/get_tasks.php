@@ -263,3 +263,19 @@ function getTasksBySearchByUser($search_data, $user_id, $connection)
 
     return $list_tasks;
 }
+
+/**
+ * Возвращает задачи которые длжны быть выполнены в ближайший час
+ * @param mysqli object $connection Объект подключения к БД
+ * @return array
+ */
+function getUrgentTasks($connection)
+{
+    $sql =
+        'SELECT DISTINCT t.term_time, t.name, u.email, u.name AS user_name FROM tasks t ' .
+        'JOIN users u ON t.user_id = u.id ' .
+        'LEFT JOIN projects p ON t.project_id = p.id ' .
+        'WHERE t.term_time BETWEEN NOW() AND DATE_ADD(now(), INTERVAL 1 HOUR)';
+    $res = mysqli_query($connection, $sql);
+    return mysqli_fetch_all($res, MYSQLI_ASSOC);
+}

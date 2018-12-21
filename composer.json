@@ -1,0 +1,14 @@
+{
+    "name": "fcsm82/doingsdone",
+    "description": "To-Do list",
+    "type": "Website",
+    "require": {
+        "swiftmailer/swiftmailer": "^6.1"
+    },
+    "authors": [
+        {
+            "name": "Alexey Ivanov",
+            "email": "alexey.ivanov.private@gmail.com"
+        }
+    ]
+}
