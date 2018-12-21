@@ -13,9 +13,10 @@ $config = require APP_DIR . '/config.php';
 // Подключаемся к БД
 $connection = dbConnect($config['db']);
 
-$transport = new Swift_SmtpTransport('phpdemo.ru', 25);
-$transport->setUsername('keks@phpdemo.ru');
-$transport->setPassword('htmlacademy');
+$transport = new Swift_SmtpTransport($config['mailer']['host'], $config['mailer']['port']);
+$transport->setUsername($config['mailer']['username']);
+$transport->setPassword($config['mailer']['password']);
+$transport->setEncryption($config['mailer']['encryption']);
 
 $mailer = new Swift_Mailer($transport);
 
