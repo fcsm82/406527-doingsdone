@@ -20,10 +20,6 @@ $transport->setEncryption($config['mailer']['encryption']);
 
 $mailer = new Swift_Mailer($transport);
 
-$logger = new Swift_Plugins_Loggers_ArrayLogger();
-
-$mailer->registerPlugin(new Swift_Plugins_LoggerPlugin($logger));
-
 foreach (getUrgentTasks($connection) as $task) {
 
     $email = $task['email'];

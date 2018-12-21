@@ -45,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result === true) {
         addUser($connection, $reg_data);
 
-        session_start();
         $user = getUserByEmail($reg_data['email'], $connection);
 
         $_SESSION['user'] = $user;
