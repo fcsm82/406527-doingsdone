@@ -7,5 +7,4 @@
 *.sublime*
 Thumbs.db
 vendor
-config.sample.php
-*.env*
+*.env.development*
