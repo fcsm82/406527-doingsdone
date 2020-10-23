@@ -16,7 +16,7 @@
     <div class="container container--with-sidebar">
         <header class="main-header">
             <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+                <img src="img/logo.svg" width="153" height="42" alt="Логотип Дела в порядке">
             </a>
 
             <?php if (isset($user)) : ?>

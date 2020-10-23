@@ -9,33 +9,33 @@
 </head>
 
 <body class="body-background">
-<h1 class="visually-hidden">Дела в порядке</h1>
+<h1 class="visually-hidden">Doingsdone</h1>
 
 <div class="page-wrapper">
     <div class="container">
         <header class="main-header">
             <a href="index.php">
-                <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
+                <img src="../img/logo.svg" width="153" height="42" alt="Logo of Doingsdone">
             </a>
 
             <div class="main-header__side">
-                <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+                <a class="main-header__side-item button button--transparent" href="auth.php">Login</a>
             </div>
         </header>
 
         <div class="content">
             <section class="welcome">
-                <h2 class="welcome__heading">«Дела в порядке»</h2>
+                <h2 class="welcome__heading">«Doingsdone»</h2>
 
                 <div class="welcome__text">
-                    <p>«Дела в порядке» — это веб приложение для удобного ведения списка дел. Сервис помогает
-                        пользователям не забывать о предстоящих важных событиях и задачах.</p>
+                    <p>«Doingsdone» is a web application for easy to use list of cases. The service helps
+                        users do not forget about upcoming important events and tasks.</p>
 
-                    <p>После создания аккаунта, пользователь может начать вносить свои дела, деля их по проектам и
-                        указывая сроки.</p>
+                    <p>After creating an account, the user can start contributing his or her business by dividing them by projects and
+                        specifying the terms.</p>
                 </div>
 
-                <a class="welcome__button button" href="register.php">Зарегистрироваться</a>
+                <a class="welcome__button button" href="register.php">Signup</a>
             </section>
         </div>
     </div>
@@ -44,13 +44,13 @@
 <footer class="main-footer">
     <div class="container">
         <div class="main-footer__copyright">
-            <p>© 2018, «Дела в порядке»</p>
+            <p>© 2018, «Doingsdone»</p>
 
-            <p>Веб-приложение для удобного ведения списка дел.</p>
+            <p>Web application for convenient to-do list management.</p>
         </div>
 
         <div class="main-footer__social social">
-            <span class="visually-hidden">Мы в соцсетях:</span>
+            <span class="visually-hidden">We're in social networks:</span>
             <a class="social__link social__link--facebook" href="#">
                 <span class="visually-hidden">Facebook</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -79,7 +79,7 @@
             </a>
             <span class="visually-hidden">,</span>
             <a class="social__link social__link--vkontakte" href="#">
-                <span class="visually-hidden">Вконтакте</span>
+                <span class="visually-hidden">VKontakte</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
                     <circle stroke="#879296" fill="none" cx="13.5" cy="13.5" r="12.666"/>
                     <path fill="#879296"
@@ -89,7 +89,7 @@
         </div>
 
         <div class="main-footer__developed-by">
-            <span class="visually-hidden">Разработано:</span>
+            <span class="visually-hidden">Developed by</span>
 
             <a href="https://htmlacademy.ru/intensive/php">
                 <img src="../img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">
