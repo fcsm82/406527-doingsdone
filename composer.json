@@ -1,0 +1,16 @@
+{
+  "name": "alexey.ivanov/doingsdone",
+  "authors": [
+    {
+      "name": "Alexey Ivanov",
+      "email": "alexey.ivanov.private@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-mysqli": "*",
+    "ext-gettext": "*"
+  },
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*"
+  }
+}
