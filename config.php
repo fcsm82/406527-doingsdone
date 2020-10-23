@@ -1,12 +1,12 @@
 <?php /** @noinspection SpellCheckingInspection */
 
-require APP_DIR . '/.env.development';
+require APP_DIR . '/.env.production';
 
 return [
         'db' => [
-            'host' => getenv(('HOST')),
-            'user' => getenv(('USER')),
-            'password' => getenv(('PASSWORD')),
-            'database' => getenv(('DATABASE'))
+            'host' => $hostname,
+            'user' => $username,
+            'password' => $password,
+            'database' => $database
         ]
     ];
