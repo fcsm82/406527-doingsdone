@@ -30,7 +30,7 @@ $config = require APP_DIR . '/config.php';
 // Подключаемся к БД
 $connection = dbConnect($config['db']);
 
-$title = 'Вход на сайт';
+$title = 'Sign in';
 
 // массив с ошибками валиции формы
 $errors = null;
