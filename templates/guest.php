@@ -28,7 +28,7 @@
                     <h2 class="welcome__heading">«Doingsdone»</h2>
 
                     <div class="welcome__text">
-                        <p>«Doingsdone» is a web application for easy to use a list of cases. The service helps users do not forget about upcoming important events and tasks.</p>
+                        <p>«Doingsdone» is a web application for easy to use a list of tasks. The service helps users do not forget about upcoming important events and tasks.</p>
 
                         <p>After creating an account, the user can start contributing their business by dividing them by projects and specifying the terms.</p>
                     </div>
