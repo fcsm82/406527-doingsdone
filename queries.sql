@@ -5,19 +5,19 @@ INSERT INTO users (email, name, password) VALUES
 ('user3@gmail.com','Tyr Webb', 'password3');
 
 INSERT INTO projects (name, user_id) VALUES
-('Входящие', '1'),
-('Учеба', '2'),
-('Работа', '1'),
-('Домашние дела', '1'),
-('Авто', '1');
+('Inbox', '1'),
+('Education', '2'),
+('Work', '1'),
+('Home', '1'),
+('Auto', '1');
 
 INSERT INTO tasks (name, complete_time, term_time, is_completed, project_id, user_id) VALUES
-('Собеседование в IT компании', STR_TO_DATE('01.12.2018', '%d.%m.%Y'), NULL, 0, 3, 1),
-('Выполнить тестовое задание', NULL, STR_TO_DATE('25.12.2018', '%d.%m.%Y'), 0, 3, 1),
-('Сделать задание первого раздела', NULL, STR_TO_DATE('21.12.2018', '%d.%m.%Y'), 1, 2, 2),
-('Встреча с другом', NULL, STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 1, 1),
-('Купить корм для кота', NULL, STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 4,1),
-('Заказать пиццу', NULL, NULL, 0, 4, 1);
+('Interview in IT company', STR_TO_DATE('01.12.2018', '%d.%m.%Y'), NULL, 0, 3, 1),
+('Perform a test task', NULL, STR_TO_DATE('25.12.2018', '%d.%m.%Y'), 0, 3, 1),
+('Make the task of the first section', NULL, STR_TO_DATE('21.12.2018', '%d.%m.%Y'), 1, 2, 2),
+('Meeting with a friend', NULL, STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 1, 1),
+('Buy cat food', NULL, STR_TO_DATE('22.12.2018', '%d.%m.%Y'), 0, 4,1),
+('Order pizza', NULL, NULL, 0, 4, 1);
 
 
 SELECT p.id, p.name, user_id, u.name FROM projects p
@@ -39,5 +39,5 @@ JOIN users u ON t.user_id = u.id
 JOIN projects p ON t.project_id = p.id
 WHERE complete_time BETWEEN @start_day AND @end_day;
 
-UPDATE tasks SET name = 'Собеседование'
+UPDATE tasks SET name = 'Interview'
 WHERE id = 1;
