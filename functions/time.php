@@ -1,6 +1,6 @@
 <?php
 /**
- * Функция подсчета остатка времени до даты выполнения задачи
+ * The function to calculate the remaining time until the date the task is performed
  * @param $term_time
  * @return float|null
  */
@@ -16,7 +16,7 @@ function hoursToDate($term_time)
     return floor($ts_diff / $secs_in_hour);
 }
 
-/** функция форматирования времени
+/** Time formatting function
  * @param string $time
  * @return string|null
  * @throws Exception
