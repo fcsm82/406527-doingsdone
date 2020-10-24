@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @param string $email Email пользователя
- * @param mysqli object $connection Объект подключения к БД
- * @return bool|string Возвращает false или id пользователя
+ * @param string $email User email
+ * @param mysqli object $connection Object of connection to DB
+ * @return bool|string return false or user id
  */
 function getIdByEmail($email, $connection)
 {
