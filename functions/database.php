@@ -1,8 +1,8 @@
 <?php /** @noinspection PhpInconsistentReturnPointsInspection */
 
 /**
- * Функция подключения к БД
- * @param array $config с параметрами подключения
+ * Function to connect to DB
+ * @param array $config with params of connection
  * @return mysqli
  */
 function dbConnect($config)
@@ -17,11 +17,11 @@ function dbConnect($config)
 }
 
 /**
- * Создает подготовленное выражение на основе готового SQL запроса и переданных данных
- * @param $link mysqli Ресурс соединения
- * @param $sql string SQL запрос с плейсхолдерами вместо значений
- * @param array $data Данные для вставки на место плейсхолдеров
- * @return mysqli_stmt Подготовленное выражение
+ * Create prepared statement using SQL query and transfered data
+ * @param $link mysqli resource of connection
+ * @param $sql string SQL query with placeholder instead of values
+ * @param array $data Values to insert instead of placeholders
+ * @return mysqli_stmt Prepaired statement
  */
 function dbGetPrepareStmt($link, $sql, $data = [])
 {
@@ -58,10 +58,10 @@ function dbGetPrepareStmt($link, $sql, $data = [])
 }
 
 /**
- * Функция получения записей из БД
- * @param $link mysqli Ресурс соединения
- * @param $sql string SQL запрос с плейсхолдерами вместо значений
- * @param array $data Данные для вставки на место плейсхолдеров
+ * Function to retrieve records from DB
+ * @param $link mysqli resource of connection
+ * @param $sql string SQL query with placeholder instead of values
+ * @param array $data Values to insert instead of placeholders
  * @return array|null
  */
 function dbFetchData($link, $sql, $data = [])
@@ -78,8 +78,8 @@ function dbFetchData($link, $sql, $data = [])
 }
 
 /**
- * Функция вставки записей из БД
- * @param $link mysqli Ресурс соединения
+ * Function to insert records to DB
+ * @param $link mysqli resource of connection
  * @param $sql
  * @param array $data
  * @return bool|int|string
@@ -92,7 +92,7 @@ function dbInsertData($link, $sql, $data = [])
 }
 
 /**
- * Формирует prepare sql запрос к таблице $table из полей fields, значение по которым в массиве $data не NULL
+ * Create prepared sql query for $table from fields with values in array $data not equal NULL
  * @param string $table
  * @param array $fields
  * @param array $data
