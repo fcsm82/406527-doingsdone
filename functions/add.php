@@ -1,9 +1,9 @@
 <?php
 /**
- * Функция добавлениязадачи в БД
- * @param int $user_id ID пользователя
- * @param mysqli object $connection Объект подключения к БД
- * @param array $project_data Данные из формы добавления задачи
+ * Function to add task to DB
+ * @param int $user_id user ID
+ * @param mysqli object $connection Object of connection to DB
+ * @param array $project_data Data from form of add task
  * @throws Exception
  */
 function addProject($user_id, $connection, $project_data)
@@ -22,9 +22,9 @@ function addProject($user_id, $connection, $project_data)
 }
 
 /**
- * Функция добавления пользователя в БД
- * @param mysqli object $connection Объект подключения к БД
- * @param array $reg_data Данные из формы регистрации пользователя
+ * Function to add user to DB
+ * @param mysqli object $connection Object of connection to DB
+ * @param array $reg_data Data from form of sign up user
  */
 function addUser($connection, $reg_data)
 {
@@ -43,10 +43,10 @@ function addUser($connection, $reg_data)
 }
 
 /**
- * Функция добавлениязадачи в БД
- * @param int $user_id ID пользователя
- * @param mysqli object $connection Объект подключения к БД
- * @param array $task_data Данные из формы добавления задачи
+ * Function to add task to DB
+ * @param int $user_id user ID
+ * @param mysqli object $connection Object of connection to DB
+ * @param array $task_data Data from form of add task
  * @throws Exception
  */
 
