@@ -1,6 +1,6 @@
 <?php
 /**
- * Функция-шаблонизатор
+ * Function-template
  * @param $name
  * @param $data
  * @return false|string
@@ -24,7 +24,7 @@ function includeTemplate($name, $data)
 }
 
 /**
- * функция фильтрации данных для защиты от XSS атаки
+ * Function to filter data to protect from XSS-atacks
  * @param array $list_values
  * @param string $filterKey
  * @return array
@@ -38,7 +38,7 @@ function filterData($list_values, $filterKey)
 }
 
 /**
- * Функция определения срочноcти задачи
+ * Function to determine importance of task
  * @param $term_time
  * @return bool
  */
