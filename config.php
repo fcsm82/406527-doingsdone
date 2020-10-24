@@ -1,6 +1,6 @@
 <?php /** @noinspection SpellCheckingInspection */
 
-require APP_DIR . '/.env.production';
+require APP_DIR . '/.env.development';
 
 return [
         'db' => [
