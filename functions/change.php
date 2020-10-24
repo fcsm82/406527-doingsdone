@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Функция изменения статуса задачи
+ * Function to change status of task
  * @param string $task
  * @param integer $status
- * @param mysqli object $connection Объект подключения к БД
+ * @param mysqli object $connection Object of connection to DB
  * @throws Exception
  */
 function changeTaskStatus($task, $status, $connection)
@@ -42,7 +42,7 @@ function changeTaskStatus($task, $status, $connection)
 }
 
 /**
- * Функция отображения выполненных задач
+ * Function  to  show completed tasks
  * @param string $show_complete_tasks
  * @return string
  */
