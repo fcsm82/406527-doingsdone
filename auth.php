@@ -2,10 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Задаем текущую директорию
+// Specify the current directory
 const APP_DIR = __DIR__;
 
-// Подключаем файлы с функциями
+// Connect files with functions
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
 
@@ -17,28 +17,28 @@ require_once APP_DIR . '/functions/time.php';
 require_once APP_DIR . '/functions/url.php';
 require_once APP_DIR . '/functions/validators.php';
 
-const ERROR_VALID_FORM = 'Пожалуйста, исправьте ошибки в форме';
-const ERROR_VERIFY_USER = 'Вы ввели неверный email/пароль';
+const ERROR_VALID_FORM = 'Please correct the errors in the form';
+const ERROR_VERIFY_USER = 'You entered the wrong email/password';
 
 session_start();
 
 if (!file_exists(APP_DIR . '/config.php')) {
-    die('На основе config.sample.php создайте файл config.php, указав в нём настройки для подключениия к БД');
+    die('Based on config.php, create a file config.php, specifying the settings for connecting to the database.');
 }
-// Подключаем файл с настройками
+// Connect the file with settings
 $config = require APP_DIR . '/config.php';
-// Подключаемся к БД
+// Connect to the database
 $connection = dbConnect($config['db']);
 
-$title = 'Вход на сайт';
+$title = 'Sign in';
 
-// массив с ошибками валиции формы
+// form validation error array
 $errors = null;
 
-// сообщение об ошибках в форме
+// form error message
 $form_message = null;
 
-// данные авторизации
+// authentication details
 $auth_data = null;
 
 $user = getAuthUser($connection);
@@ -71,14 +71,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// формируем контент страницы
+// create page content
 $page_content = includeTemplate('auth.php', [
     'auth_data' => $auth_data,
     'form_message' => $form_message,
     'errors' => $errors
 ]);
 
-// формируем страницу с добавлением задачи
+// create a page with the addition of the task
 $layout_content = includeTemplate('layout.php', [
     'page_content' => $page_content,
     'title' => $title

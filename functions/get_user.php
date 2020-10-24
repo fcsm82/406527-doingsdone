@@ -1,8 +1,8 @@
 <?php
 /**
- * Функция проверки авторизации пользователя
- * @param mysqli object $connection Объект подключения к БД
- * @return array|bool|false Возвращает массив с данными пользователя | false
+ * User authentication verification function
+ * @param mysqli object $connection Object of connection to the database
+ * @return array|bool|false Returns an array with user data | false
  */
 function getAuthUser($connection)
 {
@@ -14,10 +14,10 @@ function getAuthUser($connection)
 }
 
 /**
- * Функция получения данных пользователя по его email
- * @param string $email Email пользователя
- * @param mysqli object $connection Объект подключения к БД
- * @return array|false Возвращает данные пользователя | false в случае отсутствия пользователя в БД
+ * Function to receive user data by email
+ * @param string $email user email
+ * @param mysqli object $connection Object of connection to the database
+ * @return array|false Returns user data | false in case the user is absent in the database
  */
 function getUserByEmail($email, $connection)
 {

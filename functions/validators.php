@@ -1,21 +1,21 @@
 <?php
-const ERROR_EMPTY_FIELD = 'Обязательное к заполнению поле';
-const ERROR_LENGTH_FIELD = 'Количество символов в поле должно быть ';
-const ERROR_PROJECT_ID = 'Необходимо выбрать проект';
-const ERROR_DATE_FIELD = 'Введите дату в формате ДД.ММ.ГГГГ';
-const ERROR_EMAIL_EXIST = 'Пользователь с указанным адресом эл. почты уже зарегистрирован';
-const ERROR_PROJECT_EXIST = 'Прооект с указанным именем уже существует';
-const ERROR_EMPTY_LOGIN = 'Введите имя пользователя';
-const ERROR_EMPTY_PASSWORD = 'Введите пароль';
-const ERROR_WRONG_USER = 'Пользователя не существует';
-const ERROR_WRONG_PASSWORD = 'Неверный пароль';
-const ERROR_WRONG_EMAIL = 'Введите корректный адрес электронной почты';
+const ERROR_EMPTY_FIELD = 'Required filed';
+const ERROR_LENGTH_FIELD = 'The number of characters in the field should be ';
+const ERROR_PROJECT_ID = 'Choose a project';
+const ERROR_DATE_FIELD = 'Enter date in DD.MM.YYYYY format';
+const ERROR_EMAIL_EXIST = 'User exist';
+const ERROR_PROJECT_EXIST = 'Project exist';
+const ERROR_EMPTY_LOGIN = 'Enter username';
+const ERROR_EMPTY_PASSWORD = 'Enter password';
+const ERROR_WRONG_USER = 'User does not exist';
+const ERROR_WRONG_PASSWORD = 'Wrong password';
+const ERROR_WRONG_EMAIL = 'Invalid e-mail';
 
 /**
- * Функция валидации формы
- * @param array $task_data Массив $_POST
- * @param mysqli object $connection Объект подключения к БД
- * @return array|bool Возращает true или массив с ошибками
+ * Form Validation Function
+ * @param array $task_data array $_POST
+ * @param mysqli object $connection Object of connection to the database
+ * @return array|bool Returns true or an array with errors
  */
 function validateTaskForm($task_data, $connection)
 {
@@ -31,9 +31,9 @@ function validateTaskForm($task_data, $connection)
 }
 
 /**
- * Функция валидации поля формы "Название задачи"
- * @param string $name данные из массива $_POST
- * @return bool|string Возращает true или текст ошибки
+ * Validation function of the "Task name" form field
+ * @param string $name data from array $_POST
+ * @return bool|string true | error text
  */
 function validateName($name)
 {
@@ -49,10 +49,10 @@ function validateName($name)
 }
 
 /**
- * Функция валидации поля формы "Проект"
- * @param int $project_id данные из массива $_POST
- * @param mysqli object $connection Объект подключения к БД
- * @return bool|string Возращает true или текст ошибки
+ * Validation function of the "Project" form field
+ * @param int $project_id data from array $_POST
+ * @param mysqli object $connection Object of connection to the database
+ * @return bool|string true | error text
  */
 function validateProject($project_id, $connection)
 {
@@ -65,9 +65,9 @@ function validateProject($project_id, $connection)
 }
 
 /**
- * Функция валидации поля формы "Дата"
- * @param $input_date дата
- * @return bool|string Возращает true или текст ошибки
+ * Validation function of the "Date" form field
+ * @param $input_date date
+ * @return bool|string true | error text
  */
 function validateCompletionDate($input_date)
 {
@@ -85,26 +85,26 @@ function validateCompletionDate($input_date)
 }
 
 /**
- * Функция проверки длины строки
- * @param string $string текстовая строка
- * @param int $min Минимальное количество символов в строке
- * @param int $max Максимальное количество символов в строке
- * @return bool|string Возращает true или текст ошибки
+ * String length check function
+ * @param string $string text string
+ * @param int $min Minimum number of characters per line
+ * @param int $max Maximum number of characters per line
+ * @return bool|string true | error text
  */
 function checkLength($string, $min, $max)
 {
     $length = mb_strlen($string);
     if ($length < $min || $length > $max) {
-        return ERROR_LENGTH_FIELD . 'от ' . $min . ' до ' . $max . ' символов';
+        return ERROR_LENGTH_FIELD . 'from ' . $min . ' to ' . $max . ' symbols';
     }
     return true;
 }
 
 /**
  * Функция валидации формы
- * @param array $reg_data Массив $_POST
- * @param mysqli object $connection Объект подключения к БД
- * @return array|bool Возращает true или массив с ошибками
+ * @param array $reg_data array $_POST
+ * @param mysqli object $connection Object of connection to the database
+ * @return array|bool true | error text
  */
 function validateRegForm($reg_data, $connection)
 {
@@ -120,10 +120,10 @@ function validateRegForm($reg_data, $connection)
 }
 
 /**
- * Функция валидации Email
- * @param string $email Email введенный пользователем
- * @param mysqli object $connection Объект подключения к БД
- * @return bool|string Возвращает true | текст ошибки
+ * Email Validation Function
+ * @param string $email Email entered by the user
+ * @param mysqli object $connection Object of connection to the database
+ * @return bool|string true | error text
  */
 function validateEmail($email, $connection)
 {
@@ -149,9 +149,9 @@ function validateEmail($email, $connection)
 }
 
 /**
- * Функция валидации пароля
- * @param string $password Пароль введенный пользователем
- * @return bool|string Возвращает true | текст ошибки
+ * Password validation function
+ * @param string $password Password entered by the user
+ * @return bool|string true | error text
  */
 function validatePassword($password)
 {
@@ -167,9 +167,9 @@ function validatePassword($password)
 
 /**
  * Функция валидации формы
- * @param array $auth_data Массив $_POST
- * @param mysqli object $connection Объект подключения к БД
- * @return array|bool Возращает true или массив с ошибками
+ * @param array $auth_data array $_POST
+ * @param mysqli object $connection Object of connection to the database
+ * @return array|bool true | error text
  */
 function validateAuthForm($auth_data)
 {
@@ -184,9 +184,9 @@ function validateAuthForm($auth_data)
 }
 
 /**
- * Функция валидации логина пользователя
- * @param string $login логин/email пользователя
- * @return bool|string Возвращает true | текст ошибки
+ * User Login Validation Function
+ * @param string $login user login/email
+ * @return bool|string true | error text
  */
 function validateLogin($login)
 {
@@ -201,9 +201,9 @@ function validateLogin($login)
 }
 
 /**
- * Функция валидации пароля, введенного пользователем
- * @param string $password пароль пользователя
- * @return bool|string Возвращает true | текст ошибки
+ * Function to validate the password entered by the user
+ * @param string $password user password
+ * @return bool|string true | error text
  */
 function validateInputPassword($password)
 {
@@ -214,9 +214,9 @@ function validateInputPassword($password)
 }
 
 /**
- * Функция проверки подлинности пользователя
- * @param array $auth_data Массив $_POST
- * @param mysqli object $connection Объект подключения к БД
+ * User authentication function
+ * @param array $auth_data array $_POST
+ * @param mysqli object $connection Object of connection to the database
  * @return bool
  */
 function verifyUser($auth_data, $connection)
@@ -231,9 +231,9 @@ function verifyUser($auth_data, $connection)
 
 
 /**
- * Функция агреирования ошибок валидации формы
- * @param array $results Массив с результатами валидации полей формы
- * @return array $errors Массив с ошибками
+ * Function of aggregation of form validation errors
+ * @param array $results Array with form fields validation results
+ * @return array $errors Array of errors
  */
 function getErrors($results)
 {
@@ -249,11 +249,11 @@ function getErrors($results)
 
 
 /**
- * Функция валидации формы
- * @param array $project_data Массив $_POST
+ * Form Validation Function
+ * @param array $project_data array $_POST
  * @param integer $user_id
- * @param mysqli object $connection Объект подключения к БД
- * @return array|bool Возращает true или массив с ошибками
+ * @param mysqli object $connection Object of connection to the database
+ * @return array|bool true | error text
  */
 function validateProjectForm($project_data, $user_id, $connection)
 {
@@ -267,10 +267,10 @@ function validateProjectForm($project_data, $user_id, $connection)
 
 
 /**
- * Функция валидации поля с именем проекта
+ * Validation function of the field with the project name
  * @param string $name
  * @param integer $user_id
- * @param mysqli object $connection Объект подключения к БД
+ * @param mysqli object $connection Object of connection to the database
  * @return bool|string
  */
 function validateNameProject($name, $user_id, $connection)
@@ -294,7 +294,7 @@ function validateNameProject($name, $user_id, $connection)
 }
 
 /**
- * Функция получения значения по его ключу в массиве
+ * The function of obtaining a value by its key in an array
  * @param $array
  * @param $key
  * @return null

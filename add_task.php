@@ -2,10 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Задаем текущую директорию
+// Set the current directory
 const APP_DIR = __DIR__;
 
-// Подключаем файлы с функциями
+// Connect files with functions
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
 
@@ -25,9 +25,9 @@ session_start();
 if (!file_exists(APP_DIR . '/config.php')) {
     die('На основе config.sample.php создайте файл config.php, указав в нём настройки для подключениия к БД');
 }
-// Подключаем файл с настройками
+// Connect the file with settings
 $config = require APP_DIR . '/config.php';
-// Подключаемся к БД
+// Connect to the database
 $connection = dbConnect($config['db']);
 
 $title = 'Добавление задачи';
@@ -40,7 +40,7 @@ if (!$user) {
 
 $user_id = $user['id'];
 
-// массив с ошибками валиции формы
+// form validation error array
 $errors = null;
 $task_data = null;
 
@@ -64,14 +64,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $list_projects = getProjectsByUser($user_id, $connection);
 $list_tasks = getTasksByUser($user_id, $connection);
 
-// формируем контент страницы
+// create page content
 $page_content = includeTemplate('add_task.php', [
     'list_projects' => $list_projects,
     'task_data' => $task_data,
     'errors' => $errors
 ]);
 
-// формируем страницу с добавлением задачи
+// create a page with the addition of the task
 $layout_content = includeTemplate('layout.php', [
     'user' => $user,
     'page_content' => $page_content,

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -9,17 +9,17 @@
 </head>
 
 <body>
-<h1 class="visually-hidden">Дела в порядке</h1>
+<h1 class="visually-hidden">Doingsdone</h1>
 
 <div class="page-wrapper">
   <div class="container container--with-sidebar">
     <header class="main-header">
       <a href="#">
-        <img src="../img/logo.png" width="153" height="42" alt="Логитип Дела в порядке">
+        <img src="../img/logo.svg" width="153" height="42" alt="Logotype of Doingsdone">
       </a>
 
       <div class="main-header__side">
-        <a class="main-header__side-item button button--plus" href="form-task.html">Добавить задачу</a>
+        <a class="main-header__side-item button button--plus" href="form-task.html">Add task</a>
 
         <div class="main-header__side-item user-menu">
           <div class="user-menu__image">
@@ -27,9 +27,9 @@
           </div>
 
           <div class="user-menu__data">
-            <p>Константин</p>
+            <p>John Doe</p>
 
-            <a href="#">Выйти</a>
+            <a href="#">Exit</a>
           </div>
         </div>
       </div>
@@ -37,78 +37,78 @@
 
     <div class="content">
       <section class="content__side">
-        <h2 class="content__side-heading">Проекты</h2>
+        <h2 class="content__side-heading">Projects</h2>
 
         <nav class="main-navigation">
           <ul class="main-navigation__list">
             <li class="main-navigation__list-item">
-              <a class="main-navigation__list-item-link" href="#">Входящие</a>
+              <a class="main-navigation__list-item-link" href="#">Inbox</a>
               <span class="main-navigation__list-item-count">24</span>
             </li>
 
             <li class="main-navigation__list-item main-navigation__list-item--active">
-              <a class="main-navigation__list-item-link" href="#">Работа</a>
+              <a class="main-navigation__list-item-link" href="#">Work</a>
               <span class="main-navigation__list-item-count">12</span>
             </li>
 
             <li class="main-navigation__list-item">
-              <a class="main-navigation__list-item-link" href="#">Здоровье</a>
+              <a class="main-navigation__list-item-link" href="#">Health</a>
               <span class="main-navigation__list-item-count">3</span>
             </li>
 
             <li class="main-navigation__list-item">
-              <a class="main-navigation__list-item-link" href="#">Домашние дела</a>
+              <a class="main-navigation__list-item-link" href="#">Home</a>
               <span class="main-navigation__list-item-count">7</span>
             </li>
 
             <li class="main-navigation__list-item">
-              <a class="main-navigation__list-item-link" href="#">Авто</a>
+              <a class="main-navigation__list-item-link" href="#">Auto</a>
               <span class="main-navigation__list-item-count">0</span>
             </li>
           </ul>
         </nav>
 
-        <a class="button button--transparent button--plus content__side-button" href="form-project.html">Добавить проект</a>
+        <a class="button button--transparent button--plus content__side-button" href="form-project.html">Add project</a>
       </section>
 
       <main class="content__main">
-        <h2 class="content__main-heading">Добавление задачи</h2>
+        <h2 class="content__main-heading">Add task</h2>
 
         <form class="form"  action="index.html" method="post">
           <div class="form__row">
-            <label class="form__label" for="name">Название <sup>*</sup></label>
+            <label class="form__label" for="name">Name <sup>*</sup></label>
 
-            <input class="form__input" type="text" name="name" id="name" value="" placeholder="Введите название">
+            <input class="form__input" type="text" name="name" id="name" value="" placeholder="Enter nameе">
           </div>
 
           <div class="form__row">
-            <label class="form__label" for="project">Проект <sup>*</sup></label>
+            <label class="form__label" for="project">Project <sup>*</sup></label>
 
             <select class="form__input form__input--select" name="project" id="project">
-              <option value="">Входящие</option>
+              <option value="">Inbox</option>
             </select>
           </div>
 
           <div class="form__row">
-            <label class="form__label" for="date">Дата выполнения</label>
+            <label class="form__label" for="date">Due date</label>
 
-            <input class="form__input form__input--date" type="date" name="date" id="date" value="" placeholder="Введите дату в формате ДД.ММ.ГГГГ">
+            <input class="form__input form__input--date" type="date" name="date" id="date" value="" placeholder="Enter date in DD.MM.YYYYY format">
           </div>
 
           <div class="form__row">
-            <label class="form__label" for="preview">Файл</label>
+            <label class="form__label" for="preview">File</label>
 
             <div class="form__input-file">
               <input class="visually-hidden" type="file" name="preview" id="preview" value="">
 
               <label class="button button--transparent" for="preview">
-                <span>Выберите файл</span>
+                <span>Choose file</span>
               </label>
             </div>
           </div>
 
           <div class="form__row form__row--controls">
-            <input class="button" type="submit" name="" value="Добавить">
+            <input class="button" type="submit" name="" value="Add">
           </div>
         </form>
       </main>
@@ -119,15 +119,15 @@
 <footer class="main-footer">
   <div class="container">
     <div class="main-footer__copyright">
-      <p>© 2018, «Дела в порядке»</p>
+      <p>© <?php echo date("Y"); ?>, «Doingsdone»</p>
 
-      <p>Веб-приложение для удобного ведения списка дел.</p>
+      <p>Web application for convenient to-do list management.</p>
     </div>
 
-    <a class="main-footer__button button button--plus" href="form-task.html">Добавить задачу</a>
+    <a class="main-footer__button button button--plus" href="form-task.html">Add task</a>
 
     <div class="main-footer__social social">
-      <span class="visually-hidden">Мы в соцсетях:</span>
+      <span class="visually-hidden">We are in social networks</span>
       <a class="social__link social__link--facebook" href="#">
         <span class="visually-hidden">Facebook</span>
         <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -156,7 +156,7 @@
       </a>
       <span class="visually-hidden">,</span>
       <a class="social__link social__link--vkontakte" href="#">
-        <span class="visually-hidden">Вконтакте</span>
+        <span class="visually-hidden">VKontakte</span>
         <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
           <circle stroke="#879296" fill="none" cx="13.5" cy="13.5" r="12.666"/>
           <path fill="#879296"
@@ -166,7 +166,7 @@
     </div>
 
     <div class="main-footer__developed-by">
-      <span class="visually-hidden">Разработано:</span>
+      <span class="visually-hidden">Developed by</span>
 
       <a href="https://htmlacademy.ru/intensive/php">
         <img src="../img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">

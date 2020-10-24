@@ -2,10 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Задаем текущую директорию
+// Set the current directory
 const APP_DIR = __DIR__;
 
-// Подключаем файлы с функциями
+// Connect files with functions
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
 require_once APP_DIR . '/functions/get_id.php';
@@ -14,23 +14,23 @@ require_once APP_DIR . '/functions/add.php';
 require_once APP_DIR . '/functions/validators.php';
 
 if (!file_exists(APP_DIR . '/config.php')) {
-    die('На основе config.sample.php создайте файл config.php, указав в нём настройки для подключениия к БД');
+    die('Based on configphp, create a file config.php, specifying the settings for connecting to the database.');
 }
-// Подключаем файл с настройками
+// Connect the file with settings
 $config = require APP_DIR . '/config.php';
-// Подключаемся к БД
+// Connect to the database
 $connection = dbConnect($config['db']);
 
-// задаем заголовок страницы
-$title = 'Регистрация аккаунта';
+// set the page title
+$title = 'Registering an account';
 
-// массив с ошибками валиции формы
+// form validation error array
 $errors = null;
 $reg_data = null;
 
 session_start();
 
-// проверяем авторизацию пользователя
+// verify user authentication
 $user = getAuthUser($connection);
 if ($user) {
     header('Location: /index.php');
@@ -55,13 +55,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors = $result;
 }
 
-// формируем контент страницы
+// create page content
 $page_content = includeTemplate('register.php', [
     'reg_data' => $reg_data,
     'errors' => $errors
 ]);
 
-// формируем страницу с добавлением задачи
+// create a page with the addition of the task
 $layout_content = includeTemplate('layout.php', [
     'page_content' => $page_content,
     'title' => $title

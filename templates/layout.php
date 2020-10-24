@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -10,35 +10,34 @@
 </head>
 
 <body>
-<h1 class="visually-hidden">Дела в порядке</h1>
+<h1 class="visually-hidden">Doingsdone</h1>
 
 <div class="page-wrapper">
     <div class="container container--with-sidebar">
         <header class="main-header">
             <a href="/">
-                <img src="img/logo.png" width="153" height="42" alt="Логотип Дела в порядке">
+                <img src="img/logo.svg" width="153" height="42" alt="Logotype of Doingsdone">
             </a>
 
             <?php if (isset($user)) : ?>
                 <div class="main-header__side">
-                    <a class="main-header__side-item button button--plus open-modal" href="add_task.php">Добавить
-                        задачу</a>
+                    <a class="main-header__side-item button button--plus open-modal" href="add_task.php">Add task</a>
 
                     <div class="main-header__side-item user-menu">
                         <div class="user-menu__image">
-                            <img src="img/user-pic.jpg" width="40" height="40" alt="Пользователь">
+                            <img src="img/user-pic.jpg" width="40" height="40" alt="User">
                         </div>
 
                         <div class="user-menu__data">
                             <p><?= $user['name']; ?></p>
 
-                            <a href="logout.php">Выйти</a>
+                            <a href="logout.php">Exit</a>
                         </div>
                     </div>
                 </div>
             <?php else : ?>
                 <div class="main-header__side">
-                    <a class="main-header__side-item button button--transparent" href="auth.php">Войти</a>
+                    <a class="main-header__side-item button button--transparent" href="auth.php">Login</a>
                 </div>
             <?php endif; ?>
 
@@ -47,7 +46,7 @@
         <div class="content">
             <section class="content__side">
                 <?php if (isset($user)) : ?>
-                    <h2 class="content__side-heading">Проекты</h2>
+                    <h2 class="content__side-heading">Projects</h2>
 
                     <nav class="main-navigation">
                         <ul class="main-navigation__list">
@@ -64,11 +63,11 @@
                     </nav>
 
                     <a class="button button--transparent button--plus content__side-button"
-                       href="add_project.php" target="project_add">Добавить проект</a>
+                       href="add_project.php" target="project_add">Add project</a>
                 <?php else : ?>
-                    <p class="content__side-info">Если у вас уже есть аккаунт, авторизуйтесь на сайте</p>
+                    <p class="content__side-info">If you already have an account, please log in.</p>
 
-                    <a class="button button--transparent content__side-button" href="auth.php">Войти</a>
+                    <a class="button button--transparent content__side-button" href="auth.php">Login</a>
                 <?php endif; ?>
             </section>
 
@@ -82,17 +81,17 @@
 <footer class="main-footer">
     <div class="container">
         <div class="main-footer__copyright">
-            <p>© 2018, «Дела в порядке»</p>
+            <p>© <?php echo date("Y"); ?>, «Doingsdone»</p>
 
-            <p>Веб-приложение для удобного ведения списка дел.</p>
+            <p>Web application for convenient to-do list management.</p>
         </div>
 
         <?php if (isset($user)) : ?>
-            <a class="main-footer__button button button--plus" href="add_task.php">Добавить задачу</a>
+            <a class="main-footer__button button button--plus" href="add_task.php">Add task</a>
         <?php endif; ?>
 
         <div class="main-footer__social social">
-            <span class="visually-hidden">Мы в соцсетях:</span>
+            <span class="visually-hidden">We're in social networks:</span>
             <a class="social__link social__link--facebook" href="#">
                 <span class="visually-hidden">Facebook</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +120,7 @@
             </a>
             <span class="visually-hidden">,</span>
             <a class="social__link social__link--vkontakte" href="#">
-                <span class="visually-hidden">Вконтакте</span>
+                <span class="visually-hidden">VKontakte</span>
                 <svg width="27" height="27" viewBox="0 0 27 27" xmlns="http://www.w3.org/2000/svg">
                     <circle stroke="#879296" fill="none" cx="13.5" cy="13.5" r="12.666"/>
                     <path fill="#879296"
@@ -131,7 +130,7 @@
         </div>
 
         <div class="main-footer__developed-by">
-            <span class="visually-hidden">Разработано:</span>
+            <span class="visually-hidden">Developed by</span>
 
             <a href="https://htmlacademy.ru/intensive/php">
                 <img src="img/htmlacademy.svg" alt="HTML Academy" width="118" height="40">

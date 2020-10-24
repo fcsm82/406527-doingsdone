@@ -1,8 +1,9 @@
 <?php
 /**
- * Функция получения списка проектов по заданному пользователю
- * @param int $user_id Идентификатор пользователя
- * @param mysqli object $connection Объект подключения к БД
+ * The function of obtaining the list of projects by a specified user
+ 
+ * @param int $user_id user ID
+ * @param mysqli object $connection Object of connection to DB
  * @return array
  */
 function getProjectsByUser($user_id, $connection)
@@ -21,9 +22,9 @@ function getProjectsByUser($user_id, $connection)
 }
 
 /**
- * Функция определения проекта по его  id
- * @param int $project_id Идентификатор проекта
- * @param mysqli object $connection Объект подключения к БД
+ * Function to define a project by its id
+ * @param int $project_id project id
+ * @param mysqli object $connection Object of connection to DB
  * @return array|null
  */
 function getProjectById($project_id, $connection)
@@ -38,9 +39,9 @@ function getProjectById($project_id, $connection)
 }
 
 /**
- * Функция получения ID проекта по его названию
- * @param string $project_name Название проекта
- * @param int $user_id Идентификатор пользователя
+ * The function of obtaining project ID by its name
+ * @param string $project_name project name
+ * @param int $user_id user id
  * @param $connection
  * @return array|null
  */
