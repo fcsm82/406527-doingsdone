@@ -1,7 +1,7 @@
 <?php /** @noinspection PhpUndefinedClassInspection */
 
 /**
- * Функция создания имени файла
+ * Function to create file name
  * @param $file_name
  * @return string
  */
@@ -21,22 +21,22 @@ function generateFileName($file_name)
 }
 
 /**
- * Фнукция загрузки файла
- * @param string $file_name имя файла из массива $_FILES
- * @param $file_tmp_name временное имя файла из массива $_FILES
+ * Function to load file
+ * @param string $file_name file name from array $_FILES
+ * @param $file_tmp_name temporary fie name from array $_FILES
  */
 function uploadFile($file_name, $file_tmp_name)
 {
     $target = APP_DIR . '/' . $file_name;
     $result = move_uploaded_file($file_tmp_name, $target);
     if (!$result) {
-        die('Ошибка загрузки файла');
+        die('Faied to load file');
     }
 }
 
 /**
- * Функция получения имени файла
- * @return string Имя файла
+ * Function to retrieve file name
+ * @return string file name
  */
 function getFileName()
 {
