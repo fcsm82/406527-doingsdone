@@ -1,15 +1,15 @@
 <?php
-const ERROR_EMPTY_FIELD = 'Обязательное к заполнению поле';
-const ERROR_LENGTH_FIELD = 'Количество символов в поле должно быть ';
-const ERROR_PROJECT_ID = 'Необходимо выбрать проект';
-const ERROR_DATE_FIELD = 'Введите дату в формате ДД.ММ.ГГГГ';
-const ERROR_EMAIL_EXIST = 'Пользователь с указанным адресом эл. почты уже зарегистрирован';
-const ERROR_PROJECT_EXIST = 'Прооект с указанным именем уже существует';
-const ERROR_EMPTY_LOGIN = 'Введите имя пользователя';
-const ERROR_EMPTY_PASSWORD = 'Введите пароль';
-const ERROR_WRONG_USER = 'Пользователя не существует';
-const ERROR_WRONG_PASSWORD = 'Неверный пароль';
-const ERROR_WRONG_EMAIL = 'Введите корректный адрес электронной почты';
+const ERROR_EMPTY_FIELD = 'Required filed';
+const ERROR_LENGTH_FIELD = 'The number of characters in the field should be ';
+const ERROR_PROJECT_ID = 'Choose a project';
+const ERROR_DATE_FIELD = 'Enter date in DD.MM.YYYYY format';
+const ERROR_EMAIL_EXIST = 'User exist';
+const ERROR_PROJECT_EXIST = 'Project exist';
+const ERROR_EMPTY_LOGIN = 'Enter username';
+const ERROR_EMPTY_PASSWORD = 'Enter password';
+const ERROR_WRONG_USER = 'User does not exist';
+const ERROR_WRONG_PASSWORD = 'Wrong password';
+const ERROR_WRONG_EMAIL = 'Invalid e-mail';
 
 /**
  * Функция валидации формы
@@ -95,7 +95,7 @@ function checkLength($string, $min, $max)
 {
     $length = mb_strlen($string);
     if ($length < $min || $length > $max) {
-        return ERROR_LENGTH_FIELD . 'от ' . $min . ' до ' . $max . ' символов';
+        return ERROR_LENGTH_FIELD . 'from ' . $min . ' to ' . $max . ' symbols';
     }
     return true;
 }
