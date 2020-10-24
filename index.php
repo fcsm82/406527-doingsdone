@@ -1,10 +1,10 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-// Задаем текущую директорию
+// Set the current directory
 const APP_DIR = __DIR__;
 
-// Подключаем файлы с функциями
+// Connect files with functions
 require_once APP_DIR . '/functions/database.php';
 require_once APP_DIR . '/functions/functions.php';
 
@@ -19,22 +19,22 @@ require_once APP_DIR . '/functions/validators.php';
 
 session_start();
 if (!file_exists(APP_DIR . '/config.php')) {
-    die('На основе config.sample.php создайте файл config.php, указав в нём настройки для подключениия к БД');
+    die('Based on config.php, create a file config.php, specifying the settings for connecting to the database');
 }
-// Подключаем файл с настройками
+// Connect the file with settings
 $config = require APP_DIR . '/config.php';
-// Подключаемся к БД
+// Connect to the database
 $connection = dbConnect($config['db']);
 
-// задаем заголовок страницы
-$title = 'Дела в поряке';
+// set the page title
+$title = 'Doingsdone';
 
 
-// проверяем авторизацию пользователя
+// verify user authentication
 $user = getAuthUser($connection);
 
 if (!$user) {
-    // формируем страницу для неавторизованного пользователя
+    // create a page for an unauthorized user
     $layout_content = includeTemplate('guest.php', [
         'title' => $title
     ]);
@@ -73,14 +73,14 @@ if (isset($_GET['project_id'])) {
         $filter) : getTasksByProject($project_id, $connection);
 }
 
-// формируем контент страницы
+// create page content
 $page_content = includeTemplate($template, [
     'list_tasks' => $list_tasks,
     'filter' => $filter,
     'show_complete_tasks' => $show_complete_tasks
 ]);
 
-// формируем гланую страницу
+// form a home page
 $layout_content = includeTemplate('layout.php', [
     'user' => $user,
     'list_projects' => $list_projects,
