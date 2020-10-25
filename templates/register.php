@@ -36,7 +36,7 @@
 
             <label class="form__label" for="name">Name <sup>*</sup></label>
             <input class="form__input <?= $classname; ?>" type="text" name="name" id="name" value="<?= $value; ?>"
-                   placeholder="Введите имя">
+                   placeholder="Enter your name">
 
             <?php if (isset($errors['name'])) : ?>
                 <p class="form__message"><?= $errors['name']; ?></p>
